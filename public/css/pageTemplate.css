@@ -1,0 +1,322 @@
+
+
+
+html, body
+{
+	margin:0px;
+	padding:0px;
+}
+
+
+header
+{
+	width:100%;
+	height:50px;
+	background-color:#42a986;
+}
+
+
+
+			.headerContainer
+			{
+				width:100%;
+				max-width:1340px;
+				height:50px;
+				position:relative;
+				margin:0 auto;
+			}
+
+			.pageTitle
+			{
+				width: 200px;
+				    text-align: center;
+				    padding-top: 13px;
+				    padding-bottom: 8px;
+				    color: white;
+				    font-size: 22px;
+				    letter-spacing: 3.4px;
+				    font-family: 'stellarregular';
+				    left: 0px;
+				    right: 0px;
+				    margin-left: auto;
+				    margin-right: auto;
+			}
+
+			.userContainer
+			{
+				display:none;
+				float:left;
+			}
+
+			.notificationIcon
+			{
+				    width: 20px;
+				    height: 20px;
+				    position: absolute;
+				    left: 20px;
+				    top: 15px;
+				    background-image: url(../img/bellIcon.png);
+				    background-size: 100%;
+			}
+
+					.notificationIconDesktop
+					{
+						display:none;
+					}
+
+			.settingsIcon
+			{
+				    width: 20px;
+				    height: 20px;
+				    position: absolute;
+				    right: 20px;
+				    top: 14px;
+				    background-image: url(../img/settingsIcon.png);
+				    background-size: 100%;
+			}
+
+			.logoutBtn
+			{
+				display:none;
+				color:white;
+			}
+
+
+
+
+.groupContainer
+{
+	display:none;
+	float:left;
+}
+
+
+.listContainer
+{
+	width:100%;
+	height:100vh;
+	position:absolute;
+	float:left;
+}
+
+
+div#groupList
+{
+	float:right;
+}
+
+
+@media only screen and (min-width: 750px)
+{
+
+
+
+
+	.pageTitle
+	{
+		left:20%;
+		right: 0;
+		margin-left:0;
+		margin-right:0;
+		float:left;
+	}
+
+
+			.userContainer
+			{
+				display:block;
+			    float: left;
+			    margin-left: 10%;
+			    height: 25px;
+			    width: 210px;
+			    margin-top: 13px;
+			}
+
+					.userIcon
+					{
+						width:25px;
+						height:25px;
+						float:left;
+						background-image: url(../img/userIcon.png);
+					}
+
+					.userTitle
+					{
+						    float: left;
+						    height: 30px;
+						    line-height: 27px;
+						    font-size: 13px;
+						    padding-left: 5px;
+						    color: white;
+						    letter-spacing: 0.6px;
+						    font-family: 'Open Sans';
+					}
+
+			.notificationIcon
+			{
+				display:none;
+			}
+
+			.notificationIconDesktop
+			{
+				    display: block;
+				    width: 20px;
+				    height: 20px;
+				    float: left;
+				    margin-left: 50px;
+				    margin-top: 16px;
+				    background-image: url(../img/bellIcon.png);
+				    background-size: 100%;
+			}
+
+			.settingsIcon
+			{
+
+			    float: left;
+			    margin-left: 10px;
+			    margin-top: 16px;
+			    right: 160px;
+			    top: 0;
+			}
+
+			.logoutBtn
+			{
+				    display: block;
+				    width: 100px;
+				    text-align: center;
+				    /* height: 30px; */
+				    /* background-color: red; */
+				    padding-top: 4px;
+				    padding-bottom: 4px;
+				    border: 1px solid white;
+				    border-radius: 4px;
+				    float: right;
+				    font-size: 13px;
+				    font-family: 'Open Sans';
+				    margin-top: 10px;
+				    cursor: pointer;
+			}	
+
+			.rightContainer {
+				    width: 270px;
+				    height: 50px;
+				    float: right;
+				}
+
+
+
+.groupContainer
+{
+	display:block;
+	width:30%;
+	height:100vh;
+	background-color:#dfe2df;
+}
+
+.listContainer
+{
+	display:block;
+	width:70%;
+	right:0px;
+	border-right: 10px solid #42a986;
+}
+
+h1.groupContainerTitle {
+    text-align: right;
+    padding-right: 150px;
+    font-size: 12px;
+    margin-top: 70px;
+    font-family:'open sans';
+    color: #7c7c7c;
+}
+
+.createGroupContainer {
+    height: 50px;
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
+}
+
+
+@media only screen and (min-width: 900px)
+{
+.headerContainer
+{
+	width:80%;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+    font-family: 'stellarbold';
+    src: url('../fonts/stellar-bold-webfont.eot');
+    src: url('../fonts/stellar-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/stellar-bold-webfont.woff2') format('woff2'),
+         url('../fonts/stellar-bold-webfont.woff') format('woff'),
+         url('../fonts/stellar-bold-webfont.ttf') format('truetype'),
+         url('../fonts/stellar-bold-webfont.svg#stellarbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'stellarlight';
+    src: url('../fonts/stellar-light-webfont.eot');
+    src: url('../fonts/stellar-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/stellar-light-webfont.woff2') format('woff2'),
+         url('../fonts/stellar-light-webfont.woff') format('woff'),
+         url('../fonts/stellar-light-webfont.ttf') format('truetype'),
+         url('../fonts/stellar-light-webfont.svg#stellarlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'stellarmedium';
+    src: url('../fonts/stellar-medium-webfont.eot');
+    src: url('../fonts/stellar-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/stellar-medium-webfont.woff2') format('woff2'),
+         url('../fonts/stellar-medium-webfont.woff') format('woff'),
+         url('../fonts/stellar-medium-webfont.ttf') format('truetype'),
+         url('../fonts/stellar-medium-webfont.svg#stellarmedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'stellarregular';
+    src: url('../fonts/stellar-regular-webfont.eot');
+    src: url('../fonts/stellar-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/stellar-regular-webfont.woff2') format('woff2'),
+         url('../fonts/stellar-regular-webfont.woff') format('woff'),
+         url('../fonts/stellar-regular-webfont.ttf') format('truetype'),
+         url('../fonts/stellar-regular-webfont.svg#stellarregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
