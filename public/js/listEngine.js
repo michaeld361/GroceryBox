@@ -58,6 +58,8 @@ ref.on("value", function(snapshot) {
 
 function getSubscribedGroups(userID)
 {
+
+var windowWidth = $(window).width();
 var myDetails = userID;
  var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
 // Attach an asynchronous callback to read the data at our posts reference
@@ -65,13 +67,19 @@ ref.on("value", function(snapshot) {
   myGroups = snapshot.val();
   groupString = myGroups.groupID;
   document.getElementById('groupList').innerHTML = "";
+  document.getElementById('groupListDesktop').innerHTML = "";
   var groupArray = groupString.split(",");
   console.log(groupArray);
+
+
    for(var i = 0; i < groupArray.length; i++)
   {
     console.log(groupArray[i]);
+
     $('<div/>').prepend($('<div class="groupName" id="'+ groupArray[i] +'" onclick="changeGroup(this.id);">').text(groupArray[i])).appendTo($('#groupList'));
     //$('.groupContainer').html($('<div class="groupName">').text(groupName));
+    $('<div/>').prepend($('<div class="groupName" id="'+ groupArray[i] +'" onclick="changeGroup(this.id);">').text(groupArray[i])).appendTo($('#groupListDesktop'));
+
   }
 
 }, function (errorObject) {

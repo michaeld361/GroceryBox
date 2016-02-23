@@ -24,19 +24,36 @@
 #messageInput {
     height: 50px;
     border: none;
-
-    font-size: 19px;
+    outline: none;
+    font-size: 16px;
     color: #42a986;
-    border-bottom: 1px solid #eaeaea;
+    /* border-bottom: 1px solid #eaeaea; */
     width: 100%;
+    padding: 0px;
+
 }
 
 .newIcon {
     float: right;
-    font-size: 11px;
+    font-size: 13px;
     padding-right: 10%;
     color: #42a986;
     padding-top: 3px;
+}
+
+.groupName {
+    background-color: white;
+    padding-top: 13px;
+    padding-left: 30px;
+    padding-bottom: 13px;
+    /* height: 40px; */
+    padding-left: 20px;
+    /* width: 100%; */
+    margin-top: 2px;
+    color: #7c7c7c;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'open sans';
 }
 
 @media only screen and (min-width: 750px)

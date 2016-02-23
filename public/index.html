@@ -17,12 +17,14 @@ GroceryBox
 <body class="cbp-spmenu-push">
 			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 			<h3></h3>
+		<div id="mobileMenu">
 <div id="groupContainer" class="groupContainer">
 	<h1 class="groupContainerTitle">Your Groups</h1>
 	<div id="groupList" class="clearfix"></div>
 	<div class="createGroupContainer">
 		<input type="text" id="createGroup" placeholder="New Group Name" />
 	</div>
+</div>
 </div>
 		</nav>
 <header>
@@ -44,9 +46,15 @@ GroceryBox
 
 </header>
 
-
-
-
+<div id="desktopMenu">
+<div id="groupContainer" class="groupContainer">
+	<h1 class="groupContainerTitle">Your Groups</h1>
+	<div id="groupListDesktop" class="clearfix"></div>
+	<div class="createGroupContainer">
+		<input type="text" id="createGroup" placeholder="New Group Name" />
+	</div>
+</div>
+</div>
 
 <div class="listContainer">
 	<div class="clearfix">
@@ -67,12 +75,11 @@ GroceryBox
 
 <script src="js/listEngine.js"></script>
 <script type="text/javascript">
-/*
-var findStoreBtn = document.getElementById('toggleMenu');
-findStoreBtn.addEventListener('touchend', toggleMenu, false);
-findStoreBtn.addEventListener('click', toggleMenu, false);
-findStoreBtn.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
 
+
+
+
+/*
 var textInput = document.getElementById('addItemBtn');
 var textInputClick = document.getElementById('messageInput');
 textInput.addEventListener('touchend', focusTextField, false);
@@ -112,16 +119,26 @@ $('#addItemBtn').css('display','none');
 </script>
 <script src="js/classie.js"></script>
 		<script>
+
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
 				showLeftPush = document.getElementById( 'showLeftPush' ),
 				body = document.body;
 
-			showLeftPush.onclick = function() {
+		function pushMenu()
+		{
+
 				classie.toggle( this, 'active' );
 				classie.toggle( body, 'cbp-spmenu-push-toright' );
 				classie.toggle( menuLeft, 'cbp-spmenu-open' );
-			};
 
+
+		}
+
+
+var findStoreBtn = document.getElementById('showLeftPush');
+findStoreBtn.addEventListener('touchend', pushMenu, false);
+findStoreBtn.addEventListener('click', pushMenu, false);
+findStoreBtn.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
 
 
 </script>

@@ -54,7 +54,7 @@ header
 				    height: 20px;
 				    position: absolute;
 				    left: 20px;
-				    top: 15px;
+				    top: 20px;
 				    background-image: url(../img/groupIcon.png);
 				    background-size: 100%;
 			}
@@ -70,7 +70,7 @@ header
 				    height: 20px;
 				    position: absolute;
 				    right: 20px;
-				    top: 14px;
+				    top: 20px;
 				    background-image: url(../img/settingsIcon.png);
 				    background-size: 100%;
 			}
@@ -86,9 +86,15 @@ header
 
 .groupContainer
 {
-
+	width:100%;
 	float:left;
 }
+
+	div#groupList
+	{
+		width:100%;
+	}
+
 
 
 .listContainer
@@ -105,17 +111,47 @@ div#groupList
 	float:right;
 }
 
+#mobileMenu
+{
+	display:block;
+}
+
+#desktopMenu
+{
+	display:none;
+}
+
+#groupListDesktop
+{
+	display:none;
+}
+
+
+
 
 @media only screen and (min-width: 750px)
 {
 
 
+#mobileMenu
+{
+	display:none;
+}
 
+#desktopMenu
+{
+	display:block;
+}
+
+#groupListDesktop
+{
+	display:block;
+}
 
 	.pageTitle
 	{
 		left:20%;
-		padding-top: 13px;
+		padding-top: 18px;
 		right: 0;
 		margin-left:0;
 		margin-right:0;
@@ -131,7 +167,7 @@ div#groupList
 			    margin-left: 10%;
 			    height: 25px;
 			    width: 210px;
-			    margin-top: 13px;
+			    margin-top: 18px;
 			}
 
 					.userIcon
@@ -167,7 +203,7 @@ div#groupList
 				    height: 20px;
 				    float: left;
 				    margin-left: 50px;
-				    margin-top: 16px;
+				    margin-top: 20px;
 				    background-image: url(../img/bellIcon.png);
 				    background-size: 100%;
 			}
@@ -177,7 +213,7 @@ div#groupList
 
 			    float: left;
 			    margin-left: 10px;
-			    margin-top: 16px;
+			    margin-top: 20px;
 			    right: 160px;
 			    top: 0;
 			}
@@ -196,7 +232,7 @@ div#groupList
 				    float: right;
 				    font-size: 13px;
 				    font-family: 'Open Sans';
-				    margin-top: 10px;
+				    margin-top: 16px;
 				    cursor: pointer;
 			}	
 
