@@ -17,14 +17,14 @@
     margin-top: 1px;
     border-bottom: 1px solid #eaeaea;
     padding-left: 40px;
-    width: 100%;
     font-family: 'open sans';
+    font-size:19px;
 }
 
 #messageInput {
     height: 50px;
     border: none;
-    padding-left: 40px;
+
     font-size: 19px;
     color: #42a986;
     border-bottom: 1px solid #eaeaea;

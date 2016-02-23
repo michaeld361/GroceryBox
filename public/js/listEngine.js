@@ -10,7 +10,7 @@ var userDisplayName = '';
 
 
 // Create a callback which logs the current auth state
-/*
+
 function authDataCallback(authData) {
   if(authData) {
     console.log("User " + authData.uid + " is logged in with " + authData.provider);
@@ -30,7 +30,7 @@ function logout()
     window.location.href = "https://todofyp.firebaseapp.com/login.html";
 }
 
-*/
+
 
 // Register the callback to be fired every time auth state changes
 var ref = new Firebase("https://todofyp.firebaseio.com");

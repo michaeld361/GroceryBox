@@ -5,6 +5,7 @@ GroceryBox
 </title>
 <link rel="stylesheet" type="text/css" href="css/pageTemplate.css">
 <link rel="stylesheet" type="text/css" href="css/listTemplate.css">
+<link rel="stylesheet" type="text/css" href="css/component.css" />
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 	<script src='js/source.js'></script>
     <script src="js/loadFirst.js"></script>
@@ -13,7 +14,17 @@ GroceryBox
 </head>
 
 
-<body>
+<body class="cbp-spmenu-push">
+			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+			<h3></h3>
+<div id="groupContainer" class="groupContainer">
+	<h1 class="groupContainerTitle">Your Groups</h1>
+	<div id="groupList" class="clearfix"></div>
+	<div class="createGroupContainer">
+		<input type="text" id="createGroup" placeholder="New Group Name" />
+	</div>
+</div>
+		</nav>
 <header>
 	<div class="headerContainer">
 	<div class="pageTitle">
@@ -24,7 +35,7 @@ GroceryBox
 			<div id="userTitle" class="userTitle"></div>
 	</div>
 	<div class="rightContainer">
-	<div class="notificationIcon"></div>
+	<div id="showLeftPush" class="notificationIcon"></div>
 	<div class="notificationIconDesktop"></div>
 	<div class="settingsIcon"></div>	
 	<div class="logoutBtn" onclick="logout()">Logout</div>
@@ -32,13 +43,6 @@ GroceryBox
 	</div>
 
 </header>
-<div id="groupContainer" class="groupContainer">
-	<h1 class="groupContainerTitle">Your Groups</h1>
-	<div id="groupList" class="clearfix"></div>
-	<div class="createGroupContainer">
-		<input type="text" id="createGroup" placeholder="New Group Name" />
-	</div>
-</div>
 
 
 
@@ -106,6 +110,20 @@ $('#addItemBtn').css('display','none');
 
 
 </script>
+<script src="js/classie.js"></script>
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				body = document.body;
 
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+			};
+
+
+
+</script>
 </body>
 </html>
