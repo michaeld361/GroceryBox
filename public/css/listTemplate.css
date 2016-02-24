@@ -17,7 +17,7 @@
     margin-top: 1px;
     border-bottom: 1px solid #eaeaea;
     padding-left: 40px;
-    font-family: 'open sans';
+    font-family: 'open_sansregular';
     font-size:19px;
 }
 
@@ -42,19 +42,19 @@
 }
 
 .groupName {
-    background-color: white;
     padding-top: 13px;
     padding-left: 30px;
     padding-bottom: 13px;
-    /* height: 40px; */
     padding-left: 20px;
-    /* width: 100%; */
     margin-top: 2px;
-    color: #7c7c7c;
+    color: #c1c1c1;
+    border-bottom: 1px solid #3d3d3d;
     cursor: pointer;
     font-size: 14px;
-    font-family: 'open sans';
+    font-family: 'open_sansregular';
 }
+
+
 
 @media only screen and (min-width: 750px)
 {
@@ -63,6 +63,7 @@
     padding-left: 60px;
     margin-left: 50px;
     width: 60%;
+    cursor: pointer;
 }
 
 
@@ -119,13 +120,14 @@
     padding-top: 13px;
     padding-left: 30px;
     width: 210px;
+    border:none;
     padding-bottom: 13px;
     float: right;
     margin-top: 2px;
     color: #7c7c7c;
     cursor: pointer;
     font-size: 12px;
-    font-family: 'open sans';
+    font-family: 'open_sansregular';
 }
 
     #createGroup {
@@ -139,7 +141,7 @@
     margin-top: 2px;
     color: #7c7c7c;
     font-size: 12px;
-    font-family: 'open sans';
+    font-family: 'open_sansregular';
 }
 
 
@@ -169,3 +171,15 @@
 
 }
 
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('../fonts/OpenSans-Regular-webfont.eot');
+    src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

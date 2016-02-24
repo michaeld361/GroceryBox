@@ -175,7 +175,7 @@ if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !
 
 
       function displayChatMessage(name, text, key) {
-        $('<div/>').prepend($('<div class="listItem" onclick="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('.listItems'));
+        $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('.listItems'));
         $('.listItems')[0].scrollTop = $('.listItems')[0].scrollHeight;
         $('</div>').text();
       };
@@ -185,28 +185,23 @@ if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !
        // $('.listItem').child(text).remove();
        console.log('key: ' + key);
         console.log('item removed: ' + text);
-        $( ".listItem" ).remove( ":contains("+ text +")" );
-
+        $( "#" + key ).css( "text-decoration", "line-through" );
+        $( "#" + key ).css( "opacity", "0.6" );
       }
 
 
-      var mylatesttap;
+      
 function doubletap(id) {
 
-   var now = new Date().getTime();
-   var timesince = now - mylatesttap;
-   if((timesince < 600) && (timesince > 0)){
+//$("#" + id).on("tap",function(){
+
 
       console.log(userGroup + " --V-- " + id);
         var deleteRef = new Firebase("https://todofyp.firebaseio.com/listItems/" + userGroup + "/" + id);
         deleteRef.remove();
 
-   }else{
-            // too much time to be a doubletap
-         }
 
-   mylatesttap = new Date().getTime();
-
+//});
 }
 
 
@@ -219,150 +214,10 @@ function doubletap(id) {
             function removeListItemDB(id)
       {
 
-//swipe to dismiss
-if( $(window).width() > 900) {     
-
  doubletap(id);
-}
-else {
-
-var swipeElements = document.getElementsByClassName('listItem');
-
-for(var i = 0; i < swipeElements.length; i++)
-{
-swipeElements[i].addEventListener('touchstart', touchstart, false); 
-}
-
-function touchstart(e)
-{
-  console.log('touch start', e);
-  var element = findRealTarget(e.target, 'listItem');
-  console.log(element);
-  
-  element.removeEventListener('touchstart', touchstart, false);
-  element.addEventListener('touchmove', touchmove, false);
-  element.addEventListener('touchend', touchend, false);
-  
-  
-  var startX = e.changedTouches[0].clientX;
-  var startY = e.changedTouches[0].clientY;
-  
-  element.setAttribute('data-x', startX);
-  element.setAttribute('data-y', startY);
-}
-
-function touchmove(e)
-{
-  var element = findRealTarget(e.target, 'listItem');
-  
-  var startX = element.getAttribute('data-x');
-  var startY = element.getAttribute('data-y');
-  
-  var x = e.changedTouches[0].clientX,
-  y = e.changedTouches[0].clientY;
-  
-  var deltaX = x - startX,
-  deltaY = y - startY;
-  
-  
-  if(deltaX * deltaX > deltaY * deltaY)
-  {
-    //user deleting
-    element.style.transform = 'translate(' + deltaX + 'px,0px)';
-    e.preventDefault();
-
-  }
-  else
-  {
-      //user scrolling
-      touchend(e);
-  }
-  
-  
-  
-  
-}
-
-
-function touchend(e)
-{
-  
-  
-  var element = findRealTarget(e.target, 'listItem');
-  
-  var startX = element.getAttribute('data-x');
-  var startY = element.getAttribute('data-y');
-  
-  var x = e.changedTouches[0].clientX,
-  y = e.changedTouches[0].clientY;
-  
-  var deltaX = x - startX,
-  deltaY = y - startY;
-  
-  if(deltaX < -200)
-  {
-  //user has dragged element far enough - hide it
-  element.style.transition = 'transform .5s linear';
-  element.style.transform ='translate(-100vw, 0)';
-      console.log(userGroup + " --V-- " + id);
-        var deleteRef = new Firebase("https://todofyp.firebaseio.com/listItems/" + userGroup + "/" + id);
-        deleteRef.remove();
-  
-  setTimeout(function()
-  {
-  element.parentElement.removeChild(element);
-  },500);
-  }
-  
-  else
-  {
-  //restore it  
-  element.style.transition = 'transform .5s linear';
-  element.style.transform ='';
-  
-  setTimeout(function(){
-  element.style.transition = '';  
-  },500);
-  
-  }
-  
-  
-  
-}
-
-
-
-// Find an element with a class by checking
-// a given element and all 
-
-
- function findRealTarget(elem, className)
-  {
-  if(elem.classList.contains(className))
-  { 
-  return elem;
-  }
-  else if(elem.parentElement == null)
-    {
-    return false;
-    }
-    else
-    {   
-    return findRealTarget(elem.parentElement, className);
-  }
-  
-  element.addEventListener('touchstart', touchstart, false);
-  element.removeEventListener('touchmove', touchmove, false);
-  element.removeEventListener('touchend', touchend, false);
-  
-  
-  } 
-  
-
 
 }
-      }
-    }
+
 
 
 
@@ -409,6 +264,7 @@ userRef.on('value', function(snapshot) {
             $('#createGroup').val('');
 }
 })
+}
 
 
 

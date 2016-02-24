@@ -88,6 +88,8 @@ header
 {
 	width:100%;
 	float:left;
+	top: 0px;
+    position: absolute;
 }
 
 	div#groupList
@@ -187,7 +189,7 @@ div#groupList
 						    padding-left: 5px;
 						    color: white;
 						    letter-spacing: 0.6px;
-						    font-family: 'Open Sans';
+   							font-family: 'open_sansregular';
 					}
 
 			.notificationIcon
@@ -231,7 +233,7 @@ div#groupList
 				    border-radius: 4px;
 				    float: right;
 				    font-size: 13px;
-				    font-family: 'Open Sans';
+			    	font-family: 'open_sansregular';
 				    margin-top: 16px;
 				    cursor: pointer;
 			}	
@@ -248,8 +250,10 @@ div#groupList
 {
 	display:block;
 	width:30%;
-	height:100vh;
+	height: calc(100vh - 60px);
 	background-color:#dfe2df;
+	position: relative;
+	top:0;
 }
 
 .listContainer
@@ -257,6 +261,7 @@ div#groupList
 	display:block;
 	width:70%;
 	right:0px;
+	height: calc(100vh - 60px);
 	border-right: 10px solid #42a986;
 }
 
@@ -265,7 +270,7 @@ h1.groupContainerTitle {
     padding-right: 150px;
     font-size: 12px;
     margin-top: 70px;
-    font-family:'open sans';
+    font-family: 'open_sansregular';
     color: #7c7c7c;
 }
 
@@ -355,6 +360,18 @@ h1.groupContainerTitle {
          url('../fonts/stellar-regular-webfont.woff') format('woff'),
          url('../fonts/stellar-regular-webfont.ttf') format('truetype'),
          url('../fonts/stellar-regular-webfont.svg#stellarregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('../fonts/OpenSans-Regular-webfont.eot');
+    src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
