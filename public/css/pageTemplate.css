@@ -148,6 +148,8 @@ div#groupList
 #groupListDesktop
 {
 	display:block;
+	width: 241px;
+    float: right;
 }
 
 	.pageTitle
