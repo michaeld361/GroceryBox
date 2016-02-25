@@ -82,6 +82,19 @@ ref.on("value", function(snapshot) {
 
   }
 
+/*
+  $(document).ready(function(){
+    $('.groupName').dblclick(function(){
+    var removeItem = $(this).attr('id');
+groupArray = jQuery.grep(groupArray, function(value) {
+  return value != removeItem;
+});
+  groupString = groupArray;
+  console.log(groupString + " :bingo master");
+   })
+  })
+*/
+
 }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
 });
@@ -265,6 +278,32 @@ userRef.on('value', function(snapshot) {
 }
 })
 }
+
+
+
+//alert user when item set to urgent
+
+ var ref = new Firebase('https://todofyp.firebaseio.com/listItems/');
+// Attach an asynchronous callback to read the data at our posts reference
+ref.on("child_changed", function(snapshot) {
+  var itemStatus = snapshot.key();
+  if (groupString.indexOf(itemStatus) >= 0)
+{
+ var groupUrgentRef = new Firebase('https://todofyp.firebaseio.com/listItems/' + itemStatus);
+ groupUrgentRef.on("child_changed", function(snapshot) {
+  var itemStatus = snapshot.val();
+  var hitmebaby = itemStatus.status;
+  if(hitmebaby != 'nrl')
+  {
+  alert('Item marked at urgent');
+}
+})
+  }
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+
 
 
 

@@ -37,6 +37,8 @@ GroceryBox
 	</div>
 	<div class="rightContainer">
 	<div id="showLeftPush" class="notificationIcon"></div>
+	<div id="notificationPanelTabIcon"></div>
+	<div id="notificationPanel"></div>
 	<div class="notificationIconDesktop"></div>
 	<div class="settingsIcon"></div>	
 	<div class="logoutBtn" onclick="logout()">Logout</div>
@@ -133,6 +135,12 @@ $('#addItemBtn').css('display','none');
 
 		}
 
+$(document).ready(function(){
+    $(".notificationIconDesktop").click(function(){
+        $("#notificationPanel").toggleClass("active");
+        $("#notificationPanelTabIcon").toggleClass("active");
+    });
+});
 
 var findStoreBtn = document.getElementById('showLeftPush');
 findStoreBtn.addEventListener('touchend', pushMenu, false);

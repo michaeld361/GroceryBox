@@ -128,11 +128,48 @@ div#groupList
 	display:none;
 }
 
+#notificationPanel
+{
+	display:none;
+}
 
-
+	#notificationPanelTabIcon
+	{
+		display:none;
+	}
 
 @media only screen and (min-width: 750px)
 {
+
+
+	#notificationPanel
+	{
+display: none;
+    width: 240px;
+    height: 150px;
+    position: absolute;
+    background-color: white;
+    z-index: 9999;
+    top: 60px;
+    border: 1px solid #dbdbdb;
+    /* margin-right: 10px; */
+    /* box-shadow: 0px 0px 9px -3px; */
+    border-top: none;
+	}
+
+	#notificationPanelTabIcon
+	{
+		display:none;
+    transform: rotate(45deg);
+    background-color: white;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 58px;
+    margin-left: 45px;
+	}
 
 
 #mobileMenu
@@ -145,10 +182,13 @@ div#groupList
 	display:block;
 }
 
-#groupListDesktop
-{
-	display:block;
-}
+
+ #groupListDesktop
+  {
+  	display:block;
+ 	width: 241px;
+    float: right;
+  }
 
 	.pageTitle
 	{
@@ -204,11 +244,19 @@ div#groupList
 				    width: 20px;
 				    height: 20px;
 				    float: left;
+				    cursor: pointer;
 				    margin-left: 50px;
 				    margin-top: 20px;
 				    background-image: url(../img/bellIcon.png);
 				    background-size: 100%;
 			}
+
+			.active
+			{
+				display:block !important;
+			}
+
+
 
 			.settingsIcon
 			{
