@@ -280,6 +280,20 @@ userRef.on('value', function(snapshot) {
 }
 
 
+ var ref = new Firebase('https://todofyp.firebaseio.com/listItems/');
+// Attach an asynchronous callback to read the data at our posts reference
+ref.on("child_changed", function(snapshot) {
+  var itemStatus = snapshot.key();
+  if (groupString.indexOf(itemStatus) >= 0)
+{
+  alert('Urgent Item Added To: ' + itemStatus);
+}
+  
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+
 
 //alert user when item set to urgent
 
