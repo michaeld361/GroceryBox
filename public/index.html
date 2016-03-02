@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <head>
 <title>
@@ -8,7 +9,6 @@ GroceryBox
 <link rel="stylesheet" type="text/css" href="css/component.css" />
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 	<script src='js/source.js'></script>
-    <script src="js/loadFirst.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
 </head>
@@ -52,7 +52,7 @@ GroceryBox
 	<h1 class="groupContainerTitle">Your Groups</h1>
 	<div id="groupListDesktop" class="clearfix"></div>
 	<div class="createGroupContainer">
-		<input type="text" id="createGroupDesktop" placeholder="New Group Name" />
+		<input type="text" id="createGroup" placeholder="New Group Name" />
 	</div>
 </div>
 </div>
@@ -74,19 +74,10 @@ GroceryBox
 
 
 
-<script src="js/listEngine.js"></script>
+
 <script type="text/javascript">
 
 
-
-
-/*
-var textInput = document.getElementById('addItemBtn');
-var textInputClick = document.getElementById('messageInput');
-textInput.addEventListener('touchend', focusTextField, false);
-textInputClick.addEventListener('click', focusTextFieldDesktop, false);
-textInput.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
-*/
 
 function toggleMenu()
 {
@@ -117,11 +108,8 @@ $('#addItemBtn').css('display','none');
 }
 
 
-
-
-
 </script>
-<script src="js/classie.js"></script>
+
 		<script>
 
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
@@ -138,12 +126,14 @@ $('#addItemBtn').css('display','none');
 
 		}
 
-$(document).ready(function(){
-    $(".notificationIconDesktop").click(function(){
-        $("#notificationPanel").toggleClass("active");
-        $("#notificationPanelTabIcon").toggleClass("active");
-    });
-});
+
+		$('.notificationIconDesktop').toggle(function () {
+		    $("#notificationPanel").css("display","block");
+		}, function () {
+		    
+		    $("#notificationPanel").css("display", "none");
+		});
+
 
 var findStoreBtn = document.getElementById('showLeftPush');
 findStoreBtn.addEventListener('touchend', pushMenu, false);
@@ -152,5 +142,9 @@ findStoreBtn.addEventListener('touchstart', function(e){ e.preventDefault(); }, 
 
 
 </script>
+
+
+<script src="js/listEngine.js"></script>
+<script src="js/classie.js"></script>
 </body>
 </html>
