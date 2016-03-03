@@ -87,6 +87,7 @@ ref.on("value", function(snapshot) {
 // get groups
 function getSubscribedGroups(userID)
 {
+var notificationCount = 0;
 var windowWidth = $(window).width();
 var myDetails = userID;
  var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
@@ -108,14 +109,18 @@ ref.on("value", function(snapshot) {
     //$('.groupContainer').html($('<div class="groupName">').text(groupName));
     $('<div/>').prepend($('<div class="groupName" id="'+ groupArray[i] +'" onclick="changeGroup(this.id);">').text(groupArray[i])).appendTo($('#groupListDesktop'));
 
-    getNotifications(groupArray[i]);
+    getNotifications(groupArray[i], notificationCount);
+
   }
+    
 
-
+   
 
 }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
 });
+
+
 
 }
 
@@ -382,7 +387,7 @@ function createGroup()
 
 
 
-function getNotifications(groupNots)
+function getNotifications(groupNots, notificationCount)
 {
 
 var group = groupNots;
@@ -401,6 +406,11 @@ var group = groupNots;
           userRef.on('value', function(snapshot) {
         if (snapshot.val() < timeAdded) {
           console.log('you have a new notification');
+          notificationCount++;
+          console.log(notificationCount);
+          document.getElementById('notificationDesktop').innerHTML = '<div class="notificationCountIcon">' + notificationCount + '</div>';
+          document.getElementById('notificationPanel').innerHTML += '<div class="notificationAlert">New item added to: ' + group + '</div>';
+
     }
   })
         });
@@ -408,3 +418,4 @@ var group = groupNots;
 
 
 }
+
