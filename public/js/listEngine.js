@@ -125,6 +125,7 @@ function changeGroup(groupDiv)
     localStorage.setItem('groupID', groupDiv);
     console.log('group switched to ' + groupDiv);
     userGroup = groupDiv;
+    document.getElementById('groupHeader').innerHTML = groupDiv;
     spyItem();
 
 }
@@ -135,13 +136,16 @@ if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !
 {
   groupID = localStorage.getItem('groupID');
   console.log('Your Group: ' + groupID);
-}
+  }
 
-      $('#messageInput').keypress(function (e) {
-        if (e.keyCode == 13) {
-      updateGroupSelected();
+      function addItem(e)
+      {
+        if (e.keyCode == 13) 
+        {
+            updateGroupSelected();
         }
-      });
+      }
+
 
 function updateGroupSelected()
 {
@@ -260,7 +264,7 @@ function displayChatMessage(name, text, key) {
    if (groupString.indexOf(itemStatus) >= 0)
  {
   var groupUrgentRef = new Firebase('https://todofyp.firebaseio.com/listItems/' + itemStatus);
-  groupUrgentRef.on("child_changed", function(snapshot) {
+  groupUrgentRef.once("child_changed", function(snapshot) {
    var itemStatus = snapshot.val();
    var hitmebaby = itemStatus.status;
    if(hitmebaby != 'nrl')
