@@ -5,6 +5,7 @@ html, body
 {
 	margin:0px;
 	padding:0px;
+	outline:none;
 }
 
 
@@ -138,7 +139,7 @@ div#groupList
 		display:none;
 	}
 
-	input#createGroup {
+	#createGroup {
     padding-top: 8px;
     padding-left: 30px;
     padding-bottom: 8px;
@@ -146,19 +147,32 @@ div#groupList
     margin-top: 2px;
     margin-left: 6px;
     margin-top: 15px;
-    border-radius: 12px;
-    color: #c1c1c1;
+    border-radius: 22px;
     border: none;
-    border-bottom: 1px solid #3d3d3d;
     cursor: pointer;
-    background-color:#c8c8c8;
     font-size: 14px;
-    width: 209px;
+    width: 189px;
     font-family: 'open_sansregular';
+    outline:none;
 }
 
 @media only screen and (min-width: 750px)
 {
+
+	#createGroup
+	{
+	background-color: white;
+    padding-top: 13px;
+    padding-left: 30px;
+    width: 210px;
+    border: none;
+    padding-bottom: 13px;
+    float: right;
+    border-radius:0px;
+    color: #7c7c7c;
+    font-size: 12px;
+
+	}
 
 
 	#notificationPanel

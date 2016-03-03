@@ -71,6 +71,19 @@ ref.on("value", function(snapshot) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // get groups
 function getSubscribedGroups(userID)
 {
@@ -95,6 +108,7 @@ ref.on("value", function(snapshot) {
     //$('.groupContainer').html($('<div class="groupName">').text(groupName));
     $('<div/>').prepend($('<div class="groupName" id="'+ groupArray[i] +'" onclick="changeGroup(this.id);">').text(groupArray[i])).appendTo($('#groupListDesktop'));
 
+    getNotifications(groupArray[i]);
   }
 
 
@@ -121,13 +135,11 @@ ref.on("value", function(snapshot) {
 
 function changeGroup(groupDiv)
 {
-
     localStorage.setItem('groupID', groupDiv);
     console.log('group switched to ' + groupDiv);
     userGroup = groupDiv;
     document.getElementById('groupHeader').innerHTML = groupDiv;
     spyItem();
-
 }
 
 
@@ -165,7 +177,6 @@ function updateGroupSelected()
           $('#messageInput').val('');
           }
 spyItem();
-
 }
 
 
@@ -190,9 +201,9 @@ function spyItem()
             console.log('item added to ' + userGroup);
             var message = snapshot.val();
             var key = snapshot.key();
-            displayChatMessage(message.name, message.text, key);
+            displayChatMessage(message.name, message.text, message.status, key);
             ItemsAddedByOthers(message.time, message.text, key);
-            
+           // urgentIcon(message.name, message.text, message.status, key);
           });
 
 
@@ -208,12 +219,17 @@ function spyItem()
 
 
 
-function displayChatMessage(name, text, key) {
+function displayChatMessage(name, text, status, key) {
         $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('.listItems'));
         $('.listItems')[0].scrollTop = $('.listItems')[0].scrollHeight;
         $('</div>').text();
-      }
 
+          if(status == 'urg')
+          {
+             $('#' + key).append('<div class="urgentIcon"></div>');
+          }
+
+      }
 
 
 
@@ -230,6 +246,7 @@ function displayChatMessage(name, text, key) {
       // remove item from db and listItems
       function removeListItemUI(name, text, key)
       {
+
        // $('.listItem').child(text).remove();
        console.log('key: ' + key);
         console.log('item removed: ' + text);
@@ -266,10 +283,11 @@ function displayChatMessage(name, text, key) {
   var groupUrgentRef = new Firebase('https://todofyp.firebaseio.com/listItems/' + itemStatus);
   groupUrgentRef.once("child_changed", function(snapshot) {
    var itemStatus = snapshot.val();
+   var key = snapshot.key();
    var hitmebaby = itemStatus.status;
    if(hitmebaby != 'nrl')
    {
-   alert('Item marked at urgent');
+       $('#' + key).append('<div class="urgentIcon"></div>');
  }
  })
    }
@@ -313,6 +331,80 @@ userRef.on('value', function(snapshot) {
     // User logged off at snapshot.val() - seconds since epoch.
   }
 });
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function createGroup()
+{
+  var myDetails = userID;
+  var newGroupName = document.getElementById('createGroup').value;
+  var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
+  var newGroup = groupString + ',' + newGroupName;
+  ref.child('groupID').set(newGroup);
+  alert('group added');
+
+
+}
+
+
+
+ $('.createGroup').keypress(function (e) {
+        if (e.keyCode == 13) {
+            createGroup();
+            $('#createGroup').val('');
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getNotifications(groupNots)
+{
+
+var group = groupNots;
+
+
+      var myNotRef = new Firebase(myDataRef + '/' + group);
+      myNotRef.once("value", function(snapshot) {
+        // The callback function will get called twice, once for "fred" and once for "barney"
+        snapshot.forEach(function(childSnapshot) {
+          // key will be "fred" the first time and "barney" the second time
+          var key = childSnapshot.key();
+          // childData will be the actual contents of the child
+          var childData = childSnapshot.val();
+          var timeAdded = childData.time;
+          var userRef = new Firebase('https://todofyp.firebaseio.com/presence/' + userID)
+          userRef.on('value', function(snapshot) {
+        if (snapshot.val() < timeAdded) {
+          console.log('you have a new notification');
+    }
+  })
+        });
+      });
 
 
 }

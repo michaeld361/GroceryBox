@@ -21,7 +21,7 @@ GroceryBox
 <div id="groupContainer" class="groupContainer">
 	<div id="groupList" class="clearfix"></div>
 	<div class="createGroupContainer">
-		<input type="text" id="createGroup" placeholder="New Group Name" />
+		<input type="text" id="createGroup" class="createGroup" placeholder="New Group Name" />
 	</div>
 </div>
 </div>
@@ -116,14 +116,13 @@ $('#addItemBtn').css('display','none');
 				showLeftPush = document.getElementById( 'showLeftPush' ),
 				body = document.body;
 
+
 		function pushMenu()
 		{
-
+				console.log('close menu');
 				classie.toggle( this, 'active' );
 				classie.toggle( body, 'cbp-spmenu-push-toright' );
 				classie.toggle( menuLeft, 'cbp-spmenu-open' );
-
-
 		}
 
 

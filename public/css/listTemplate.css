@@ -55,6 +55,22 @@
 }
 
 
+.urgentIcon {
+    width: 19px;
+    height: 19px;
+    float: left;
+    position: relative;
+    z-index: 999999999;
+    top: 4px;
+    left: -10px;
+    background-size: 100%;
+    background-image: url(../img/urgentIconSet.png);
+}
+.urgentSet
+{
+    background-image: url(../img/urgentIconSet.png);
+}
+
 
 @media only screen and (min-width: 750px)
 {
@@ -91,7 +107,7 @@
     position: relative;
     color:#d64841;
     font-family: 'open_sanslight';
-    font-weight:light;
+    font-weight: light;
     opacity: 0.9;
 }
 
