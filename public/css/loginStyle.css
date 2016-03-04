@@ -1,0 +1,190 @@
+
+
+html, body
+{
+	margin:0px;
+	padding:0px;
+}
+
+.loginPageContainer
+{
+	width:100%;
+	height:100vh;
+	background-image:url('../img/pattern.png');
+}
+
+
+
+		.loginContainer {
+    width: 20%;
+    background-color: white;
+    position: absolute;
+    left: 0px;
+    height: 250px;
+    border-radius: 8px;
+    top: 40%;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -115px;
+    padding: 30px;
+}
+
+
+
+input#loginEmail {
+    width: 240px;
+    height: 30px;
+    border-radius: 16px;
+    padding-left: 20px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    outline:none;
+    top: 50px;
+    border: 1px solid #e5e5e5;
+}
+
+
+input#loginPass {
+	    width: 240px;
+    height: 30px;
+    border-radius: 16px;
+    padding-left: 20px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    outline:none;
+    margin-right: auto;
+    top: 90px;
+    border: 1px solid #e5e5e5;
+}
+
+
+.registerSection
+{
+	width:100%;
+	height:100vh;
+	background-color:red;
+}
+
+
+		#registerSectionButton
+		{
+    width: 130px;
+    height: 37px;
+    /* background-color: #42a986; */
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    /* margin-top: 20px; */
+    border: 1px solid #42a986 !important;
+    /* color: white; */
+    /* top: 20px; */
+    margin-right: auto;
+    bottom: 70px;
+    border-radius: 200px;
+    border: none;
+    background: none;
+    outline: none;
+    font-weight: bold;
+    color: #42a986;
+		}
+
+
+		.loginContainer {
+		    height: 250px;
+		    width: 370px;
+		    padding: 0px;
+		}
+
+		button.loginBtn {
+    width: 150px;
+    height: 30px;
+    position: absolute;
+    bottom: 50px;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    background-color: #42a986;
+    border: none;
+    border-radius: 40px;
+    outline:none;
+}
+
+		@media only screen and (max-width:700px)
+		{
+
+
+
+			.registerSection
+			{
+				background-color:blue;
+			}
+
+				.loginContainer
+				{
+					width:100%;
+				}
+
+				input#loginEmail {
+			    width: 50%;
+			    height: 40px;
+			    border: 1px solid #e5e5e5;
+			    border-radius: 26px;
+			    padding-left: 30px;
+			    /* text-align: center; */
+			    padding-top: 4px;
+			    margin-top: 30px;
+			    top:0;
+			    outline: none;
+			    position: absolute;
+			    /* margin: 0 auto; */
+			    left: 0px;
+			    right: 0px;
+			    margin-left: auto;
+			    margin-right: auto;
+			}
+
+
+			input#loginPass {
+			    width: 50%;
+			    height: 40px;
+			    border: 1px solid #e5e5e5;
+			    top: 30px;
+			    border-radius: 26px;
+			    padding-left: 30px;
+			    /* text-align: center; */
+			    padding-top: 4px;
+			    margin-top: 70px;
+			    outline: none;
+			    position: absolute;
+			    /* margin: 0 auto; */
+			    left: 0px;
+			    right: 0px;
+			    margin-left: auto;
+			    margin-right: auto;
+
+				}
+
+				button.loginBtn {
+			    position: absolute;
+			    bottom: 30px;
+			    text-align: center;
+			    width: 30%;
+			    border: none;
+			    left: 0px;
+			    right: 0px;
+			    margin-left: auto;
+			    margin-right: auto;
+			    height: 35px;
+			}
+
+
+		}

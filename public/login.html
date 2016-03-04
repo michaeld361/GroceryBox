@@ -1,6 +1,7 @@
 <!doctype html>
 <head>
 <title>GroceryBox</title>
+<link rel="stylesheet" type="text/css" href="css/loginStyle.css">
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src='js/source.js'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,22 +9,23 @@
 
 <body>
 <header>
-GroceryBox
+
 </header>
 
 <div class="loginPageContainer">
 <div class="loginContainer">
 
-  <input class="loginField" id="loginEmail" type="text" placeholder="Email"/>
+  <input class="loginField" id="loginEmail" type="text" placeholder="Email"/><br>
   <input class="loginField" id="loginPass" type="password" placeholder="Password"/><br>
   <button class="loginBtn">Login</button>
 </div>
-
+<button id="registerSectionButton">Register</button>
 
 </div>
 
 
-<div id="registerPage">
+
+<div class="registerSection">
 <div class="loginContainer2">
 
   <input class="registerField" id="regEmail" type="text" placeholder="Email"/>
