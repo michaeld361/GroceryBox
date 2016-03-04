@@ -6,6 +6,14 @@ var myDataRef = new Firebase('https://todofyp.firebaseio.com/' + 'listItems/');
 var userID = '';
 
 
+
+if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
+{
+  groupID = localStorage.getItem('groupID');
+  console.log('Your Group: ' + groupID);
+  changeGroup(groupID);
+  }
+
 //Login 
 function authDataCallback(authData) {
   if(authData) {
@@ -32,6 +40,40 @@ ref45.onAuth(authDataCallback);
 
 
 
+
+
+//notificaiton - website
+function getNotifications(groupNots, notificationCount)
+{
+
+var group = groupNots;
+
+
+      var myNotRef = new Firebase(myDataRef + '/' + group);
+      myNotRef.once("value", function(snapshot) {
+        // The callback function will get called twice, once for "fred" and once for "barney"
+        snapshot.forEach(function(childSnapshot) {
+          // key will be "fred" the first time and "barney" the second time
+          var key = childSnapshot.key();
+          // childData will be the actual contents of the child
+          var childData = childSnapshot.val();
+          var timeAdded = childData.time;
+          var userRef = new Firebase('https://todofyp.firebaseio.com/presence/' + userID)
+          userRef.on('value', function(snapshot) {
+        if (snapshot.val() < timeAdded) {
+          console.log('you have a new notification');
+          notificationCount++;
+          console.log(notificationCount);
+          document.getElementById('notificationDesktop').innerHTML = '<div class="notificationCountIcon">' + notificationCount + '</div>';
+          document.getElementById('notificationPanel').innerHTML += '<div class="notificationAlert">New item added to: ' + group + '</div>';
+
+    }
+  })
+        });
+      });
+
+
+}
 
 
 
@@ -144,16 +186,13 @@ function changeGroup(groupDiv)
     console.log('group switched to ' + groupDiv);
     userGroup = groupDiv;
     document.getElementById('groupHeader').innerHTML = groupDiv;
+    getUsersInGroup(userGroup);
     spyItem();
 }
 
 
 
-if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
-{
-  groupID = localStorage.getItem('groupID');
-  console.log('Your Group: ' + groupID);
-  }
+
 
       function addItem(e)
       {
@@ -359,8 +398,15 @@ function createGroup()
   var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
   var newGroup = groupString + ',' + newGroupName;
   ref.child('groupID').set(newGroup);
-  alert('group added');
+}
 
+function createGroupDesktop()
+{
+  var myDetails = userID;
+  var newGroupName = document.getElementById('createGroupDesktop').value;
+  var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
+  var newGroup = groupString + ',' + newGroupName;
+  ref.child('groupID').set(newGroup);
 
 }
 
@@ -373,49 +419,46 @@ function createGroup()
 }
 });
 
+  $('.createGroupDesktop').keypress(function (e) {
+        if (e.keyCode == 13) {
+            createGroupDesktop();
+            $('#createGroupDesktop').val('');
+}
+});
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-function getNotifications(groupNots, notificationCount)
-{
-
-var group = groupNots;
-
-
-      var myNotRef = new Firebase(myDataRef + '/' + group);
-      myNotRef.once("value", function(snapshot) {
-        // The callback function will get called twice, once for "fred" and once for "barney"
-        snapshot.forEach(function(childSnapshot) {
-          // key will be "fred" the first time and "barney" the second time
-          var key = childSnapshot.key();
-          // childData will be the actual contents of the child
-          var childData = childSnapshot.val();
-          var timeAdded = childData.time;
-          var userRef = new Firebase('https://todofyp.firebaseio.com/presence/' + userID)
-          userRef.on('value', function(snapshot) {
-        if (snapshot.val() < timeAdded) {
-          console.log('you have a new notification');
-          notificationCount++;
-          console.log(notificationCount);
-          document.getElementById('notificationDesktop').innerHTML = '<div class="notificationCountIcon">' + notificationCount + '</div>';
-          document.getElementById('notificationPanel').innerHTML += '<div class="notificationAlert">New item added to: ' + group + '</div>';
-
+    function getUsersInGroup(userGroup)
+    {
+    document.getElementById('usersInGroup').innerHTML = '';
+    var ref28 = new Firebase("https://todofyp.firebaseio.com/users/");
+    ref28.on("value", function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+    var usersInGroup = childSnapshot.val();
+    var userGroupInGroup = usersInGroup.groupID;
+    var userNameInGroup = usersInGroup.Name;
+    var usersInGroupArray = userGroupInGroup.split(",");
+    //for each user in the group
+    for(var i = 0; i < usersInGroupArray.length; i++)
+    {
+      if(usersInGroupArray[i] == userGroup)
+      {
+        console.log(userNameInGroup + ' is in your group');
+        document.getElementById('usersInGroup').innerHTML += '<div class="userInGroupIcon"><div class="userOffline"></div>' + userNameInGroup + '</div>';
+      }
     }
-  })
-        });
-      });
-
+   })
+ });
 
 }
+
+
+
+
+
+
+
+
 
