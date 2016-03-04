@@ -21,7 +21,7 @@ ref.authWithPassword({
 var uid = 0;
 function authHandler(error, authData) {
   if (error) {
-    console.log("Login Failed!", error);
+    document.getElementById('validationMessage').innerHTML = error;
   } else {
     console.log("Authenticated successfully with payload:", authData);
     console.log("User ID: ", authData.uid);
@@ -48,11 +48,15 @@ ref.createUser({
   password : userPass
 }, function(error, userData) {
   if (error) {
-    console.log("Error creating user:", error);
+    document.getElementById('validationMessageReg').innerHTML = error;
   } else {
     console.log("Successfully created user account with uid:", userData.uid);
     setUserGroup(userData.uid);
-    alert('Successfully Registered');
+    document.getElementById('validationMessage').innerHTML = 'Successfully registered - please login';
+    $('#loginEmail').val(userEmail);
+        $('html, body').animate({
+        scrollTop: $(".loginPageContainer").offset().top
+    }, 300);
   }
 });
 })
@@ -98,3 +102,10 @@ function setDeviceToken(uid)
 
 
 }
+
+
+$("#registerSectionButton").click(function() {
+    $('html, body').animate({
+        scrollTop: $(".registerSection").offset().top
+    }, 300);
+});
