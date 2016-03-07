@@ -75,12 +75,13 @@ function setUserGroup(uid)
 var userID = uid;
 var groupArray = ['group1', 'group2', 'group3'];
 var userGroup = groupArray.toString();
+var notificationStatus = 'YES';
 
 var myDataRef = new Firebase('https://todofyp.firebaseio.com/');
       var listRef = myDataRef.child("users");
       var groupRef = listRef.child(userID);
       $(document).ready(function(){
-        groupRef.set({groupID: userGroup, Name: userName,deviceToken: deviceToken});
+        groupRef.set({groupID: userGroup, Name: userName,deviceToken: deviceToken, notificationStatus: notificationStatus});
       })
 }
 
@@ -93,7 +94,6 @@ var myDataRef = new Firebase('https://todofyp.firebaseio.com/');
 function setDeviceToken(uid)
 {
   var myDetails = userID;
- // deviceToken = blah blah blah;
 //  var newGroupName = document.getElementById('createGroup').value;
   var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
   var newGroup = groupString + ',' + newGroupName;

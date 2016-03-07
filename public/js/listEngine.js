@@ -4,7 +4,7 @@ var userGroup = '';
 var groupID = '';
 var myDataRef = new Firebase('https://todofyp.firebaseio.com/' + 'listItems/');
 var userID = '';
-
+var itemTrigger = 0;
 
 
 if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
@@ -250,12 +250,14 @@ function spyItem()
            // urgentIcon(message.name, message.text, message.status, key);
           });
 
-
+        if(itemTrigger != 1)
+        {
            myRef.on('child_removed', function(snapshot) {
         var message = snapshot.val();
         var key = snapshot.key();
         removeListItemUI(message.name, message.text, key);
        });
+         }
 
             
         }
@@ -267,6 +269,7 @@ function displayChatMessage(name, text, status, key) {
         $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('.listItems'));
         $('.listItems')[0].scrollTop = $('.listItems')[0].scrollHeight;
         $('</div>').text();
+
 
           if(status == 'urg')
           {
@@ -303,17 +306,41 @@ function displayChatMessage(name, text, status, key) {
 
             function removeListItemDB(id)
       {
-
-      console.log(userGroup + " --V-- " + id);
+        if(itemTrigger == 1)
+        {
+          setItemUrgent(id);
+        }
+        else
+          {
+        console.log(userGroup + " --V-- " + id);
         var deleteRef = new Firebase("https://todofyp.firebaseio.com/listItems/" + userGroup + "/" + id);
         deleteRef.remove();
-
+          }
       }
 
 
+function setTrigger()
+{
+  itemTrigger = 1;
+}
+
+function setItemUrgent(id)
+{
+
+  var setStatusRef = new Firebase("https://todofyp.firebaseio.com/listItems/" + userGroup + "/" + id);
+  setStatusRef.update({ status: 'urg'}, onFinish);
+}
 
 
-      //check when user online
+function onFinish()
+{
+  console.log('item set to Urgent');
+}
+
+
+
+
+
       //alert user when item set to urgent
 
  //alert user when item set to urgent
@@ -398,7 +425,19 @@ function createGroup()
   var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
   var newGroup = groupString + ',' + newGroupName;
   ref.child('groupID').set(newGroup);
+
+/*
+  var createGroupNotificationRef = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails + '/' + 'notificationSubscription/' + newGroupName);
+  createGroupNotificationRef.push({'groupID': newGroupName, 'recievePush': 'YES'}, completeSuc);
+*/
 }
+
+/*
+function completeSuc()
+{
+  console.log('noti created');
+}
+*/
 
 function createGroupDesktop()
 {
@@ -446,7 +485,7 @@ function createGroupDesktop()
       if(usersInGroupArray[i] == userGroup)
       {
         console.log(userNameInGroup + ' is in your group');
-        document.getElementById('usersInGroup').innerHTML += '<div class="userInGroupIcon"><div class="userOffline"></div>' + userNameInGroup + '</div>';
+        document.getElementById('usersInGroup').innerHTML += '<div class="userInGroupIcon"><div class="userOffline"></div>' + userNameInGroup + '<div class="toggleNotificstions"></div>' + '</div>';
       }
     }
    })
