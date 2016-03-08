@@ -130,6 +130,7 @@
     height: 27px;
     padding-right: 14px;
     cursor: pointer;
+    outline:none;
 }
 
 #messageInput {

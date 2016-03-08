@@ -321,7 +321,18 @@ function displayChatMessage(name, text, status, key) {
 
 function setTrigger()
 {
+
+  if(itemTrigger == 1)
+  {
+    itemTrigger = 0;
+  $('.urgentBtn').css('border', '1px solid #d64841');
+  }
+  else
+  {
   itemTrigger = 1;
+  $('.urgentBtn').css('border', '2px solid #d64841');
+  }
+
 }
 
 function setItemUrgent(id)
@@ -492,11 +503,6 @@ function createGroupDesktop()
  });
 
 }
-
-
-
-
-
 
 
 
