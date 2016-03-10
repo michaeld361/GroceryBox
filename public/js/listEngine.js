@@ -5,7 +5,7 @@ var groupID = '';
 var myDataRef = new Firebase('https://todofyp.firebaseio.com/' + 'listItems/');
 var userID = '';
 var itemTrigger = 0;
-
+var groupArray = [];
 
 if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
 {
@@ -53,9 +53,10 @@ var group = groupNots;
       myNotRef.once("value", function(snapshot) {
         // The callback function will get called twice, once for "fred" and once for "barney"
         snapshot.forEach(function(childSnapshot) {
-          // key will be "fred" the first time and "barney" the second time
+        
           var key = childSnapshot.key();
           // childData will be the actual contents of the child
+          console.log('keyy: ' + key);
           var childData = childSnapshot.val();
           var timeAdded = childData.time;
           var userRef = new Firebase('https://todofyp.firebaseio.com/presence/' + userID)
@@ -139,7 +140,7 @@ ref.on("value", function(snapshot) {
   groupString = myGroups.groupID;
   document.getElementById('groupList').innerHTML = "";
   document.getElementById('groupListDesktop').innerHTML = "";
-  var groupArray = groupString.split(",");
+  groupArray = groupString.split(",");
   console.log(groupArray);
 
 
@@ -186,7 +187,12 @@ function changeGroup(groupDiv)
     console.log('group switched to ' + groupDiv);
     userGroup = groupDiv;
     document.getElementById('groupHeader').innerHTML = groupDiv;
+    if($(window).width() < 750)
+    {
+    document.getElementById('pageTitle').innerHTML = groupDiv;
+    }
     getUsersInGroup(userGroup);
+    groupID = groupDiv;
     spyItem();
 }
 
@@ -266,6 +272,7 @@ function spyItem()
 
 
 function displayChatMessage(name, text, status, key) {
+
         $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('.listItems'));
         $('.listItems')[0].scrollTop = $('.listItems')[0].scrollHeight;
         $('</div>').text();
@@ -277,13 +284,6 @@ function displayChatMessage(name, text, status, key) {
           }
 
       }
-
-
-
-
-
-
-
 
 
 
@@ -439,16 +439,33 @@ function createGroup()
 
 /*
   var createGroupNotificationRef = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails + '/' + 'notificationSubscription/' + newGroupName);
-  createGroupNotificationRef.push({'groupID': newGroupName, 'recievePush': 'YES'}, completeSuc);
+  createGroupNotificationRef.push({'groupID': newGroupName, 'recievePush': 'YES'});
 */
 }
 
-/*
-function completeSuc()
+
+function leaveGroup()
 {
-  console.log('noti created');
+    var r = confirm("Are you sure you want to leave " + groupID);
+    if (r == true) 
+    {
+        for(var i = 0; i < groupArray.length; i++)
+        {
+          if(groupArray[i] == groupID)
+          {
+          groupArray.splice(i, 1);
+          var newGroup = groupArray.toString();
+          var ref = new Firebase('https://todofyp.firebaseio.com/users/' + userID);
+          ref.child('groupID').set(newGroup);
+          alert('You Left ' + groupToLeave);
+          }
+        } 
 }
-*/
+  else {
+        console.log('you are still in the group');
+    }
+}
+
 
 function createGroupDesktop()
 {
