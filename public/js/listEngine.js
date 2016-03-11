@@ -51,12 +51,10 @@ var group = groupNots;
 
       var myNotRef = new Firebase(myDataRef + '/' + group);
       myNotRef.once("value", function(snapshot) {
-        // The callback function will get called twice, once for "fred" and once for "barney"
         snapshot.forEach(function(childSnapshot) {
         
           var key = childSnapshot.key();
           // childData will be the actual contents of the child
-          console.log('keyy: ' + key);
           var childData = childSnapshot.val();
           var timeAdded = childData.time;
           var userRef = new Firebase('https://todofyp.firebaseio.com/presence/' + userID)
@@ -524,3 +522,188 @@ function createGroupDesktop()
 
 
 
+$('#mealPlanner').click(function() {
+    $('.mealPlanningPanel').slideToggle('fast');
+});
+
+
+
+
+
+function createMealPlan()
+{
+
+
+var mealPlanID = '';
+
+  var userRef = new Firebase('https://todofyp.firebaseio.com/users/' + userID)
+          userRef.on('value', function(snapshot) {
+            var groupPlanQuery = snapshot.val();
+            mealPlanID = groupPlanQuery.notificationStatus;
+          });
+
+  if(mealPlanID != '')
+  {
+    getMealPlan(mealPlanID);
+  }
+  else
+  {
+var newPlanName = document.getElementById('mealPlanName').value;
+$('#mealPlanName').css('display', 'none');
+$('#createMealPlanBtn').css('display', 'none');
+
+var mealPlanRef = new Firebase('https://todofyp.firebaseio.com/' + 'mealPlan/');
+ mealPlanRef.push({name: newPlanName, admin: userID}, onSuccess);
+
+}
+}
+
+
+
+
+function getMealPlan(buttonID)
+{
+  document.getElementById('mealPlan').innerHTML = '';
+ // var mealPlanID = '-KC_blv7etV_jhbwqPI9';
+  //console.log(mealPlanID);
+  //var myMeal = mealPlanID;
+//  console.log('my meal: ' + myMeal);
+//  var mealPlanString = myMeal.toString();
+  var whichDay = 'monday';
+
+if(buttonID == 'mondayBtn')
+{
+whichDay = 'monday';
+}
+if(buttonID == 'tuesdayBtn')
+{
+whichDay = 'tuesday';
+}
+if(buttonID == 'wednesdayBtn')
+{
+whichDay = 'wednesday';
+}
+if(buttonID == 'thursdayBtn')
+{
+whichDay = 'thursday';
+}
+if(buttonID == 'fridayBtn')
+{
+whichDay = 'friday';
+}
+if(buttonID == 'saturdayBtn')
+{
+whichDay = 'saturday';
+}
+if(buttonID == 'sundayBtn')
+{
+whichDay = 'sunday';
+}
+
+
+      var mealPlanRef = new Firebase('https://todofyp.firebaseio.com/mealPlan');
+      var mealPlanGroupRef = mealPlanRef.child('0683780530');
+       console.log('key 424: ' + mealPlanGroupRef.key());
+       var mealPlanGroupID2 = mealPlanGroupRef.key();
+       mealPlanForUser(mealPlanGroupID2);
+        var dayRef = mealPlanGroupRef.child(whichDay);
+          var name = userDisplayName;
+          var text = $('#' + whichDay + 'Input').val();
+          if(text != '')
+          {
+          var currentTime = Firebase.ServerValue.TIMESTAMP;
+          dayRef.push({name: name, text: text, time: currentTime});
+          console.log('Item Added: ' + text);
+          $('#messageInput').val('');
+          }
+
+          document.getElementById(whichDay + 'PlanItems').innerHTML = '';
+                mealPlanGroupRef.on('child_added', function(snapshot) {
+                  console.log('child snap: ' + snapshot.key());
+                  var dayToAppend = snapshot.key();
+                  document.getElementById(dayToAppend + 'PlanItems').innerHTML = '';
+                  snapshot.forEach(function(childSnapshot) {
+                  var message = childSnapshot.val();
+                  var key = childSnapshot.key();
+                  console.log(key + ' -- ' + message.text);
+                  displayMealPlan(message.name, message.text, dayToAppend);
+          });
+});
+}
+
+
+
+
+
+
+/*
+function tuesdayPlan(mealPlanID)
+{
+        var mealPlanRef = new Firebase('https://todofyp.firebaseio.com/' + 'mealPlan/' + '/' + mealPlanID + '/tue');
+
+            mealPlanRef.on('child_added', function(snapshot) {
+            var message = snapshot.val();
+            var key = snapshot.key();
+            displayMealPlan(message.name, key);
+
+          });
+
+            wednesdayPlan(mealPlanID);
+}
+
+function wednesdayPlan(mealPlanID)
+{
+        var mealPlanRef = new Firebase('https://todofyp.firebaseio.com/' + 'mealPlan/' + '/' + mealPlanID + '/wed');
+
+            mealPlanRef.on('child_added', function(snapshot) {
+            var message = snapshot.val();
+            var key = snapshot.key();
+            displayMealPlan(message.name, key);
+
+          });
+}
+
+*/
+
+
+
+
+
+
+
+
+
+function displayMealPlan(name, text, dayToAppend) {
+
+        $('<div/>').prepend($('<div class="mealItem">').text(text)).appendTo($('#' + dayToAppend + ' .mealPlanItems'));
+        $('#mealPlan')[0].scrollTop = $('#mealPlan')[0].scrollHeight;
+        $('</div>').text();
+
+      }
+
+
+function onSuccess()
+{
+  console.log('group created succcessfully');
+}
+
+
+
+
+function mealPlanForUser(mealPlanGroup)
+{
+  var setStatusRef = new Firebase("https://todofyp.firebaseio.com/users/" + userID);
+  setStatusRef.update({ mealPlanGroupID: mealPlanGroup}, onSuccess);
+}
+
+function onSuccess()
+{
+  console.log('user mealplan saved');
+}
+
+
+
+
+
+
+//create script to randomly generate a string

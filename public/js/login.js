@@ -76,12 +76,13 @@ var userID = uid;
 var groupArray = ['group1', 'group2', 'group3'];
 var userGroup = groupArray.toString();
 var notificationStatus = 'YES';
+var mealPlanGroupID = '';
 
 var myDataRef = new Firebase('https://todofyp.firebaseio.com/');
       var listRef = myDataRef.child("users");
       var groupRef = listRef.child(userID);
       $(document).ready(function(){
-        groupRef.set({groupID: userGroup, Name: userName,deviceToken: deviceToken, notificationStatus: notificationStatus});
+        groupRef.set({groupID: userGroup, Name: userName,deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
       })
 }
 

@@ -200,9 +200,60 @@ div#groupList
 	display:none;
 }
 
+#mealPlanner .mealPlanningPanel
+{
+	display:none;
+}
+
 
 @media only screen and (min-width: 750px)
 {
+
+.mealPlanningPanel {
+	display:none;
+    background-color: grey;
+    width: 100%;
+    height: 80vh;
+    position: absolute;
+    top: 0px;
+    z-index: 9999999999999;
+}
+
+
+	#mealPlanner {
+	display:block;
+    float: right;
+    width: 210px;
+    padding-left: 30px;
+    background-color: red;
+    margin-top: 10px;
+    padding-top: 14px;
+    background-color: #42a986;
+    padding-top: 13px;
+    padding-left: 30px;
+    width: 210px;
+    border: none;
+    padding-bottom: 13px;
+    float: right;
+    margin-top: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'open_sansregular';
+}
+
+#mondayInput, #tuesdayInput, #wednesdayInput, #thursdayInput, #fridayInput, #saturdayInput, #sundayInput {
+    float: left;
+}
+
+
+#mondayBtn, #tuesdayBtn, #wednesdayBtn, #thursdayBtn, #fridayBtn, #saturdayBtn, #sundayBtn {
+    float: left;
+    margin-top:0px;
+    height:20px;
+}
+
+
 
 	#leaveGroup 
 {
@@ -496,6 +547,7 @@ div#groupList
 	right:0px;
 	height: calc(100vh - 60px);
 	border-right: 10px solid #42a986;
+	overflow:visible;
 }
 
 h1.groupContainerTitle {

@@ -55,6 +55,7 @@ GroceryBox
 		<input type="text" id="createGroupDesktop" class="createGroupDesktop" placeholder="New Group Name" />
 	</div>
 	<div id="usersInGroup" class="usersInGroup"></div>
+	<div id="mealPlanner">Meal Planner</div>
 </div>
 </div>
 
@@ -68,6 +69,48 @@ GroceryBox
 <div id="listItems" class="listItems"></div>
 <input type='text' onkeypress="addItem(event)" id='messageInput' autocorrect="off" autocapitalize="off" placeholder='+Add Item'>
 <div id="leaveGroup" onclick="leaveGroup()"></div>
+
+<div class="mealPlanningPanel">
+<input type="text" id="mealPlanName" placeholder="New Plan Name">
+
+<button id="createMealPlanBtn" class="scheduleBtn" onclick="createMealPlan()">CREATE</button>
+<div id="monday"><h1>Monday</h1>
+		<div id="mondayPlanItems" class="mealPlanItems"></div>
+<input type="text" id="mondayInput" placeholder="New Meal Item">
+<button id="mondayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
+</div>
+<div id="tuesday"><h1>Tuesday</h1>
+		<div id="tuesdayPlanItems" class="mealPlanItems"></div>
+<input type="text" id="tuesdayInput" placeholder="New Meal Item">
+<button id="tuesdayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
+</div>
+<div id="wednesday"><h1>Wednesday</h1>
+		<div id="wednesdayPlanItems" class="mealPlanItems"></div>
+<input type="text" id="wednesdayInput" placeholder="New Meal Item">
+<button id="wednesdayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
+</div>
+<div id="thursday"><h1>Thursday</h1>
+		<div id="thursdayPlanItems" class="mealPlanItems"></div>
+<input type="text" id="thursdayInput" placeholder="New Meal Item">
+<button id="thursdayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
+</div>
+<div id="friday"><h1>Friday</h1>
+		<div id="fridayPlanItems" class="mealPlanItems"></div>
+<input type="text" id="fridayInput" placeholder="New Meal Item">
+<button id="fridayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
+</div>
+<div id="saturday"><h1>Saturday</h1>
+		<div id="saturdayPlanItems" class="mealPlanItems"></div>
+<input type="text" id="saturdayInput" placeholder="New Meal Item">
+<button id="saturdayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
+</div>
+<div id="sunday"><h1>Sunday</h1>
+		<div id="sundayPlanItems" class="mealPlanItems"></div>
+<input type="text" id="sundayInput" placeholder="New Meal Item">
+<button id="sundayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
+</div>
+<div id="mealPlan" class="mealPlan"></div>
+</div>
 </div>
 
 
