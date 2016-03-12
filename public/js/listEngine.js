@@ -6,6 +6,7 @@ var myDataRef = new Firebase('https://todofyp.firebaseio.com/' + 'listItems/');
 var userID = '';
 var itemTrigger = 0;
 var groupArray = [];
+var randomKey = '';
 
 if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
 {
@@ -533,21 +534,12 @@ $('#mealPlanner').click(function() {
 function createMealPlan()
 {
 
-
+    getRandomKey();
+    console.log(randomKey + ' ---haha loool');
 var mealPlanID = '';
 
-  var userRef = new Firebase('https://todofyp.firebaseio.com/users/' + userID)
-          userRef.on('value', function(snapshot) {
-            var groupPlanQuery = snapshot.val();
-            mealPlanID = groupPlanQuery.notificationStatus;
-          });
 
-  if(mealPlanID != '')
-  {
-    getMealPlan(mealPlanID);
-  }
-  else
-  {
+
 var newPlanName = document.getElementById('mealPlanName').value;
 $('#mealPlanName').css('display', 'none');
 $('#createMealPlanBtn').css('display', 'none');
@@ -555,7 +547,9 @@ $('#createMealPlanBtn').css('display', 'none');
 var mealPlanRef = new Firebase('https://todofyp.firebaseio.com/' + 'mealPlan/');
  mealPlanRef.push({name: newPlanName, admin: userID}, onSuccess);
 
-}
+
+
+
 }
 
 
@@ -601,8 +595,9 @@ whichDay = 'sunday';
 }
 
 
+    console.log(randomKey + ' RandomKey');
       var mealPlanRef = new Firebase('https://todofyp.firebaseio.com/mealPlan');
-      var mealPlanGroupRef = mealPlanRef.child('0683780530');
+      var mealPlanGroupRef = mealPlanRef.child(randomKey);
        console.log('key 424: ' + mealPlanGroupRef.key());
        var mealPlanGroupID2 = mealPlanGroupRef.key();
        mealPlanForUser(mealPlanGroupID2);
@@ -629,6 +624,8 @@ whichDay = 'sunday';
                   displayMealPlan(message.name, message.text, dayToAppend);
           });
 });
+
+                
 }
 
 
@@ -703,7 +700,14 @@ function onSuccess()
 
 
 
+function getRandomKey()
+{
 
+  var array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4','5','6','7','8','9','0','!','*','&','£'];
+
+  for(var i = 0; i < 15; i++) { randomKey = randomKey + array[Math.floor(Math.random() * 40)]; }
+    console.log(randomKey);
+}
 
 
 //create script to randomly generate a string
