@@ -200,7 +200,7 @@ div#groupList
 	display:none;
 }
 
-#mealPlanner .mealPlanningPanel
+#mealPlanner, .mealPlanningPanel
 {
 	display:none;
 }
