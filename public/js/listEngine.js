@@ -537,22 +537,23 @@ function createMealPlan()
     getRandomKey();
 
     console.log(randomKey + ' ---haha loool');
-var mealPlanID = '';
 
 var userRef = new Firebase('https://todofyp.firebaseio.com/users/' + userID)
           userRef.on('value', function(snapshot) {
 
             var userDetails = snapshot.val();
             var userMealPleanQuery = userDetails.mealPlanGroupID;
-//if(userMealPleanQuery != '')
-//{
+if(userMealPleanQuery != '')
+{
   console.log('user has a meal plan');
-  //getExistingMealPlan()
+  randomKey = userMealPleanQuery;
+  //getMealPlan();
+  getExistingMealPlan(randomKey)
   //getMealPlan();
 
-//}
-//else
-//{
+}
+else
+{
   console.log('user does not have a meal plan');
 var newPlanName = document.getElementById('mealPlanName').value;
 $('#mealPlanName').css('display', 'none');
@@ -560,7 +561,7 @@ $('#createMealPlanBtn').css('display', 'none');
 
 var mealPlanRef = new Firebase('https://todofyp.firebaseio.com/' + 'mealPlan/');
  mealPlanRef.push({name: newPlanName, admin: userID}, onSuccess);
-//}
+}
 });
 
 
@@ -578,7 +579,6 @@ function getMealPlan(buttonID)
 //  console.log('my meal: ' + myMeal);
 //  var mealPlanString = myMeal.toString();
   var whichDay = 'monday';
-
 if(buttonID == 'mondayBtn')
 {
 whichDay = 'monday';
@@ -643,21 +643,22 @@ whichDay = 'sunday';
 }
 
 
-function getExistingMealPlan()
+function getExistingMealPlan(randomKey)
 {
 
-   var mealPlanRef = new Firebase('https://todofyp.firebaseio.com/mealPlan');
+    //document.getElementById(whichDay + 'PlanItems').innerHTML = '';
+          var mealPlanRef = new Firebase('https://todofyp.firebaseio.com/mealPlan');
       var mealPlanGroupRef = mealPlanRef.child(randomKey);
-      mealPlanGroupRef.on('value', function(snapshot) {
-      var dayToAppend = snapshot.key();
-        snapshot.forEach(function(childSnapshot) {
+                mealPlanGroupRef.on('value', function(snapshot) {
+                  console.log('child snap: ' + snapshot.key());
+                  snapshot.forEach(function(childSnapshot) {
                   var message = childSnapshot.val();
                   var key = childSnapshot.key();
+                  var dayToAppend = childSnapshot.key();
                   console.log(key + ' -- ' + message.text);
                   displayMealPlan(message.name, message.text, dayToAppend);
           });
-
-      });
+});
 }
 
 

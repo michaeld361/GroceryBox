@@ -20,12 +20,14 @@
 
 function getUsersInGroup(groupMarked)
 {
+  var userDeviceTokens = [];
 var userNotiRef = new Firebase("https://todofyp.firebaseio.com/users/");
     userNotiRef.on("value", function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
     var usersInGroup = childSnapshot.val();
     var userGroupInGroup = usersInGroup.groupID;
     var userNameInGroup = usersInGroup.Name;
+    var userDeviceToken = usersInGroup.deviceToken;
     var userNotificationStatus = usersInGroup.notificationStatus;
     var usersInGroupArray = userGroupInGroup.split(",");
     //for each user in the group
@@ -37,6 +39,7 @@ var userNotiRef = new Firebase("https://todofyp.firebaseio.com/users/");
       if(usersInGroupArray[i] == groupMarked)
       {
         console.log(userNameInGroup + ' got sent a push notificaiton');
+        userDeviceTokens.push(userDeviceToken);
       }
     }
 	}
