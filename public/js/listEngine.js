@@ -753,7 +753,6 @@ function getDayofWeek()
 
     $('#' + Day).ready(function(){
       $('#' + Day).css('color', '#3a3a3a');
-      $('#' + Day).css('font-size', '16px');
       $('#' + Day).css('opacity', '1.0');
     })
 

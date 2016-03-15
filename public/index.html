@@ -67,50 +67,50 @@ GroceryBox
 </div>
 
 <div id="listItems" class="listItems"></div>
-<input type='text' onkeypress="addItem(event)" id='messageInput' autocorrect="off" autocapitalize="off" placeholder='+Add Item'>
+<input type='text' onkeypress="addItem(event)" id='messageInput' autocorrect="off" autocapitalize="off" placeholder='+ Add Item'>
 <div id="leaveGroup" onclick="leaveGroup()"></div>
 
 <div class="mealPlanningPanel">
 <input type="text" id="mealPlanName" placeholder="New Plan Name">
 
 <button id="createMealPlanBtn" class="scheduleBtn" onclick="createMealPlan()">CREATE</button>
-<div id="monday" class="dayOfWeek"><h1>Monday</h1>
+<div id="monday" class="dayOfWeek"><h1 class="dayOfWeekTitle">Monday</h1>
 		<div id="mondayPlanItems" class="mealPlanItems"></div>
 <input type="text" id="mondayInput" placeholder="New Meal Item">
 <button id="mondayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
 <button id="mondayMealAdd" class="addMealBtn">Add Meal</button>
 </div>
-<div id="tuesday" class="dayOfWeek"><h1>Tuesday</h1>
+<div id="tuesday" class="dayOfWeek"><h1 class="dayOfWeekTitle">Tuesday</h1>
 		<div id="tuesdayPlanItems" class="mealPlanItems"></div>
 <input type="text" id="tuesdayInput" placeholder="New Meal Item">
 <button id="tuesdayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
 <button class="addMealBtn">Add Meal</button>
 </div>
-<div id="wednesday" class="dayOfWeek"><h1>Wednesday</h1>
+<div id="wednesday" class="dayOfWeek"><h1 class="dayOfWeekTitle">Wednesday</h1>
 		<div id="wednesdayPlanItems" class="mealPlanItems"></div>
 <input type="text" id="wednesdayInput" placeholder="New Meal Item">
 <button id="wednesdayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
 <button class="addMealBtn">Add Meal</button>
 </div>
-<div id="thursday" class="dayOfWeek"><h1>Thursday</h1>
+<div id="thursday" class="dayOfWeek"><h1 class="dayOfWeekTitle">Thursday</h1>
 		<div id="thursdayPlanItems" class="mealPlanItems"></div>
 <input type="text" id="thursdayInput" placeholder="New Meal Item">
 <button id="thursdayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
 <button class="addMealBtn">Add Meal</button>
 </div>
-<div id="friday" class="dayOfWeek"><h1>Friday</h1>
+<div id="friday" class="dayOfWeek"><h1 class="dayOfWeekTitle">Friday</h1>
 		<div id="fridayPlanItems" class="mealPlanItems"></div>
 <input type="text" id="fridayInput" placeholder="New Meal Item">
 <button id="fridayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
 <button class="addMealBtn">Add Meal</button>
 </div>
-<div id="saturday" class="dayOfWeek"><h1>Saturday</h1>
+<div id="saturday" class="dayOfWeek"><h1 class="dayOfWeekTitle">Saturday</h1>
 		<div id="saturdayPlanItems" class="mealPlanItems"></div>
 <input type="text" id="saturdayInput" placeholder="New Meal Item">
 <button id="saturdayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
 <button class="addMealBtn">Add Meal</button>
 </div>
-<div id="sunday" class="dayOfWeek"><h1>Sunday</h1>
+<div id="sunday" class="dayOfWeek"><h1 class="dayOfWeekTitle">Sunday</h1>
 		<div id="sundayPlanItems" class="mealPlanItems"></div>
 <input type="text" id="sundayInput" placeholder="New Meal Item">
 <button id="sundayBtn" class="scheduleBtn" onclick="getMealPlan(this.id)">add item</button>
@@ -193,7 +193,18 @@ findStoreBtn.addEventListener('touchend', pushMenu, false);
 findStoreBtn.addEventListener('click', pushMenu, false);
 findStoreBtn.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
 
+var focusTextField = document.getElementById('messageInput');
+focusTextField.addEventListener('touchend', focusText, false);
+focusTextField.addEventListener('click', focusText, false);
+focusTextField.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
 
+
+function focusText()
+{
+$(document).ready(function(){
+	focusTextField.focus();
+});
+}
 </script>
 
 

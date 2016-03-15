@@ -41,17 +41,18 @@ header
 			{
 				width: 200px;
 				    text-align: center;
-				    padding-top: 16px;
+				    padding-top: 20px;
 				    padding-bottom: 8px;
 				    color: white;
-				    font-size: 23px;
-				    letter-spacing: 3.4px;
-				    font-family: 'stellarregular';
+				    font-size: 16px;
+				    font-family: 'open_sansregular';
 				    left: 0px;
 				    right: 0px;
 				    margin-left: auto;
 				    margin-right: auto;
 			}
+
+
 
 			.userContainer
 			{
@@ -91,6 +92,26 @@ header
 				display:none;
 				color:white;
 			}
+
+
+
+.scheduleBtn.urgentBtn
+{
+    display: block;
+    position: fixed;
+    font-size: 9px;
+    height: 39px;
+    opacity: 0.8;
+    outline: none;
+    color: rgb(214, 72, 65);
+    border-radius: 50px;
+    background-color: white;
+    bottom: 72px;
+    right: 20px;
+    border: 1px solid rgb(214, 72, 65);
+}
+
+
 
 
 
@@ -189,7 +210,8 @@ div#groupList
 	display:block;
     width: 100%;
     height: 55px;
-    background-color: gray;
+    background-color: #e8e7e7;
+    border-top:1px solid #dad9d9;
     position: fixed;
     bottom: 0px;
     z-index: 999999999;
@@ -211,11 +233,12 @@ div#groupList
 
 .mealPlanningPanel {
 	display:none;
-    background-color: #f3f4f3;
+    background-color: #c8dfd7;
     width: 100%;
     position: absolute;
     top: 0px;
     margin-left: 20px;
+    padding-bottom:30px;
     margin-top: 0px;
     z-index: 9999999999999;
 }
@@ -244,35 +267,58 @@ div#groupList
 
 #mondayInput, #tuesdayInput, #wednesdayInput, #thursdayInput, #fridayInput, #saturdayInput, #sundayInput {
     float: left;
-    display:none;
+    margin-left: 20px;
+    display: none;
+    height: 22px;
+    background-color: #a6bfb6;
+    padding-left: 10px;
+    border: none;
+    top: 29px;
+    position: relative;
+    bottom: 10px;
 }
 
 
 #mondayBtn, #tuesdayBtn, #wednesdayBtn, #thursdayBtn, #fridayBtn, #saturdayBtn, #sundayBtn {
     float: left;
-    margin-top:0px;
-    height:20px;
-    display:none;
+    margin-top: 32px;
+    height: 20px;
+    display: none;
 }
 
 .dayOfWeek
 {
-    position: relative;
-    left: 70px;
+	position: relative;
+    left: 10px;
     font-family: 'open_sansregular';
     color: #7b7a7a;
-    font-size: 13px;
-    margin-top: 60px;
-    opacity:0.6;
+    font-size: 11px;
+    background-color: white;
+    margin-top: 20px;
+    /* opacity: 0.6; */
+    border-radius: 4px;
     width: 30%;
+    padding-left: 12px;
+    margin-left: 10px;
     height: 200px;
     float: left;
 }
 
+			.dayOfWeekTitle
+			{
+				padding-left: 17px;
+			    font-size: 20px;
+			    /* border-bottom: 1px solid; */
+			    padding-top: 5px;
+			}
+
 .mealItem 
 {
-    margin-top: 1px;
-    padding: 10px;
+	margin-top: 1px;
+    padding: 5px;
+    padding-bottom: 7px;
+    padding-left: 24px;
+    font-size: 16px;
     font-family: 'open_sansregular';
     color: #42a986;
 }
@@ -326,8 +372,28 @@ div#groupList
 
 		.scheduleBtn.urgentBtn {
 		    margin-top: -27px;
-		    left: 140px;
+		    left: 150px;
 		    outline:none;
+
+	display: block;
+    position: relative;
+
+    /* float: right; */
+
+    border: 1px solid #d64841;
+    border-radius: 14px;
+    background: none;
+    /* padding: 4px; */
+    color: #d64841;
+    font-size: 12px;
+    padding-left: 14px;
+    height: 27px;
+    padding-right: 14px;
+    cursor: pointer;
+    bottom:0;
+    right:0;
+    opacity:1.0;
+
 		}
 
 
@@ -470,6 +536,8 @@ div#groupList
 		margin-right:0;
 		float:left;
 		font-size: 22px;
+		letter-spacing: 3.4px;
+		font-family: 'stellarregular';
 	}
 
 
