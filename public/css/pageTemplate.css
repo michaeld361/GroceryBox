@@ -211,39 +211,40 @@ div#groupList
 
 .mealPlanningPanel {
 	display:none;
-    background-color: grey;
+    background-color: #f3f4f3;
     width: 100%;
-    height: 80vh;
     position: absolute;
     top: 0px;
+    margin-left: 20px;
+    margin-top: 0px;
     z-index: 9999999999999;
 }
 
 
 	#mealPlanner {
-	display:block;
+	display: block;
+    width: 100px;
+	color: #42a986;
+    text-align: center;
+    /* height: 30px; */
+    /* background-color: red; */
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 1px solid white;
+    border-radius: 4px;
     float: right;
-    width: 210px;
-    padding-left: 30px;
-    background-color: red;
-    margin-top: 10px;
-    padding-top: 14px;
-    background-color: #42a986;
-    padding-top: 13px;
-    padding-left: 30px;
-    width: 210px;
-    border: none;
-    padding-bottom: 13px;
-    float: right;
-    margin-top: 10px;
-    color: white;
-    cursor: pointer;
-    font-size: 12px;
+    background-color:white;
+    font-size: 13px;
+    position: relative;
     font-family: 'open_sansregular';
+    margin-top: 0px;
+    left: 40px;
+    cursor: pointer;
 }
 
 #mondayInput, #tuesdayInput, #wednesdayInput, #thursdayInput, #fridayInput, #saturdayInput, #sundayInput {
     float: left;
+    display:none;
 }
 
 
@@ -251,6 +252,40 @@ div#groupList
     float: left;
     margin-top:0px;
     height:20px;
+    display:none;
+}
+
+.dayOfWeek
+{
+    position: relative;
+    left: 70px;
+    font-family: 'open_sansregular';
+    color: #7b7a7a;
+    font-size: 13px;
+    margin-top: 60px;
+    opacity:0.6;
+    width: 30%;
+    height: 200px;
+    float: left;
+}
+
+.mealItem 
+{
+    margin-top: 1px;
+    padding: 10px;
+    font-family: 'open_sansregular';
+    color: #42a986;
+}
+
+
+.addMealBtn {
+    width: 110px;
+    background-color: white;
+    border: 1px solid #d64841;
+    padding: 5px;
+    color: #d64841;
+    border-radius: 15px;
+    /* opacity: 0.7; */
 }
 
 
@@ -574,6 +609,16 @@ h1.groupContainerTitle {
 .headerContainer
 {
 	width:80%;
+}
+
+}
+
+
+@media only screen and (min-width: 1300px)
+{
+.mealPlanningPanel
+{
+	width:70%;
 }
 
 }

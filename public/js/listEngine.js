@@ -525,6 +525,7 @@ function createGroupDesktop()
 
 $('#mealPlanner').click(function() {
     $('.mealPlanningPanel').slideToggle('fast');
+    getDayofWeek();
 });
 
 
@@ -535,7 +536,7 @@ function createMealPlan()
 {
 
     getRandomKey();
-
+    
     console.log(randomKey + ' ---haha loool');
 
 var userRef = new Firebase('https://todofyp.firebaseio.com/users/' + userID)
@@ -547,10 +548,7 @@ if(userMealPleanQuery != '')
 {
   console.log('user has a meal plan');
   randomKey = userMealPleanQuery;
-  //getMealPlan();
-  getExistingMealPlan(randomKey)
-  //getMealPlan();
-
+  getExistingMealPlan(randomKey);
 }
 else
 {
@@ -740,4 +738,33 @@ function getRandomKey()
 }
 
 
-//create script to randomly generate a string
+
+
+function getDayofWeek()
+{
+
+  var weeklyDays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+
+    var d = new Date();
+    var n = d.getDay()
+    //console.log('Todays Day: ' + weeklyDays[n]);
+    var Day = weeklyDays[n];
+
+
+    $('#' + Day).ready(function(){
+      $('#' + Day).css('color', '#3a3a3a');
+      $('#' + Day).css('font-size', '16px');
+      $('#' + Day).css('opacity', '1.0');
+    })
+
+}
+
+
+
+
+
+$('#mondayMealAdd').click(function(){
+  $('#mondayMealAdd').css('display', 'none');
+  $('#mondayBtn').css('display', 'block');
+  $('#mondayInput').css('display', 'block');
+})
