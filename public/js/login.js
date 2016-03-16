@@ -51,7 +51,7 @@ ref.createUser({
     document.getElementById('validationMessageReg').innerHTML = error;
   } else {
     console.log("Successfully created user account with uid:", userData.uid);
-    setUserGroup(userData.uid);
+    setUserGroup(userData.uid, userEmail);
     document.getElementById('validationMessage').innerHTML = 'Successfully registered - please login';
     $('#loginEmail').val(userEmail);
         $('html, body').animate({
@@ -66,7 +66,7 @@ ref.createUser({
 
 
 
-function setUserGroup(uid)
+function setUserGroup(uid, userEmail)
 {
 
 //Do something to get device token, then store in users firebase profile.
@@ -82,7 +82,7 @@ var myDataRef = new Firebase('https://todofyp.firebaseio.com/');
       var listRef = myDataRef.child("users");
       var groupRef = listRef.child(userID);
       $(document).ready(function(){
-        groupRef.set({groupID: userGroup, Name: userName,deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
+        groupRef.set({groupID: userGroup, Name: userName, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
       })
 }
 

@@ -434,8 +434,9 @@ function createGroup()
   var newGroupName = document.getElementById('createGroup').value;
   var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
   var newGroup = groupString + ',' + newGroupName;
-  ref.child('groupID').set(newGroup);
-
+  ref.update({ groupID: newGroup});
+  groupID = newGroupName;
+  changeGroup(newGroupName);
 /*
   var createGroupNotificationRef = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails + '/' + 'notificationSubscription/' + newGroupName);
   createGroupNotificationRef.push({'groupID': newGroupName, 'recievePush': 'YES'});
@@ -472,8 +473,9 @@ function createGroupDesktop()
   var newGroupName = document.getElementById('createGroupDesktop').value;
   var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
   var newGroup = groupString + ',' + newGroupName;
-  ref.child('groupID').set(newGroup);
-
+  ref.update({ groupID: newGroup});
+  groupID = newGroupName;
+  changeGroup(newGroupName);
 }
 
 
@@ -757,6 +759,58 @@ function getDayofWeek()
     })
 
 }
+
+
+
+
+
+
+
+function addUser()
+{
+
+
+var checkEmail = 'admin0013@admin.com';
+
+    var myDataRef2 = new Firebase('https://todofyp.firebaseio.com/users');
+      myDataRef2.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+        
+          
+          var childData = childSnapshot.val();
+          var userEmail = childData.Email;
+
+
+          if(checkEmail == userEmail)
+          {
+          var userAddKey = childSnapshot.key();
+          var userAddGroup = childData.groupID;
+            console.log('found an email match: ' + userEmail);
+            console.log('add user key: ' + userAddKey);
+                  var newUserRef = myDataRef2.child(userAddKey);
+                  var newGroup = userAddGroup + ',' + groupID;
+                  //newUserRef.child('groupID').update(newGroup);
+                  newUserRef.update({ groupID: newGroup});
+                  console.log('user is now in group');
+          }
+          else
+          {
+            console.log('No user found');
+          }
+        });
+      });
+
+
+}
+
+
+
+
+
+
+
+
+
 
 
 
