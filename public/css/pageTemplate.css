@@ -39,17 +39,17 @@ header
 
 			.pageTitle
 			{
-				width: 200px;
-				    text-align: center;
-				    padding-top: 20px;
-				    padding-bottom: 8px;
-				    color: white;
-				    font-size: 16px;
-				    font-family: 'open_sansregular';
-				    left: 0px;
-				    right: 0px;
-				    margin-left: auto;
-				    margin-right: auto;
+			    width: 200px;
+			    text-align: center;
+			    padding-top: 16px;
+			    padding-bottom: 8px;
+			    color: white;
+			    font-size: 19px;
+			    font-family: 'open_sansregular';
+			    left: 0px;
+			    right: 0px;
+			    margin-left: auto;
+			    margin-right: auto;
 			}
 
 
@@ -209,13 +209,38 @@ div#groupList
 {
 	display:block;
     width: 100%;
-    height: 55px;
-    background-color: #e8e7e7;
+    height: 50px;
+    background-color: #f1f1f1;
     border-top:1px solid #dad9d9;
     position: fixed;
     bottom: 0px;
     z-index: 999999999;
 }
+
+
+			.mobileTab {
+			    float: left;
+			    width: 25%;
+			    height: 100%;
+			    text-align: center;
+			}
+
+			.mobileNavIcon {
+			    width: 22px;
+			    height: 22px;
+			    position: relative;
+			    margin-top: 5px;
+			    background-size:100%;
+			    top: 7px;
+			    margin: 0 auto;
+			}
+
+			.mobileNavLabel {
+			    margin-top: 3px;
+			    font-size: 11px;
+			    color: #b6b6b6;
+			    font-family: 'open_sansregular';
+			}
 
 #leaveGroup
 {
