@@ -15,6 +15,15 @@ GroceryBox
 
 
 <body class="cbp-spmenu-push">
+	<div id="lightsOut"></div>
+<div class="lightbox">
+	<h3>Add a user to this list</h3>
+	<div class="addUserContainer">
+		<p class="textDesc">To add a user to this list, please enter their email adress below. Easy Peasy!</p>
+<input type="text" id="addUserTextBox" class="addUserTextBox" placeholder="User Email"><br>
+<button id="addUserBtn2" onclick="addUser();">Add User</button>
+</div>
+</div>
 			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 			<h3></h3>
 		<div id="mobileMenu">
@@ -69,7 +78,7 @@ GroceryBox
 <div id="listItems" class="listItems"></div>
 <input type='text' onkeypress="addItem(event)" id='messageInput' autocorrect="off" autocapitalize="off" placeholder='+ Add Item'>
 <div id="leaveGroup" onclick="leaveGroup()"></div>
-<div id="addUser" onclick="addUser()"></div>
+<div id="addUser" onclick="lightbox()"></div>
 
 <div class="mealPlanningPanel">
 <input type="text" id="mealPlanName" placeholder="New Plan Name">

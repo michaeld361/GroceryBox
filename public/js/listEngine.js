@@ -770,8 +770,11 @@ function addUser()
 {
 
 
-var checkEmail = 'admin0013@admin.com';
+var checkEmail = document.getElementById('addUserTextBox').value;
 
+
+if(checkEmail != '')
+{
     var myDataRef2 = new Firebase('https://todofyp.firebaseio.com/users');
       myDataRef2.once("value", function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
@@ -799,7 +802,7 @@ var checkEmail = 'admin0013@admin.com';
           }
         });
       });
-
+}
 
 }
 
@@ -808,9 +811,23 @@ var checkEmail = 'admin0013@admin.com';
 
 
 
+function lightbox()
+{
+document.body.scrollTop = document.documentElement.scrollTop = 0;
+  $(document).ready(function(){
+    $('html').css('overflow', 'hidden');
+    $('#lightsOut').fadeIn();
+    $('.lightbox').fadeIn();
+  })
+}
 
 
 
+$('#lightsOut').click(function(){
+  $('html').css('overflow', 'auto');
+  $('#lightsOut').fadeOut('fast');
+  $('.lightbox').fadeOut('fast');
+})
 
 
 

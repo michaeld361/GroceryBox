@@ -36,6 +36,7 @@ html {
     width: 100%;
     padding: 0px;
     padding-left:40px;
+    padding-bottom:100px;
 
 }
 
@@ -143,6 +144,7 @@ html {
     padding-left: 74px;
     margin-left: 50px;
     width: 50%;
+    padding-bottom:50px;
 }
 
 .groupName {
