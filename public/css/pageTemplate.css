@@ -8,6 +8,72 @@ html, body
 	outline:none;
 }
 
+.editProfileBtn {
+    position: absolute;
+    width: 120px;
+    /* height: 30px; */
+    bottom: 30px;
+    margin-left: auto;
+    padding-top: 5px;
+    font-size: 12px;
+    padding-bottom: 5px;
+    margin-right: auto;
+    font-family: 'open_sansregular';
+    left: 0px;
+    color: #d64841;
+    right: 0px;
+    border: 1px solid #d64841;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    background-image:url(../img/userIconLarge.png);
+    position: relative;
+    background-size:100%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+
+.displayName-profile {
+    font-family: 'open_sansregular';
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+}
+.profilePanel {
+    display: none;
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+
+    height: 76vh;
+    padding-bottom: 30px;
+    margin-top: 0px;
+    z-index: 999999999;
+}
+
+p.profilePanelInfo {
+    text-align: center;
+    margin-top: 5px;
+    font-family: 'open_sansregular';
+    color: #d64841;
+}
+
+
+.emailAddress-profile {
+    text-align: center;
+    font-family: 'open_sansregular';
+    margin-top: 20px;
+    font-size: 11px;
+    margin-top: 25px;
+}
+
+
 #settingsTab {
     display: block;
     width: 100%;
@@ -246,19 +312,88 @@ div#groupList
 {
 	display:none;
 }
-
-#mealPlanner, .mealPlanningPanel
+.dayOfWeek
 {
-	display:none;
+    width: 90%;
+    background-color: white;
+    margin-right: 20px;
+    min-height: 120px;
+    position: relative;
+    right: 5px;
+    margin-top: 10px;
+    /* padding: 0px; */
 }
+
+.mealPlanningPanel
+{
+    display: none;
+    position: absolute;
+    padding-left: 20px;
+    top: 0px;
+    padding-top: 20px;
+    width: 100%;
+    background-color: #e7e7e7;
+}
+
+#mealPlanner
+{
+display:none;
+}
+
+
+h1.dayOfWeekTitle {
+    padding-left: 15px;
+    padding-top: 10px;
+    font-size: 16px;
+}
+
 #lightsOut, .lightbox
 {
 	display:none;
 }
 
+.textMeal {
+    position: absolute;
+    bottom: 0px;
+}
+
+
+.addMealBtn {
+    position: absolute;
+    bottom: 0px;
+    /* float: right; */
+    right: 40px;
+}
 
 @media only screen and (min-width: 750px)
 {
+
+    .profilePanel
+    {
+        width:280px;
+        margin-left:20px;
+        border: 1px solid #c4c0c0;
+        border-top:none;
+        height:350px;
+    }
+
+    #closeLightbox
+    {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    background-color: white;
+    border: none;
+    font-size: 17px;
+    outline: none;
+    opacity: 0.4;
+    cursor: pointer;
+    }
+
+    #closeLightbox:hover
+    {
+        opacity:0.7;
+    }
 
 
 .lightbox h3 {
@@ -331,7 +466,7 @@ button#addUserBtn2 {
 
 .lightbox {
 	display: none;
-    width: 40%;
+    width: 50%;
     height: 280px;
     position: absolute;
     left: 0px;
@@ -355,6 +490,8 @@ button#addUserBtn2 {
     margin-top: 0px;
     z-index: 9999999999999;
 }
+
+
 
 
 	#mealPlanner {
@@ -455,7 +592,7 @@ button#addUserBtn2 {
     width: 20px;
     height: 20px;
     position: absolute;
-    bottom: 40px;
+    bottom: 90px;
     right: 50px;
     background-image: url(../img/binIcon.png);
     background-repeat: no-repeat;
@@ -478,7 +615,7 @@ button#addUserBtn2 {
 				    width: 20px;
 				    height: 20px;
 				    position: absolute;
-				    bottom: 40px;
+				    bottom: 90px;
 				    right: 110px;
 				    background-image: url(../img/addUserIcon.png);
 				    background-repeat: no-repeat;
@@ -627,6 +764,19 @@ button#addUserBtn2 {
     top: 58px;
     margin-left: 45px;
 	}
+
+        #notificationPanelTabIcon2
+    {
+    transform: rotate(45deg);
+    background-color: white;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -2px;
+    margin-left: 45px;
+    }
 
 	.notificationCountIcon {
     background-color: #d64841;

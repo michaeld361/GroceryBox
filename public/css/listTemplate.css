@@ -67,7 +67,6 @@ html {
     height: 19px;
     float: left;
     position: relative;
-    z-index: 999999999;
     top: 4px;
     left: -10px;
     background-size: 100%;

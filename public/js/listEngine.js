@@ -250,7 +250,8 @@ function spyItem()
             console.log('item added to ' + userGroup);
             var message = snapshot.val();
             var key = snapshot.key();
-            displayChatMessage(message.name, message.text, message.status, key);
+            var priorityStatus = message.status;
+            displayChatMessage(message.name, message.text, message.status, key, priorityStatus);
             ItemsAddedByOthers(message.time, message.text, key);
            // urgentIcon(message.name, message.text, message.status, key);
           });
@@ -270,12 +271,19 @@ function spyItem()
 
 
 
-function displayChatMessage(name, text, status, key) {
-
-        $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('.listItems'));
-        $('.listItems')[0].scrollTop = $('.listItems')[0].scrollHeight;
-        $('</div>').text();
-
+function displayChatMessage(name, text, status, key, priorityStatus) {
+        if(priorityStatus == 'urg')
+        {
+            $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).prependTo($('.listItems'));
+            $('.listItems')[0].scrollTop = $('.listItems')[0].scrollHeight;
+            $('</div>').text();
+        }
+        else
+        {
+            $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('.listItems'));
+            $('.listItems')[0].scrollTop = $('.listItems')[0].scrollHeight;
+            $('</div>').text();
+        }
 
           if(status == 'urg')
           {
@@ -298,6 +306,8 @@ function displayChatMessage(name, text, status, key) {
         console.log('item removed: ' + text);
         $( "#" + key ).css( "text-decoration", "line-through" );
         $( "#" + key ).css( "opacity", "0.6" );
+
+
       }
 
 
@@ -369,7 +379,7 @@ function onFinish()
    if(hitmebaby != 'nrl')
    {
        $('#' + key).append('<div class="urgentIcon"></div>');
- }
+   }
  })
    }
  }, function (errorObject) {
@@ -471,11 +481,18 @@ function createGroupDesktop()
 {
   var myDetails = userID;
   var newGroupName = document.getElementById('createGroupDesktop').value;
+  if(newGroupName.length <= 16 && newGroupName.length >= 1 && newGroupName != '')
+  {
   var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
   var newGroup = groupString + ',' + newGroupName;
   ref.update({ groupID: newGroup});
   groupID = newGroupName;
   changeGroup(newGroupName);
+  }
+  else
+  {
+    alert('List names should be between 1 and 16 characters');
+  }
 }
 
 
@@ -527,12 +544,59 @@ function createGroupDesktop()
 
 $('#mealPlanner').click(function() {
     $('.mealPlanningPanel').slideToggle('fast');
+    $('.profilePanel').slideUp('fast');
     getDayofWeek();
 });
 
 
 
+//Meal Plan Tab
+var showMealPlanPage = document.getElementById('mealPlanTab');
+showMealPlanPage.addEventListener('touchend', showMealPlanTab, false);
+showMealPlanPage.addEventListener('click', showMealPlanTab, false);
+showMealPlanPage.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
 
+function showMealPlanTab()
+{
+      $('.mealPlanningPanel').slideDown('fast');
+      $('.profilePanel').slideUp('fast');
+      $('#pageTitle').html('Meal Plan');
+      getDayofWeek();
+}
+
+
+$('.userIcon').click(function(){
+      $('.profilePanel').slideToggle('fast');
+});
+
+//Profile Tab
+var showProfilePage = document.getElementById('profileTab');
+showProfilePage.addEventListener('touchend', showProfileTab, false);
+showProfilePage.addEventListener('click', showProfileTab, false);
+showProfilePage.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
+
+function showProfileTab()
+{
+      $('.profilePanel').slideDown('fast');
+      $('.mealPlanningPanel').slideUp('fast');
+      $('#pageTitle').html('My Profile');
+
+}
+
+
+
+//List Tab
+var showListPage = document.getElementById('listTab');
+showListPage.addEventListener('touchend', showListTab, false);
+showListPage.addEventListener('click', showListTab, false);
+showListPage.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
+
+function showListTab()
+{
+      $('.profilePanel').slideUp('fast');
+      $('.mealPlanningPanel').slideUp('fast');
+      $('#pageTitle').html(groupID);
+}
 
 function createMealPlan()
 {
@@ -827,8 +891,14 @@ $('#lightsOut').click(function(){
   $('html').css('overflow', 'auto');
   $('#lightsOut').fadeOut('fast');
   $('.lightbox').fadeOut('fast');
-})
+});
 
+
+$('#closeLightbox').click(function(){
+  $('html').css('overflow', 'auto');
+  $('#lightsOut').fadeOut('fast');
+  $('.lightbox').fadeOut('fast');
+});
 
 
 
