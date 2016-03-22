@@ -544,7 +544,7 @@ function createGroupDesktop()
 
 $('#mealPlanner').click(function() {
     $('.mealPlanningPanel').slideToggle('fast');
-    $('.profilePanel').slideUp('fast');
+    //$('.profilePanel').slideUp('fast');
     getDayofWeek();
 });
 
@@ -558,15 +558,18 @@ showMealPlanPage.addEventListener('touchstart', function(e){ e.preventDefault();
 
 function showMealPlanTab()
 {
+      $('.wrap, #profileTab').removeClass('active2');
       $('.mealPlanningPanel').slideDown('fast');
-      $('.profilePanel').slideUp('fast');
+      //$('.profilePanel').slideUp('fast');
+      $('#lightsOut').fadeOut('fast');
       $('#pageTitle').html('Meal Plan');
       getDayofWeek();
 }
 
 
 $('.userIcon').click(function(){
-      $('.profilePanel').slideToggle('fast');
+        $('.wrap, #profileTab').toggleClass('active2');
+        $('#lightsOut').fadeToggle('fast');
 });
 
 //Profile Tab
@@ -577,9 +580,14 @@ showProfilePage.addEventListener('touchstart', function(e){ e.preventDefault(); 
 
 function showProfileTab()
 {
-      $('.profilePanel').slideDown('fast');
+      //$('.profilePanel').slideToggle('fast');
+      $('#lightsOut').fadeToggle('fast');
       $('.mealPlanningPanel').slideUp('fast');
       $('#pageTitle').html('My Profile');
+
+  
+  $('.wrap, #profileTab').toggleClass('active2');
+
 
 }
 
@@ -593,8 +601,10 @@ showListPage.addEventListener('touchstart', function(e){ e.preventDefault(); }, 
 
 function showListTab()
 {
+      $('.wrap, #profileTab').removeClass('active2');
       $('.profilePanel').slideUp('fast');
       $('.mealPlanningPanel').slideUp('fast');
+      $('#lightsOut').fadeOut('fast');
       $('#pageTitle').html(groupID);
 }
 
@@ -888,7 +898,8 @@ document.body.scrollTop = document.documentElement.scrollTop = 0;
 
 
 $('#lightsOut').click(function(){
-  $('html').css('overflow', 'auto');
+  $('.wrap, #profileTab').removeClass('active2');
+  $('html').css('overflow', 'initial');
   $('#lightsOut').fadeOut('fast');
   $('.lightbox').fadeOut('fast');
 });
@@ -908,3 +919,6 @@ $('#mondayMealAdd').click(function(){
   $('#mondayBtn').css('display', 'block');
   $('#mondayInput').css('display', 'block');
 })
+
+
+

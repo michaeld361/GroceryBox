@@ -8,6 +8,116 @@ html, body
 	outline:none;
 }
 
+
+
+
+
+
+
+.wrap {
+      position: absolute;
+    overflow: hidden;
+    top: 5%;
+    display: block;
+    border-radius: 4px;
+    transform: translateY(20px);
+    transition: all 0.5s;
+    visibility: hidden;
+    width: 90%;
+
+    height: 55vh;
+    padding-bottom: 30px;
+    border-radius: 9px;
+    left: 15px;
+    z-index: 999999999;
+
+
+
+}
+
+
+
+.wrap .content {
+  opacity: 0;
+}
+.wrap:before {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: white;
+  content: "";
+  bottom: 10px;
+  left: 50%;
+  top: 95%;
+  color: #fff;
+  border-radius: 50%;
+  -webkit-transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.wrap.active2 {
+  display: block;
+  visibility: visible;
+  box-shadow: 2px 3px 16px silver;
+  transition: all 600ms;
+  transform: translateY(0px);
+  transition: all 0.5s;
+}
+.wrap.active2:before {
+  height: 2000px;
+  width: 2000px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  margin-left: -1000px;
+  margin-top: -1000px;
+  display: block;
+  -webkit-transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.wrap.active2 .content {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  transition: all 600ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+#profileTab{
+
+  outline: none;
+  display: block;
+
+
+}
+
+
+.content {
+    height: 100%;
+    margin-top: 62px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#lightsOut {
+    width: 100%;
+    height: 83vh;
+    background-color: black;
+    position: absolute;
+    z-index: 9999;
+    top: 60px;
+    opacity: 0.4;
+}
+
 .editProfileBtn {
     position: absolute;
     width: 120px;
@@ -30,11 +140,13 @@ html, body
 .avatar {
     width: 100px;
     height: 100px;
-    background-image:url(../img/userIconLarge.png);
+    background-image: url(../img/userIconLarge.png);
     position: relative;
-    background-size:100%;
+    background-size: 100%;
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: -40px;
+    background-color: white;
+    border-radius: 60px;
 }
 
 
@@ -47,13 +159,14 @@ html, body
 .profilePanel {
     display: none;
     background-color: white;
-    width: 100%;
+    width: 90%;
     position: absolute;
-    top: 0px;
-
-    height: 76vh;
+    top: 60px;
+    height: 45vh;
     padding-bottom: 30px;
     margin-top: 0px;
+    border-radius: 9px;
+    left: 15px;
     z-index: 999999999;
 }
 
@@ -367,6 +480,27 @@ h1.dayOfWeekTitle {
 
 @media only screen and (min-width: 750px)
 {
+
+    .wrap {
+    position: absolute;
+    overflow: hidden;
+    top: 5%;
+    display: block;
+    border-radius: 4px;
+    transform: translateY(20px);
+    transition: all 0.5s;
+    visibility: hidden;
+    width: 50%;
+    height: 55vh;
+    padding-bottom: 30px;
+    border-radius: 9px;
+    /* left: 115px; */
+    left: 0px;
+    z-index: 9999999999;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
     .profilePanel
     {
