@@ -24,8 +24,7 @@ html, body
     transition: all 0.5s;
     visibility: hidden;
     width: 90%;
-
-    height: 55vh;
+    height: 60vh;
     padding-bottom: 30px;
     border-radius: 9px;
     left: 15px;

@@ -96,7 +96,8 @@ ref.on("value", function(snapshot) {
   myName = snapshot.val();
   userDisplayName = myName.Name;
   document.getElementById('userTitle').innerHTML = myName.Name;
-
+  document.getElementById('profilePanelName').innerHTML = myName.Name;
+  document.getElementById('profilePanelEmail').innerHTML = myName.Email;
 
 }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);

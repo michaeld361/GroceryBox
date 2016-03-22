@@ -11,6 +11,28 @@ GroceryBox
 	<script src='js/source.js'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
+
+
+
+    <!-- For Chrome for Android: -->
+                    <link rel="icon" sizes="192x192" href="img/touchIcons/touch-icon-192x192.png">
+                    <!-- For iPhone 6 Plus with @3× display: -->
+                    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="img/touchIcons/apple-touch-icon-180x180-precomposed.png">
+                    <!-- For iPad with @2× display running iOS ≥ 7: -->
+                    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="img/touchIcons/apple-touch-icon-152x152-precomposed.png">
+                    <!-- For iPad with @2× display running iOS ≤ 6: -->
+                    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touchIcons/apple-touch-icon-144x144-precomposed.png">
+                    <!-- For iPhone with @2× display running iOS ≥ 7: -->
+                    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="img/touchIcons/apple-touch-icon-120x120-precomposed.png">
+                    <!-- For iPhone with @2× display running iOS ≤ 6: -->
+                    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touchIcons/apple-touch-icon-114x114-precomposed.png">
+                    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: -->
+                    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="img/touchIcons/apple-touch-icon-76x76-precomposed.png">
+                    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: -->
+                    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touchIcons/apple-touch-icon-72x72-precomposed.png">
+                    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+                    <link rel="apple-touch-icon-precomposed" href="img/touchIcons/apple-touch-icon-precomposed.png"><!-- 57×57px -->    
+
 </head>
 
 
@@ -134,9 +156,9 @@ GroceryBox
 	<div id="notificationPanelTabIcon2"></div>
 	<div class="avatar"></div>
 	<div class="displayName-profile">Display Name</div>
-	<p class="profilePanelInfo">Michael Down</p>
+	<p id="profilePanelName" class="profilePanelInfo"></p>
 	<div class="emailAddress-profile">Email Address</div>
-	<p class="profilePanelInfo">mail@michaeldown.co.uk</p>
+	<p id="profilePanelEmail" class="profilePanelInfo"></p>
 	<div class="editProfileBtn">Edit Profile</div>
 </div>
 </div>
@@ -208,6 +230,19 @@ $('#addItemBtn').css('display','none');
 				classie.toggle( body, 'cbp-spmenu-push-toright' );
 				classie.toggle( menuLeft, 'cbp-spmenu-open' );
 		}
+
+
+		$('.listContainer').click(function(){
+			$('body').removeClass('cbp-spmenu-push-toright');
+			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
+		})
+
+				$('#messageInput').click(function(){
+			$('body').removeClass('cbp-spmenu-push-toright');
+			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
+		})
+
+		
 
 
 			$(document).ready(function(){
