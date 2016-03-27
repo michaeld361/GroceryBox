@@ -7,6 +7,7 @@ var userID = '';
 var itemTrigger = 0;
 var groupArray = [];
 var randomKey = '';
+var recipeConstruct = [];
 
 if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
 {
@@ -183,6 +184,7 @@ ref.on("value", function(snapshot) {
 
 function changeGroup(groupDiv)
 {
+    recipeConstruct = [];
     localStorage.setItem('groupID', groupDiv);
     console.log('group switched to ' + groupDiv);
     userGroup = groupDiv;
@@ -249,12 +251,14 @@ function spyItem()
         myRef.on('child_added', function(snapshot) {
 
             console.log('item added to ' + userGroup);
+
             var message = snapshot.val();
             var key = snapshot.key();
             var priorityStatus = message.status;
             displayChatMessage(message.name, message.text, message.status, key, priorityStatus);
             ItemsAddedByOthers(message.time, message.text, key);
            // urgentIcon(message.name, message.text, message.status, key);
+           recipeConstruct.push(message.text);
           });
 
         if(itemTrigger != 1)
@@ -948,14 +952,16 @@ $('#lightsOut').click(function(){
 function getRecipe()
 {
 
+var recipeString = recipeConstruct.join();
+console.log(recipeString);
 
 $.ajax({
-    url: 'https://community-food2fork.p.mashape.com/search?key=a3fd68683903224dde5608cc027e33a5&q=chicken%2Colives%2Conions', // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
+    url: 'https://community-food2fork.p.mashape.com/search?key=a3fd68683903224dde5608cc027e33a5&q=' + recipeString, // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
     type: 'GET', // The HTTP Method
     data: {}, // Additional parameters here
     datatype: 'json',
     success: function(data) 
-    { //alert(JSON.stringify(data));
+    { alert(JSON.stringify(data));
   //document.getElementById("output").innerHTML = data;
   //var obj = $.parseJSON('[["1","aaaaaa","1"],["2","bbbbbbb","2"],["3","ccccccc","3"]]')
 var json = JSON.parse(data);

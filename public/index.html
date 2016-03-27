@@ -50,11 +50,16 @@ GroceryBox
 
 <!-- lightbox for recipe inspiration -->
 <div id="lightbox2" class="lightbox2">
-<h3 id="recipeTitle">Recipe Inspiration</h3>
+<button id="closeRecipebox">X</button>
 
- <div id="imageContainer"><img id="pic1"></img></div>
-  <a id="linkMe">Visit Site</a>
-<button id="getRecipeBtn" onclick="getRecipe();">Get Recipe</button>
+ <div id="imageContainer"><img id="pic1" src="img/recipeHoldingImage.jpg"></img></div>
+ <div id="textContainer">
+<h3 id="recipeTitle">Recipe Inspiration</h3>
+<p class="recipeInfo">Recipe Inspiration uses the items on your current shopping list to find a suitable recipe. Simply add items you want to eat to your list, and we can find a recipe for you. Don't like the recipe you're given? no problem, just click 'Next Recipe' to see more recommendations.<br> <br>Bon appetit!</p>
+  <a id="linkMe" target="_blank"><div class="recipeIcon2"><img src="img/recipeIcon.png"></div>View Recipe</a>
+<button id="getRecipeBtn" onclick="getRecipe();"><div class="recipeIcon2"><img src="img/refreshIcon.png"></div>Get Recipe</button>
+ </div>
+
 </div>
 			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 			<h3></h3>
