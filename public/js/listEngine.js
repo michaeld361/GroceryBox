@@ -520,7 +520,7 @@ function createGroupDesktop()
     {
     document.getElementById('usersInGroup').innerHTML = '';
     var ref28 = new Firebase("https://todofyp.firebaseio.com/users/");
-    ref28.on("value", function(snapshot) {
+    ref28.once("value", function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
     var usersInGroup = childSnapshot.val();
     var userGroupInGroup = usersInGroup.groupID;
@@ -545,6 +545,7 @@ function createGroupDesktop()
 
 $('#mealPlanner').click(function() {
     $('.mealPlanningPanel').slideToggle('fast');
+    $('#lightsOut').fadeToggle('fast');
     //$('.profilePanel').slideUp('fast');
     getDayofWeek();
 });
@@ -897,6 +898,16 @@ document.body.scrollTop = document.documentElement.scrollTop = 0;
 }
 
 
+function lightbox2()
+{
+document.body.scrollTop = document.documentElement.scrollTop = 0;
+  $(document).ready(function(){
+    $('html').css('overflow', 'hidden');
+    $('#lightsOut').fadeIn();
+    $('.lightbox2').fadeIn();
+  })
+}
+
 
 $('#lightsOut').click(function(){
   $('.wrap, #profileTab').removeClass('active2');
@@ -923,3 +934,54 @@ $('#mondayMealAdd').click(function(){
 
 
 
+
+$('#lightsOut').click(function(){
+  //$('.wrap, #profileTab').removeClass('active2');
+  $('html').css('overflow', 'initial');
+  $('#lightsOut').fadeOut('fast');
+  $('.lightbox2').fadeOut('fast');
+});
+
+
+
+
+function getRecipe()
+{
+
+
+$.ajax({
+    url: 'https://community-food2fork.p.mashape.com/search?key=a3fd68683903224dde5608cc027e33a5&q=chicken%2Colives%2Conions', // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
+    type: 'GET', // The HTTP Method
+    data: {}, // Additional parameters here
+    datatype: 'json',
+    success: function(data) 
+    { //alert(JSON.stringify(data));
+  //document.getElementById("output").innerHTML = data;
+  //var obj = $.parseJSON('[["1","aaaaaa","1"],["2","bbbbbbb","2"],["3","ccccccc","3"]]')
+var json = JSON.parse(data);
+var titleData = json.recipes[0].title;
+var titleData2 = json.recipes[0].source_url;
+var titleData3 = json.recipes[0].image_url;
+document.getElementById("recipeTitle").innerHTML = titleData;
+document.getElementById("linkMe").href = titleData2;
+document.getElementById("pic1").src = titleData3;
+     },
+    error: function(err) { alert(err); },
+    beforeSend: function(xhr) {
+    xhr.setRequestHeader("X-Mashape-Authorization", "LktMh68JFamshRTztQfGxxWiHMaRp1M0iufjsng1SPMx9O0AfF"); // Enter here your Mashape key
+    }
+});
+  
+
+
+
+
+
+
+
+
+
+
+
+
+}

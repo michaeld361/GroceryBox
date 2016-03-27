@@ -47,6 +47,15 @@ GroceryBox
 <button id="addUserBtn2" onclick="addUser();">Add User</button>
 </div>
 </div>
+
+<!-- lightbox for recipe inspiration -->
+<div id="lightbox2" class="lightbox2">
+<h3 id="recipeTitle">Recipe Inspiration</h3>
+
+ <div id="imageContainer"><img id="pic1"></img></div>
+  <a id="linkMe">Visit Site</a>
+<button id="getRecipeBtn" onclick="getRecipe();">Get Recipe</button>
+</div>
 			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 			<h3></h3>
 		<div id="mobileMenu">
@@ -102,6 +111,7 @@ GroceryBox
 <input type='text' onkeypress="addItem(event)" id='messageInput' autocorrect="off" autocapitalize="off" placeholder='+ Add Item'>
 <div id="leaveGroup" onclick="leaveGroup()"></div>
 <div id="addUser" onclick="lightbox()"></div>
+<div id="giveMeRecipe" onclick="lightbox2()"></div>
 <div class="mealPlanningPanel">
 <input type="text" id="mealPlanName" placeholder="New Plan Name">
 

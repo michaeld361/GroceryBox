@@ -477,8 +477,74 @@ h1.dayOfWeekTitle {
     right: 40px;
 }
 
+.lightbox2
+{
+    display:none;
+}
+
+
 @media only screen and (min-width: 750px)
 {
+
+
+    #giveMeRecipe {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        position: absolute;
+        bottom: 90px;
+        right: 170px;
+        border-radius: 60px;
+    }
+
+.lightbox2 {
+    display: none;
+    width: 50%;
+    left: 0px;
+    position: absolute;
+    min-height:440px;
+    background-color: white;
+    border-radius: 10px;
+    right: 0px;
+    margin-left: auto;
+    z-index: 99999999999999999999999;
+    margin-right: auto;
+    margin-top: 110px;
+}
+
+.lightbox2 h3 {
+    padding: 15px;
+    text-align: center;
+    font-family: 'open_sansregular';
+    color: #d64841;
+}
+
+div#imageContainer {
+    height: 200px;
+}
+
+img#pic1 {
+    position: relative;
+    /* top: -92px; */
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* height: 340px; */
+    height: 100%;
+    opacity: 0.9;
+}
+
+        
+#getRecipeBtn {
+    width: 150px;
+    height: 40px;
+    position: absolute;
+    margin: 0 auto;
+    /* top: 200px; */
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
 
     .wrap {
     position: absolute;
@@ -591,7 +657,7 @@ button#addUserBtn2 {
     background-color: black;
     height: 100vh;
     position: absolute;
-    top: 0px;
+    top: 60px;
     opacity: 0.2;
     left: 0px;
     z-index: 9999999999999999;
@@ -614,7 +680,7 @@ button#addUserBtn2 {
 
 .mealPlanningPanel {
 	display:none;
-    background-color: #c8dfd7;
+    background-color: white;
     width: 100%;
     position: absolute;
     top: 0px;
@@ -981,6 +1047,7 @@ button#addUserBtn2 {
 						    line-height: 27px;
 						    font-size: 13px;
 						    padding-left: 5px;
+                            min-width:100px;
 						    color: white;
 						    letter-spacing: 0.6px;
    							font-family: 'open_sansregular';
