@@ -8,6 +8,8 @@ var itemTrigger = 0;
 var groupArray = [];
 var randomKey = '';
 var recipeConstruct = [];
+var nextRecipe = 0;
+var recipeData = '';
 
 if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
 {
@@ -185,6 +187,8 @@ ref.on("value", function(snapshot) {
 function changeGroup(groupDiv)
 {
     recipeConstruct = [];
+    nextRecipe = 0;
+    recipeData = '';
     localStorage.setItem('groupID', groupDiv);
     console.log('group switched to ' + groupDiv);
     userGroup = groupDiv;
@@ -949,9 +953,16 @@ $('#lightsOut').click(function(){
 
 
 
+
+
 function getRecipe()
 {
-
+if(nextRecipe != 0)
+{
+  nextRecipeInJSON();
+}
+else
+{
 var recipeString = recipeConstruct.join();
 console.log(recipeString);
 
@@ -961,33 +972,48 @@ $.ajax({
     data: {}, // Additional parameters here
     datatype: 'json',
     success: function(data) 
-    { alert(JSON.stringify(data));
-  //document.getElementById("output").innerHTML = data;
-  //var obj = $.parseJSON('[["1","aaaaaa","1"],["2","bbbbbbb","2"],["3","ccccccc","3"]]')
-var json = JSON.parse(data);
-var titleData = json.recipes[0].title;
-var titleData2 = json.recipes[0].source_url;
-var titleData3 = json.recipes[0].image_url;
-document.getElementById("recipeTitle").innerHTML = titleData;
-document.getElementById("linkMe").href = titleData2;
-document.getElementById("pic1").src = titleData3;
+    { 
+      recipeData = JSON.parse(data);
+      nextRecipeInJSON();
      },
     error: function(err) { alert(err); },
     beforeSend: function(xhr) {
     xhr.setRequestHeader("X-Mashape-Authorization", "LktMh68JFamshRTztQfGxxWiHMaRp1M0iufjsng1SPMx9O0AfF"); // Enter here your Mashape key
     }
 });
-  
-
-
-
-
-
-
-
-
-
-
-
+}  
 
 }
+
+
+function nextRecipeInJSON()
+{
+  if(nextRecipe >= 1)
+  {
+    $('#previousRecipe').css('display', 'block');
+  }
+  else
+  {
+      $('#previousRecipe').css('display', 'none');
+  }
+
+
+var titleData = recipeData.recipes[nextRecipe].title;
+var titleData2 = recipeData.recipes[nextRecipe].source_url;
+var titleData3 = recipeData.recipes[nextRecipe].image_url;
+document.getElementById("recipeTitle").innerHTML = titleData;
+document.getElementById("linkMe").href = titleData2;
+document.getElementById("pic1").src = titleData3;
+
+
+nextRecipe++;
+console.log('before' + nextRecipe);
+}
+
+
+
+$('#previousRecipe').click(function(){
+    nextRecipe = nextRecipe - 2;
+    console.log('after' + nextRecipe);
+    nextRecipeInJSON();
+})

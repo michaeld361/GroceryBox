@@ -503,9 +503,26 @@ h1.dayOfWeekTitle {
                     border: 1px solid #4b4b4b;
                 }
 
+
+                #previousRecipe
+                {
+                display: none;
+                position: absolute;
+                bottom: 10px;
+                height: 30px;
+                font-family: 'open_sansregular';
+                outline: none;
+                color: #d64841;
+                left: 10px;
+                border-radius: 9px;
+                width: 90px;
+                background-color: white;
+                border: none;
+                }
+
 .lightbox2 {
     display: none;
-    width: 50%;
+    width: 60%;
     left: 0px;
     position: absolute;
     min-height:480px;
@@ -1248,6 +1265,7 @@ h1.groupContainerTitle {
 	width:80%;
 }
 
+
 }
 
 
@@ -1257,6 +1275,14 @@ h1.groupContainerTitle {
 {
 	width:70%;
 }
+
+
+
+.lightbox2 {
+
+width:50%;
+    }
+
 
 }
 
