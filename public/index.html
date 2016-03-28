@@ -179,6 +179,23 @@ GroceryBox
 	<div class="editProfileBtn">Edit Profile</div>
 </div>
 </div>
+
+
+<div id="recipeWrap" class="recipeWrap">
+	  <div class='content'>
+	<div id="imageContainerMobile"><img id="pic1Mobile" src="img/recipeHoldingImage.jpg">
+<!--<button id="previousRecipeMobile">Previous</button>-->
+ </div>
+ <div id="textContainerMobile">
+<h3 id="recipeTitleMobile">Recipe Inspiration</h3>
+<p class="recipeInfoMobile">Recipe Inspiration uses the items on your current shopping list to find a suitable recipe. Simply add items.<br> <br>Bon appetit!</p>
+  <a id="linkMeMobile" target="_blank"><div class="recipeIcon2"><img src="img/recipeIcon.png"></div>View Recipe</a>
+<button id="getRecipeBtnMobile" onclick="getRecipeMobile();"><div class="recipeIcon2"><img src="img/refreshIcon.png"></div>Next Recipe</button>
+ </div>
+</div>
+</div>
+
+
 </div>
 
 
@@ -187,8 +204,8 @@ GroceryBox
 
 		<div id="listTab" class="mobileTab"><img class="mobileNavIcon" src="img/listIcon2.png"><div class="mobileNavLabel">List</div></div>
 		<div id="mealPlanTab" class="mobileTab"><img class="mobileNavIcon" src="img/planIcon.png"><div class="mobileNavLabel">Plan</div></div>
-		<div class="mobileTab"><img class="mobileNavIcon" src="img/listIcon2.png"><div class="mobileNavLabel">Store</div></div>
-		<div id="profileTab" class="mobileTab"><img class="mobileNavIcon" src="img/planIcon.png"><div class="mobileNavLabel">Profile</div></div>
+		<div id="recipeTab" class="mobileTab"><img class="mobileNavIcon" src="img/listIcon2.png"><div class="mobileNavLabel">Recipes</div></div>
+		<div id="profileTab" class="mobileTab"><img class="mobileNavIcon" src="img/userTabIcon.png"><div class="mobileNavLabel">Profile</div></div>
 
 </div>
 
@@ -250,6 +267,11 @@ $('#addItemBtn').css('display','none');
 
 
 		$('.listContainer').click(function(){
+			$('body').removeClass('cbp-spmenu-push-toright');
+			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
+		})
+
+			$('#groupList').click(function(){
 			$('body').removeClass('cbp-spmenu-push-toright');
 			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
 		})

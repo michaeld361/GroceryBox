@@ -9,7 +9,10 @@ var groupArray = [];
 var randomKey = '';
 var recipeConstruct = [];
 var nextRecipe = 0;
+var nextRecipeMobile = 0;
 var recipeData = '';
+var recipeDataMobile = '';
+
 
 if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
 {
@@ -186,6 +189,8 @@ ref.on("value", function(snapshot) {
 
 function changeGroup(groupDiv)
 {
+
+
     recipeConstruct = [];
     nextRecipe = 0;
     recipeData = '';
@@ -588,6 +593,13 @@ showProfilePage.addEventListener('touchend', showProfileTab, false);
 showProfilePage.addEventListener('click', showProfileTab, false);
 showProfilePage.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
 
+
+var showRecipePage = document.getElementById('recipeTab');
+showRecipePage.addEventListener('touchend', showRecipeTab, false);
+showRecipePage.addEventListener('click', showRecipeTab, false);
+showRecipePage.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
+
+
 function showProfileTab()
 {
       //$('.profilePanel').slideToggle('fast');
@@ -597,6 +609,19 @@ function showProfileTab()
 
   
   $('.wrap, #profileTab').toggleClass('active2');
+
+
+}
+
+function showRecipeTab()
+{
+      //$('.profilePanel').slideToggle('fast');
+      $('#lightsOut').fadeToggle('fast');
+      $('.mealPlanningPanel').slideUp('fast');
+      $('#pageTitle').html('Recipe Inspiration');
+
+  
+  $('.recipeWrap, #recipeTab').toggleClass('active2');
 
 
 }
@@ -926,11 +951,17 @@ $('#lightsOut').click(function(){
 
 
 $('#closeLightbox').click(function(){
-  $('html').css('overflow', 'auto');
+  $('html').css('overflow', 'initial');
   $('#lightsOut').fadeOut('fast');
   $('.lightbox').fadeOut('fast');
 });
 
+
+$('#closeRecipebox').click(function(){
+  $('html').css('overflow', 'initial');
+  $('#lightsOut').fadeOut('fast');
+  $('.lightbox2').fadeOut('fast');
+});
 
 
 
@@ -1017,3 +1048,64 @@ $('#previousRecipe').click(function(){
     console.log('after' + nextRecipe);
     nextRecipeInJSON();
 })
+
+
+
+
+
+
+function getRecipeMobile()
+{
+if(nextRecipeMobile != 0)
+{
+  nextRecipeInJSONMobile();
+}
+else
+{
+var recipeString = recipeConstruct.join();
+console.log(recipeString);
+
+$.ajax({
+    url: 'https://community-food2fork.p.mashape.com/search?key=a3fd68683903224dde5608cc027e33a5&q=' + recipeString, // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
+    type: 'GET', // The HTTP Method
+    data: {}, // Additional parameters here
+    datatype: 'json',
+    success: function(data) 
+    { 
+      recipeDataMobile = JSON.parse(data);
+      nextRecipeInJSONMobile();
+     },
+    error: function(err) { alert(err); },
+    beforeSend: function(xhr) {
+    xhr.setRequestHeader("X-Mashape-Authorization", "LktMh68JFamshRTztQfGxxWiHMaRp1M0iufjsng1SPMx9O0AfF"); // Enter here your Mashape key
+    }
+});
+}  
+
+}
+
+
+
+function nextRecipeInJSONMobile()
+{
+  if(nextRecipeMobile >= 1)
+  {
+    $('#previousRecipe').css('display', 'block');
+  }
+  else
+  {
+      $('#previousRecipe').css('display', 'none');
+  }
+
+
+var titleData = recipeDataMobile.recipes[nextRecipeMobile].title;
+var titleData2 = recipeDataMobile.recipes[nextRecipeMobile].source_url;
+var titleData3 = recipeDataMobile.recipes[nextRecipeMobile].image_url;
+document.getElementById("recipeTitleMobile").innerHTML = titleData;
+document.getElementById("linkMeMobile").href = titleData2;
+document.getElementById("pic1Mobile").src = titleData3;
+
+
+nextRecipeMobile++;
+console.log('before' + nextRecipeMobile);
+}

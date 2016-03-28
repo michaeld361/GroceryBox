@@ -14,7 +14,7 @@ html, body
 
 
 
-.wrap {
+.wrap{
       position: absolute;
     overflow: hidden;
     top: 5%;
@@ -30,8 +30,122 @@ html, body
     left: 15px;
     z-index: 999999999;
 
+}
+
+.recipeWrap {
+    position: absolute;
+    overflow: hidden;
+    top: 4%;
+    display: block;
+    border-radius: 4px;
+    transform: translateY(20px);
+    transition: all 0.5s;
+    visibility: hidden;
+    width: 90%;
+    height: 66vh;
+    padding-bottom: 30px;
+    border-radius: 9px;
+    left: 15px;
+    z-index: 999999999;
+}
 
 
+#imageContainerMobile {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    margin-top: -62px;
+}
+
+
+div#textContainerMobile {
+    /* margin-top: 60px; */
+    position: relative;
+    top: 80px;
+    text-align: center;
+}
+
+
+#pic1Mobile {
+    width: 100%;
+}
+
+
+p.recipeInfoMobile {
+    width: 80%;
+    position: relative;
+    margin: 0 auto;
+    font-family: 'open_sansregular';
+    font-size: 12px;
+    padding-top: 28px;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
+
+h3#recipeTitleMobile {
+background-color: white;
+    width: 80%;
+    position: relative;
+    margin: 0 auto;
+    /* padding-top: 21px; */
+    height: 32px;
+    font-family: 'open_sansregular';
+    line-height: 26px;
+    color: #d64841;
+    font-size: 15px;
+    top: -10px;
+    padding-top: 10px;
+    border-radius: 20px;
+    margin-top: -20px;
+}
+
+button#getRecipeBtnMobile {
+    position: absolute;
+    bottom: -80px;
+    /* margin-left: 40px; */
+    /* width: 130px; */
+    padding-left: 11px;
+    padding-right: 11px;
+    right: 40px;
+    font-size: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    /* height: 35px; */
+    border-radius: 4px;
+    border: none;
+    background: none;
+    border: 1px solid #42a986;
+    color: #42a986;
+    font-family: 'open_sansregular';
+    text-decoration: none;
+    outline: none;
+    /* cursor: pointer; */
+}
+
+
+
+a#linkMeMobile {
+    position: absolute;
+    bottom: -80px;
+    /* margin-left: 40px; */
+    /* width: 130px; */
+    padding-left: 11px;
+    padding-right: 11px;
+    left: 40px;
+    font-size: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    /* height: 35px; */
+    border-radius: 4px;
+    border: none;
+    background: #42a986;
+    color: white;
+    font-family: 'open_sansregular';
+    text-decoration: none;
+    outline: none;
+    /* cursor: pointer; */
 }
 
 
@@ -79,6 +193,52 @@ html, body
   opacity: 1;
   transition: all 600ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
+
+
+.recipeWrap .content {
+  opacity: 0;
+}
+.recipeWrap:before {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: white;
+  content: "";
+  bottom: 10px;
+  left: 50%;
+  top: 95%;
+  color: #fff;
+  border-radius: 50%;
+  -webkit-transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.recipeWrap.active2 {
+  display: block;
+  visibility: visible;
+  box-shadow: 2px 3px 16px silver;
+  transition: all 600ms;
+  transform: translateY(0px);
+  transition: all 0.5s;
+}
+.recipeWrap.active2:before {
+  height: 2000px;
+  width: 2000px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  margin-left: -1000px;
+  margin-top: -1000px;
+  display: block;
+  -webkit-transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.recipeWrap.active2 .content {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  transition: all 600ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
 
 #profileTab{
 
@@ -650,7 +810,8 @@ opacity:0.7;
 }
 
 
-    .wrap {
+    .wrap
+    {
     position: absolute;
     overflow: hidden;
     top: 5%;
@@ -669,6 +830,24 @@ opacity:0.7;
     right: 0px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.recipeWrap
+{
+    position: absolute;
+    overflow: hidden;
+    top: 2%;
+    display: block;
+    border-radius: 4px;
+    transform: translateY(20px);
+    transition: all 0.5s;
+    visibility: hidden;
+    width: 90%;
+    height: 70vh;
+    padding-bottom: 30px;
+    border-radius: 9px;
+    left: 15px;
+    z-index: 999999999;
 }
 
     .profilePanel
