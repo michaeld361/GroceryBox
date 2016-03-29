@@ -286,6 +286,10 @@ function spyItem()
 
 
 function displayChatMessage(name, text, status, key, priorityStatus) {
+
+  var lineThrough = $('#' + key).css('text-decoration');
+
+
         if(priorityStatus == 'urg')
         {
             $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).prependTo($('.listItems'));
@@ -299,11 +303,17 @@ function displayChatMessage(name, text, status, key, priorityStatus) {
             $('</div>').text();
         }
 
+        //if (lineThrough != 'line-through')
+       // {
           if(status == 'urg')
           {
              $('#' + key).append('<div class="urgentIcon"></div>');
           }
-
+       // }
+      //  else
+      //  {
+      //    alert('item marked as Urgent already');
+       // }
       }
 
 
