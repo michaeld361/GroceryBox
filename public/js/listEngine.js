@@ -116,23 +116,6 @@ ref.on("value", function(snapshot) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // get groups
 function getSubscribedGroups(userID)
 {
@@ -153,10 +136,12 @@ ref.on("value", function(snapshot) {
    for(var i = 0; i < groupArray.length; i++)
   {
     console.log(groupArray[i]);
-
-    $('<div/>').prepend($('<div class="groupName" id="'+ groupArray[i] +'" onclick="changeGroup(this.id);">').text(groupArray[i])).appendTo($('#groupList'));
+    //var removeIDString = groupArray[i].indexOf("----ID----");
+    var splitGroupID = groupArray[i].split("----ID----")[0];
+    console.log(splitGroupID);
+    $('<div/>').prepend($('<div class="groupName" id="'+ groupArray[i] +'" onclick="changeGroup(this.id);">').text(splitGroupID)).appendTo($('#groupList'));
     //$('.groupContainer').html($('<div class="groupName">').text(groupName));
-    $('<div/>').prepend($('<div class="groupName" id="'+ groupArray[i] +'" onclick="changeGroup(this.id);">').text(groupArray[i])).appendTo($('#groupListDesktop'));
+    $('<div/>').prepend($('<div class="groupName" id="'+ groupArray[i] +'" onclick="changeGroup(this.id);">').text(splitGroupID)).appendTo($('#groupListDesktop'));
 
     getNotifications(groupArray[i], notificationCount);
 
@@ -168,16 +153,7 @@ ref.on("value", function(snapshot) {
 }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
 });
-
-
-
 }
-
-
-
-
-
-
 
 
 
@@ -189,20 +165,20 @@ ref.on("value", function(snapshot) {
 
 function changeGroup(groupDiv)
 {
-
-
-    recipeConstruct = [];
+recipeConstruct = [];
     nextRecipe = 0;
     recipeData = '';
     localStorage.setItem('groupID', groupDiv);
     console.log('group switched to ' + groupDiv);
     userGroup = groupDiv;
-    document.getElementById('groupHeader').innerHTML = groupDiv;
+    var splitGroupID = groupDiv.split("----ID----")[0];
+    document.getElementById('groupHeader').innerHTML = splitGroupID;
     if($(window).width() < 750)
     {
-    document.getElementById('pageTitle').innerHTML = groupDiv;
+    document.getElementById('pageTitle').innerHTML = splitGroupID;
     }
     getUsersInGroup(userGroup);
+    console.log('groupME: ' + splitGroupID);
     groupID = groupDiv;
     spyItem();
 }
@@ -503,14 +479,18 @@ function leaveGroup()
 
 function createGroupDesktop()
 {
+  randomKey = "";
   var myDetails = userID;
   var newGroupName = document.getElementById('createGroupDesktop').value;
   if(newGroupName.length <= 16 && newGroupName.length >= 1 && newGroupName != '')
   {
+  getRandomKey();
+  newGroupName = newGroupName + "----ID----" + randomKey;
   var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
   var newGroup = groupString + ',' + newGroupName;
   ref.update({ groupID: newGroup});
   groupID = newGroupName;
+  var splitGroupID = newGroupName.split("----ID----")[0];
   changeGroup(newGroupName);
   }
   else
@@ -998,6 +978,8 @@ $('#lightsOut').click(function(){
 
 function getRecipe()
 {
+
+    document.getElementById('refreshIcon').src = 'img/loadingGIF.svg';
 if(nextRecipe != 0)
 {
   nextRecipeInJSON();
@@ -1046,7 +1028,7 @@ document.getElementById("recipeTitle").innerHTML = titleData;
 document.getElementById("linkMe").href = titleData2;
 document.getElementById("pic1").src = titleData3;
 
-
+  document.getElementById('refreshIcon').src = 'img/refreshIcon.png';
 nextRecipe++;
 console.log('before' + nextRecipe);
 }
@@ -1066,6 +1048,10 @@ $('#previousRecipe').click(function(){
 
 function getRecipeMobile()
 {
+
+      document.getElementById('mobileRecipeRefresh').src = 'img/loadingGIF.svg';
+
+
 if(nextRecipeMobile != 0)
 {
   nextRecipeInJSONMobile();
@@ -1083,6 +1069,7 @@ $.ajax({
     success: function(data) 
     { 
       recipeDataMobile = JSON.parse(data);
+
       nextRecipeInJSONMobile();
      },
     error: function(err) { alert(err); },
@@ -1114,7 +1101,7 @@ var titleData3 = recipeDataMobile.recipes[nextRecipeMobile].image_url;
 document.getElementById("recipeTitleMobile").innerHTML = titleData;
 document.getElementById("linkMeMobile").href = titleData2;
 document.getElementById("pic1Mobile").src = titleData3;
-
+ document.getElementById('mobileRecipeRefresh').src = 'img/refreshIcon.png';
 
 nextRecipeMobile++;
 console.log('before' + nextRecipeMobile);

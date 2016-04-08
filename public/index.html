@@ -59,7 +59,7 @@ GroceryBox
 <h3 id="recipeTitle">Recipe Inspiration</h3>
 <p class="recipeInfo">Recipe Inspiration uses the items on your current shopping list to find a suitable recipe. Simply add items you want to eat to your list, and we can find a recipe for you. Don't like the recipe you're given? no problem, just click 'Next Recipe' to see more recommendations.<br> <br>Bon appetit!</p>
   <a id="linkMe" target="_blank"><div class="recipeIcon2"><img src="img/recipeIcon.png"></div>View Recipe</a>
-<button id="getRecipeBtn" onclick="getRecipe();"><div class="recipeIcon2"><img src="img/refreshIcon.png"></div>Next Recipe</button>
+<button id="getRecipeBtn" onclick="getRecipe();"><div class="recipeIcon2"><img id="refreshIcon" src="img/refreshIcon.png"></div>Next Recipe</button>
  </div>
 
 </div>
@@ -101,7 +101,7 @@ GroceryBox
 	<h1 class="groupContainerTitle">Your Groups</h1>
 	<div id="groupListDesktop" class="clearfix"></div>
 	<div class="createGroupContainer">
-		<input type="text" id="createGroupDesktop" class="createGroupDesktop" placeholder="New Group Name" />
+		<input type="text" id="createGroupDesktop" class="createGroupDesktop" placeholder="Create New List" />
 	</div>
 	<div id="usersInGroup" class="usersInGroup"></div>
 </div>
@@ -183,6 +183,7 @@ GroceryBox
 
 <div id="recipeWrap" class="recipeWrap">
 	  <div class='content'>
+
 	<div id="imageContainerMobile"><img id="pic1Mobile" src="img/recipeHoldingImage.jpg">
 <!--<button id="previousRecipeMobile">Previous</button>-->
  </div>
@@ -190,7 +191,7 @@ GroceryBox
 <h3 id="recipeTitleMobile">Recipe Inspiration</h3>
 <p class="recipeInfoMobile">Recipe Inspiration uses the items on your current shopping list to find a suitable recipe. Simply add items.<br> <br>Bon appetit!</p>
   <a id="linkMeMobile" target="_blank"><div class="recipeIcon2"><img src="img/recipeIcon.png"></div>View Recipe</a>
-<button id="getRecipeBtnMobile" onclick="getRecipeMobile();"><div class="recipeIcon2"><img src="img/refreshIcon.png"></div>Next Recipe</button>
+<button id="getRecipeBtnMobile" onclick="getRecipeMobile();"><div class="recipeIcon2"><img id="mobileRecipeRefresh" src="img/refreshIcon.png"></div>Next Recipe</button>
  </div>
 </div>
 </div>

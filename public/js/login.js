@@ -73,7 +73,7 @@ function setUserGroup(uid, userEmail)
 
 
 var userID = uid;
-var groupArray = ['group1', 'group2', 'group3'];
+var groupArray = [];
 var userGroup = groupArray.toString();
 var notificationStatus = 'YES';
 var mealPlanGroupID = '';
