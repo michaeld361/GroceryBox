@@ -2,7 +2,7 @@
 var userEmail = '';
 var userName = '';
 var deviceToken = '';
-
+var uid = 0;
 
 
 //login seciton
@@ -16,9 +16,48 @@ ref.authWithPassword({
   email    : loginEmail,
   password : loginPass
 }, authHandler);
-})
+});
+
+
+
+//Login with Google
+$('#loginGoogle').click(function(){
+var ref = new Firebase("https://todofyp.firebaseio.com");
+ref.authWithOAuthPopup("google", function(error, authData) 
+{ 
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    var findUser = new Firebase("https://todofyp.firebaseio.com/users/" + authData.uid);
+    findUser.on("value", function(snapshot) {
+      var doesUserExist = snapshot.exists();
+      
+      if(doesUserExist)
+      {
+        window.location.href = "https://todofyp.firebaseapp.com/";
+      }
+      else
+      {
+        userName = authData.google.displayName;
+        setUserGroupGoogleAuth(authData.uid, authData.google.email);
+      }
+    })
+
+
+  }
+
+}, {
+  remember: "default",
+  scope: "email"
+});
+});
+
+
+
+
+
 // Create a callback to handle the result of the authentication
-var uid = 0;
+
 function authHandler(error, authData) {
   if (error) {
     document.getElementById('validationMessage').innerHTML = error;
@@ -63,6 +102,24 @@ ref.createUser({
 
 
 
+function setUserGroupGoogleAuth(uid, userEmail)
+{
+
+  
+        var userID = uid;
+      var groupArray = [];
+      var userGroup = groupArray.toString();
+      var notificationStatus = 'YES';
+      var mealPlanGroupID = '';
+
+      var myDataRef = new Firebase('https://todofyp.firebaseio.com/');
+      var listRef = myDataRef.child("users");
+      var groupRef = listRef.child(userID);
+      $(document).ready(function(){
+        groupRef.set({groupID: userGroup, Name: userName, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
+         window.location.href = "https://todofyp.firebaseapp.com/";
+      })
+}
 
 
 

@@ -120,7 +120,26 @@ button#getRecipeBtnMobile {
     /* cursor: pointer; */
 }
 
-
+#undoContainer
+{
+    display:none;
+    width:60%;
+    position: absolute;
+    bottom: 126px;
+    left:0px;
+    right:0px;
+    margin-left:auto;
+    font-size:13px;
+    margin-right:auto;
+    background-color: #42a986;
+    font-family: 'open_sansregular';
+    padding-top: 10px;
+    opacity: 0.6;
+    border-radius: 25px;
+    padding-bottom: 10px;
+    color: white;
+    text-align: center;
+}
 
 a#linkMeMobile {
     position: absolute;
@@ -641,6 +660,19 @@ h1.dayOfWeekTitle {
 
 @media only screen and (min-width: 750px)
 {
+
+
+#undoContainer {
+    display: none;
+    width: 50%;
+    position: absolute;
+    bottom: 87px;
+    left: 50px;
+    right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
 
 
                 #giveMeRecipe {

@@ -165,6 +165,7 @@ ref.on("value", function(snapshot) {
 
 function changeGroup(groupDiv)
 {
+      document.getElementById('usersInGroup').innerHTML = '';
 recipeConstruct = [];
     nextRecipe = 0;
     recipeData = '';
@@ -244,7 +245,7 @@ function spyItem()
             ItemsAddedByOthers(message.time, message.text, key);
            // urgentIcon(message.name, message.text, message.status, key);
            recipeConstruct.push(message.text);
-          });
+          },endSnapshot(myRef));
 
         if(itemTrigger != 1)
         {
@@ -252,12 +253,24 @@ function spyItem()
         var message = snapshot.val();
         var key = snapshot.key();
         removeListItemUI(message.name, message.text, key);
+        undoChange(snapshot);
        });
          }
-
-            
         }
 
+
+function endSnapshot(myRef)
+{
+
+  $('.groupName').click(function(){
+  var groupDiv = this.id;
+
+  myRef.off('child_added');
+  console.log('it is off!');
+  changeGroup(groupDiv);
+  //spyItem();
+    });
+}
 
 
 
@@ -359,12 +372,6 @@ function onFinish()
 
 
 
-
-
-      //alert user when item set to urgent
-
- //alert user when item set to urgent
- 
 
  // Attach an asynchronous callback to read the data at our posts reference
  myDataRef.on("child_changed", function(snapshot) {
@@ -539,11 +546,15 @@ function createGroupDesktop()
       }
     }
    })
- });
+ }, endGroupSnapshot(ref28));
 
 }
 
-
+function endGroupSnapshot(ref28)
+{
+  ref28.off('value');
+  console.log('Group is off!');
+}
 
 
 $('#mealPlanner').click(function() {
@@ -1105,4 +1116,43 @@ document.getElementById("pic1Mobile").src = titleData3;
 
 nextRecipeMobile++;
 console.log('before' + nextRecipeMobile);
+}
+
+
+
+
+
+/*
+var undo = new Firebase('https://todofyp.firebaseio.com/listItems/' + groupID);
+undo.on('child_removed', function(deletedSnapshot) {
+  undoChange(deletedSnapshot);
+  deletedSnapshot = "";
+});
+*/
+
+function undoChange(deletedSnapshot)
+{
+ $('#undoContainer').fadeIn('fast', function () {
+    $(this).delay(2000).fadeOut('slow');
+
+    $('#undoContainer').click(function(){
+      var undoSnapshot = deletedSnapshot.val();
+      var name = undoSnapshot.name;
+      var text = undoSnapshot.text;
+      var userGroup = undoSnapshot.groupID;
+      var defaultStatus = undoSnapshot.status;
+      var currentTime = undoSnapshot.time;
+      var undoChange = new Firebase('https://todofyp.firebaseio.com/listItems/' + groupID);
+      undoChange.push({name: name, text: text, groupID: userGroup, status: defaultStatus, time: currentTime}, onUndo);
+    })
+
+
+  });
+
+}
+
+
+function onUndo()
+{
+  console.log('changes have been undone');
 }
