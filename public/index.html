@@ -46,6 +46,13 @@ GroceryBox
 <input type="text" id="addUserTextBox" class="addUserTextBox" placeholder="User Email"><br>
 <button id="addUserBtn2" onclick="addUser();">Add User</button>
 </div>
+<div class="getLinkContainer">
+<p class="textDesc">Send this link to friends and family for them to view and edit items on it.</p>
+<div id="linkBox"></div>
+</div>
+
+<div id="getLink" onclick="getLink();">Get a Link</div>
+<div id="getEmail">Add by Email</div>
 </div>
 
 <!-- lightbox for recipe inspiration -->
@@ -98,7 +105,7 @@ GroceryBox
 
 <div id="desktopMenu">
 <div id="groupContainer" class="groupContainer">
-	<h1 class="groupContainerTitle">Your Groups</h1>
+	<h1 class="groupContainerTitle">Your Lists</h1>
 	<div id="groupListDesktop" class="clearfix"></div>
 	<div class="createGroupContainer">
 		<input type="text" id="createGroupDesktop" class="createGroupDesktop" placeholder="Create New List" />
@@ -171,7 +178,7 @@ GroceryBox
 <div class="wrap">
 	  <div class='content'>
 	<div id="notificationPanelTabIcon2"></div>
-	<div class="avatar"></div>
+	<div id="avatar"></div>
 	<div class="displayName-profile">Display Name</div>
 	<p id="profilePanelName" class="profilePanelInfo"></p>
 	<div class="emailAddress-profile">Email Address</div>

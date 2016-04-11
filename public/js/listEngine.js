@@ -12,8 +12,8 @@ var nextRecipe = 0;
 var nextRecipeMobile = 0;
 var recipeData = '';
 var recipeDataMobile = '';
-
-
+var groupString = '';
+var urlCount = 0;
 if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
 {
   groupID = localStorage.getItem('groupID');
@@ -30,10 +30,24 @@ function authDataCallback(authData) {
     getUserDetails(userID);
     getSubscribedGroups(userID);
   } else {
-    console.log("User is logged out");
+    var groupLink = getURLGroupID()["groupID"];
+    if(groupLink == '' || groupLink == undefined)
+{
+      console.log("User is logged out");
     window.location.href = "https://todofyp.firebaseapp.com/login.html";
+}
+else if(groupLink != '' || groupLink != undefined)
+{
+  userID = 'Guest User';
+  var cleansedGroupID = groupLink.replace("%20", " ");
+  groupID = cleansedGroupID;
+  changeGroup(groupID);
+}
+
   }
 }
+
+
 function logout()
 {
     ref45.unauth();
@@ -101,9 +115,14 @@ var myDetails = userID;
 ref.on("value", function(snapshot) {
   myName = snapshot.val();
   userDisplayName = myName.Name;
+  groupString = myName.groupID;
+  var userInitials = myName.initials;
+  document.getElementById('avatar').innerHTML = userInitials;
   document.getElementById('userTitle').innerHTML = myName.Name;
   document.getElementById('profilePanelName').innerHTML = myName.Name;
   document.getElementById('profilePanelEmail').innerHTML = myName.Email;
+
+getGroupByLink(userID);
 
 }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
@@ -144,7 +163,6 @@ ref.on("value", function(snapshot) {
     $('<div/>').prepend($('<div class="groupName" id="'+ groupArray[i] +'" onclick="changeGroup(this.id);">').text(splitGroupID)).appendTo($('#groupListDesktop'));
 
     getNotifications(groupArray[i], notificationCount);
-
   }
     
 
@@ -535,6 +553,7 @@ function createGroupDesktop()
     var usersInGroup = childSnapshot.val();
     var userGroupInGroup = usersInGroup.groupID;
     var userNameInGroup = usersInGroup.Name;
+    var userInitials = usersInGroup.initials;
     var usersInGroupArray = userGroupInGroup.split(",");
     //for each user in the group
     for(var i = 0; i < usersInGroupArray.length; i++)
@@ -542,7 +561,7 @@ function createGroupDesktop()
       if(usersInGroupArray[i] == userGroup)
       {
         console.log(userNameInGroup + ' is in your group');
-        document.getElementById('usersInGroup').innerHTML += '<div class="userInGroupIcon"><div class="userOffline"></div>' + userNameInGroup + '<div class="toggleNotificstions"></div>' + '</div>';
+        document.getElementById('usersInGroup').innerHTML += '<div class="userInGroupIcon"><div class="userOffline"></div>' + userNameInGroup + '<div class="toggleNotificstions">' + userInitials + '</div>' + '</div>';
       }
     }
    })
@@ -843,7 +862,7 @@ function onSuccess()
 function getRandomKey()
 {
 
-  var array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4','5','6','7','8','9','0','!','*','&','£'];
+  var array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4','5','6','7','8','9','0','!','*','£'];
 
   for(var i = 0; i < 15; i++) { randomKey = randomKey + array[Math.floor(Math.random() * 40)]; }
     console.log(randomKey);
@@ -885,6 +904,7 @@ var checkEmail = document.getElementById('addUserTextBox').value;
 
 if(checkEmail != '')
 {
+  var emailConfirmed = 'no';
     var myDataRef2 = new Firebase('https://todofyp.firebaseio.com/users');
       myDataRef2.once("value", function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
@@ -908,6 +928,7 @@ if(checkEmail != '')
           }
           else
           {
+
             console.log('No user found');
           }
         });
@@ -1156,3 +1177,54 @@ function onUndo()
 {
   console.log('changes have been undone');
 }
+
+
+function getLink()
+{
+  $('.addUserContainer').css('display', 'none');
+  $('#getLink').css('display','none');
+  $('.getLinkContainer').fadeIn('fast');
+  $('#getEmail').fadeIn('fast');
+
+
+var getLink = 'https://todofyp.firebaseapp.com/index.html?groupID=' + groupID;
+document.getElementById('linkBox').innerHTML = getLink;
+
+}
+
+
+
+function getGroupByLink(myDetails)
+{
+if(urlCount == 0)
+{
+  urlCount = 1;
+var groupLink = getURLGroupID()["groupID"];
+
+if(groupLink != '' || groupLink != undefined)
+{
+  var cleansedGroupID = groupLink.replace("%20", " ");
+  alert(cleansedGroupID);
+  console.log("GROUPBITCH: " + groupString);
+  var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
+  var newGroup = groupString + ',' + cleansedGroupID;
+  ref.update({ groupID: newGroup});
+  groupID = cleansedGroupID;
+  var splitGroupID = cleansedGroupID.split("----ID----")[0];
+  changeGroup(cleansedGroupID);
+  alert('new group joined');
+}
+}
+
+}
+
+
+
+function getURLGroupID() {
+var vars = {};
+var url = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+vars[key] = value;
+});
+return vars;
+}
+

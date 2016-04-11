@@ -2,6 +2,7 @@
 var userEmail = '';
 var userName = '';
 var deviceToken = '';
+var userInitials = '';
 var uid = 0;
 
 
@@ -82,6 +83,7 @@ userEmail = document.getElementById('regEmail').value;
 userName = document.getElementById('regName').value;
 var userPass = document.getElementById('regPass').value;
 
+
 ref.createUser({
   email    : userEmail,
   password : userPass
@@ -104,8 +106,11 @@ ref.createUser({
 
 function setUserGroupGoogleAuth(uid, userEmail)
 {
+//get initials
+  var initials = userName.match(/\b(\w)/g);
+var userInitials = initials.join('');
 
-  
+
         var userID = uid;
       var groupArray = [];
       var userGroup = groupArray.toString();
@@ -116,7 +121,7 @@ function setUserGroupGoogleAuth(uid, userEmail)
       var listRef = myDataRef.child("users");
       var groupRef = listRef.child(userID);
       $(document).ready(function(){
-        groupRef.set({groupID: userGroup, Name: userName, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
+        groupRef.set({groupID: userGroup, Name: userName, initials: userInitials, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
          window.location.href = "https://todofyp.firebaseapp.com/";
       })
 }
@@ -126,8 +131,9 @@ function setUserGroupGoogleAuth(uid, userEmail)
 function setUserGroup(uid, userEmail)
 {
 
-//Do something to get device token, then store in users firebase profile.
-
+//get initials
+var initials = userName.match(/\b(\w)/g);
+var userInitials = initials.join('');
 
 var userID = uid;
 var groupArray = [];
@@ -139,7 +145,7 @@ var myDataRef = new Firebase('https://todofyp.firebaseio.com/');
       var listRef = myDataRef.child("users");
       var groupRef = listRef.child(userID);
       $(document).ready(function(){
-        groupRef.set({groupID: userGroup, Name: userName, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
+        groupRef.set({groupID: userGroup, Name: userName, initials: userInitials, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
       })
 }
 

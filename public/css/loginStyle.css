@@ -13,6 +13,25 @@ html, body
 	background-image:url('../img/pattern.png');
 }
 
+#loginGoogle {
+    position: absolute;
+    bottom: 33px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0px;
+    right: 0px;
+    width: 191px;
+    background-image:url(../img/googlebtn.png);
+    height:46px;
+}
+
+
+#loginGoogle:hover
+{
+    background-image:url(../img/googlebtn_pressed.png);
+}
+
 
 
 		.loginContainer {
@@ -97,7 +116,7 @@ input#loginPass {
 
 
 		.loginContainer {
-		    height: 250px;
+		    height: 300px;
 		    width: 370px;
 		    padding: 0px;
 		}
@@ -106,7 +125,7 @@ input#loginPass {
     width: 150px;
     height: 36px;
     position: absolute;
-    bottom: 50px;
+    bottom: 110px;
     left: 0px;
     right: 0px;
     margin-left: auto;
@@ -298,7 +317,7 @@ div#validationMessageReg {
 
 				button.loginBtn {
 			    position: absolute;
-			    bottom: 30px;
+			    bottom: 80px;
 			    text-align: center;
 			    width: 50%;
 			    border: none;
@@ -308,6 +327,11 @@ div#validationMessageReg {
 			    margin-right: auto;
 			    height: 35px;
 			}
+
+            #loginGoogle
+            {
+                bottom:5px;
+            }
 
 
             #registerSectionButton

@@ -296,7 +296,7 @@ a#linkMeMobile {
     position: absolute;
     width: 120px;
     /* height: 30px; */
-    bottom: 30px;
+    bottom: 60px;
     margin-left: auto;
     padding-top: 5px;
     font-size: 12px;
@@ -311,14 +311,19 @@ a#linkMeMobile {
     border-radius: 15px;
 }
 
-.avatar {
+#avatar {
     width: 100px;
     height: 100px;
-    background-image: url(../img/userIconLarge.png);
+    border: 5px solid #42a986;
     position: relative;
+    font-family: 'open_sansregular';
     background-size: 100%;
     margin: 0 auto;
-    margin-top: -40px;
+    font-size: 55px;
+    line-height: 100px;
+    margin-top: 0px;
+    color: #42a986;
+    text-align: center;
     background-color: white;
     border-radius: 60px;
 }
@@ -660,6 +665,73 @@ h1.dayOfWeekTitle {
 
 @media only screen and (min-width: 750px)
 {
+
+    #getLink {
+    text-align: right;
+    padding-right: 25px;
+    /* padding-bottom: 10px; */
+    font-family: 'open_sansregular';
+    /* margin-bottom: 30px; */
+    color: #d64841;
+    width: 94px;
+    /* background-color: red; */
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+#getLink:hover
+{
+    opacity:0.7;
+}
+
+.getLinkContainer {
+    display:none;
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+    font-family: 'open_sansregular';
+    text-align: center;
+    height: 160px;
+}
+
+#linkBox {
+    width: 660px;
+    height: 36px;
+    background-color: #42a986;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 20px;
+    font-size: 12px;
+    line-height: 36px;
+    color: white;
+    text-align: center;
+}
+
+
+#getEmail {
+    text-align: right;
+    display:none;
+    padding-right: 25px;
+    /* padding-bottom: 10px; */
+    font-family: 'open_sansregular';
+    /* margin-bottom: 30px; */
+    color: #d64841;
+    width: 100px;
+    /* background-color: red; */
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+#getEmail:hover
+{
+    opacity:0.7;
+}
+
+
 
 
 #undoContainer {
@@ -1194,7 +1266,7 @@ button#addUserBtn2 {
 
 	.userInGroupIcon {
     width: 100%;
-    height: 28px;
+    height: 36px;
     margin-top: 0px;
     font-size: 11px;
     padding-right: 30px;
@@ -1213,15 +1285,19 @@ button#addUserBtn2 {
 		}
 
 
-			.toggleNotificstions {
-			    width: 7px;
-			    height: 7px;
-			    border: 1px solid #7c7c7c;
-			    float: right;
-			    margin-right: 40px;
-			    margin-top: 4px;
-			    opacity:0.7;
-			}
+            .toggleNotificstions {
+                    width: 23px;
+                    height: 23px;
+                    border: 1px solid #d64841;
+                    float: right;
+                    margin-right: 40px;
+                    margin-top: -3px;
+                    color: #d64841;
+                    line-height: 22px;
+                    text-align: center;
+                    opacity: 0.7;
+                    border-radius: 15px;
+            }
 
 	#createGroup
 	{
