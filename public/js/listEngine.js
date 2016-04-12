@@ -1188,7 +1188,7 @@ function getLink()
 
 
 var getLink = 'https://todofyp.firebaseapp.com/index.html?groupID=' + groupID;
-document.getElementById('linkBox').innerHTML = getLink;
+document.getElementById('linkBox').value = getLink;
 
 }
 
