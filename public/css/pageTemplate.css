@@ -9,6 +9,76 @@ html, body
 }
 
 
+p.addUserDesc {
+    width: 80%;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    line-height: 21px;
+    color: #595757;
+    margin-top: 20px;
+    font-family: 'open_sansregular';
+}
+
+p.addUserTitle {
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+    font-weight:bold;
+    color: #d64841;
+    top: 12px;
+    font-family: 'open_sansregular';
+}
+
+input#addUserEmailMobile {
+    height: 29px;
+    width: 70%;
+    position: absolute;
+    left: 0px;
+    padding-left: 10px;
+    right: 0px;
+    font-size: 11px;
+    margin-left: auto;
+    font-family: 'open_sansregular';
+    border: none;
+    border-radius: 8px;
+    margin-right: auto;
+    margin-top: 10px;
+    background-color: #e4e3e3;
+}
+
+div#addUserBtnMobile {
+    margin-top: 10px;
+    position: absolute;
+    width: 50px;
+    font-family: 'open_sansregular';
+    right: 13%;
+    font-size: 11px;
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+    height: 31px;
+    line-height: 31px;
+    background-color: #42a986;
+}
+
+p.addUserTitle.sendViaLink {
+    margin-top: 90px;
+    font-family: 'open_sansregular';
+}
+
+#getLinkBtnMobile
+{
+    width:69px;
+    height:69px;
+    top:10px;
+    position: relative;
+    margin:0 auto;
+    background-image:url(../img/linkIconMobile.png);
+}
+
 
 .wrap{
       position: absolute;
@@ -34,6 +104,7 @@ html, body
     padding-left: 30px;
     padding-bottom: 13px;
     padding-left: 20px;
+    height:20px;
     margin-top: 2px;
     color: #c1c1c1;
     border-bottom: 1px solid #3d3d3d;
@@ -683,13 +754,39 @@ h1.dayOfWeekTitle {
     width:100%;
     display:none;
     min-height:600px;
-    background-color:red;
+    background-color:white;
     position: absolute;
     top:0px;
 }
 
+#addGroupBtn
+{
+    display:none;
+}
+
+
 @media only screen and (min-width: 750px)
 {
+    
+
+#addGroupBtn {
+    display: block;
+    float: right;
+    position: relative;
+    left: 199px;
+    margin-top: 12px;
+    width: 22px;
+    height: 22px;
+    line-height: 21px;
+    opacity: 0.;
+    background-color: #7c7c7c;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0.8;
+    cursor: pointer;
+    border-radius: 30px;
+}
 
 
 

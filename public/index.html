@@ -117,6 +117,7 @@ GroceryBox
 	<div id="groupListDesktop" class="clearfix"></div>
 	<div class="createGroupContainer">
 		<input type="text" id="createGroupDesktop" class="createGroupDesktop" placeholder="Create New List" />
+		<div id="addGroupBtn">+</div>
 	</div>
 	<div id="usersInGroup" class="usersInGroup"></div>
 </div>
@@ -134,7 +135,15 @@ GroceryBox
 <div id="leaveGroup" onclick="leaveGroup()"></div>
 <div id="addUser" onclick="lightbox()"></div>
 <div id="giveMeRecipe" onclick="lightbox2()"></div>
-<div id="addUserPanel"></div>
+<div id="addUserPanel">
+<p class="addUserTitle">Add by Email</p>
+<p class="addUserDesc">Enter the members email to add them to the current list</p>
+<input type="text" id="addUserEmailMobile" placeholder="example@example.com">
+<div id="addUserBtnMobile" onclick="addUser();">Add</div>
+<p class="addUserTitle sendViaLink">Add by Link</p>
+<p class="addUserDesc">Send this link to household members and they will be joined to this list</p>
+<div id="getLinkBtnMobile"></div>
+</div>
 <div class="mealPlanningPanel">
 <input type="text" id="mealPlanName" placeholder="New Plan Name">
 
@@ -316,6 +325,13 @@ $('#addItemBtn').css('display','none');
 		})
 
 			$('.settingName').click(function(){
+			$('body').removeClass('cbp-spmenu-push-toright');
+			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
+			$('body').removeClass('cbp-spmenu-push-toleft');
+			$('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
+		})
+
+			$('#addUserMobile').click(function(){
 			$('body').removeClass('cbp-spmenu-push-toright');
 			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
 			$('body').removeClass('cbp-spmenu-push-toleft');

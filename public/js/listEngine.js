@@ -14,12 +14,6 @@ var recipeData = '';
 var recipeDataMobile = '';
 var groupString = '';
 var urlCount = 0;
-if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
-{
-  groupID = localStorage.getItem('groupID');
-  console.log('Your Group: ' + groupID);
-  changeGroup(groupID);
-  }
 
 //Login 
 function authDataCallback(authData) {
@@ -46,6 +40,13 @@ else if(groupLink != '' || groupLink != undefined)
 
   }
 }
+
+if(localStorage.getItem('groupID') !== null || localStorage.getItem('groupID') !== 0)
+{
+  groupID = localStorage.getItem('groupID');
+  console.log('Your Group: ' + groupID);
+  changeGroup(groupID);
+  }
 
 
 function logout()
@@ -465,17 +466,27 @@ userRef.on('value', function(snapshot) {
 
 function createGroup()
 {
+  randomKey = "";
+
+  var validationCount = 0;
   var myDetails = userID;
-  var newGroupName = document.getElementById('createGroup').value;
+  var newGroupNameRaw = document.getElementById('createGroup').value;
+  var newGroupName = newGroupNameRaw.replace(/[^a-zA-Z0-9 ]/g, "");
+  if(newGroupName.length <= 16 && newGroupName.length >= 1 && newGroupName != '')
+  {
+  getRandomKey();
+  newGroupName = newGroupName + "----ID----" + randomKey;
   var ref = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails);
   var newGroup = groupString + ',' + newGroupName;
   ref.update({ groupID: newGroup});
   groupID = newGroupName;
+  var splitGroupID = newGroupName.split("----ID----")[0];
   changeGroup(newGroupName);
-/*
-  var createGroupNotificationRef = new Firebase('https://todofyp.firebaseio.com/users/' + myDetails + '/' + 'notificationSubscription/' + newGroupName);
-  createGroupNotificationRef.push({'groupID': newGroupName, 'recievePush': 'YES'});
-*/
+  }
+  else
+  {
+    alert('List names should be between 1 and 16 characters');
+  }
 }
 
 
@@ -543,6 +554,10 @@ function createGroupDesktop()
 }
 });
 
+  $('#addGroupBtn').click(function() {
+            createGroupDesktop();
+            $('#createGroupDesktop').val('');
+});
 
 
 
@@ -642,6 +657,7 @@ function showProfileTab()
 {
       //$('.profilePanel').slideToggle('fast');
       $('#lightsOut').fadeToggle('fast');
+      $('#addUserPanel').slideUp('fast');
       $('.mealPlanningPanel').slideUp('fast');
       $('#pageTitle').html('My Profile');
 
@@ -656,6 +672,7 @@ function showRecipeTab()
       //$('.profilePanel').slideToggle('fast');
       $('#lightsOut').fadeToggle('fast');
       $('.mealPlanningPanel').slideUp('fast');
+      $('#addUserPanel').slideUp('fast');
       $('#pageTitle').html('Recipe Inspiration');
 
   
@@ -678,9 +695,11 @@ function showListTab()
 {
       $('.wrap, #profileTab').removeClass('active2');
       $('.profilePanel').slideUp('fast');
+      $('#addUserPanel').slideUp('fast');
       $('.mealPlanningPanel').slideUp('fast');
       $('#lightsOut').fadeOut('fast');
-      $('#pageTitle').html(groupID);
+      var splitGroupID = groupID.split("----ID----")[0];
+      $('#pageTitle').html(splitGroupID);
 }
 
 function createMealPlan()
@@ -920,7 +939,10 @@ function addUser()
 
 
 var checkEmail = document.getElementById('addUserTextBox').value;
-
+if(checkEmail == "")
+{
+  checkEmail = document.getElementById('addUserEmailMobile').value;
+}
 
 if(checkEmail != '')
 {
