@@ -81,6 +81,14 @@ GroceryBox
 </div>
 </div>
 		</nav>
+		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+			<h3></h3>
+<div id="settingsContainer" class="groupContainer">
+	<div id="addUserMobile" class="settingName">Add User</div>
+	<div class="settingName">Settings</div>
+	<div class="settingName" onclick="logout()">Sign-Out</Ou>
+</div>
+		</nav>
 <header>
 	<div class="headerContainer">
 	<div id="pageTitle" class="pageTitle">
@@ -96,7 +104,7 @@ GroceryBox
 	<div id="notificationPanelTabIcon"></div>
 	<div id="notificationPanel"></div>
 	<div id="notificationDesktop" class="notificationIconDesktop"></div>
-	<div class="settingsIcon"></div>	
+	<div id="settingsIcon" class="settingsIcon"></div>	
 	<div class="logoutBtn" onclick="logout()">Logout</div>
 </div>
 	</div>
@@ -126,6 +134,7 @@ GroceryBox
 <div id="leaveGroup" onclick="leaveGroup()"></div>
 <div id="addUser" onclick="lightbox()"></div>
 <div id="giveMeRecipe" onclick="lightbox2()"></div>
+<div id="addUserPanel"></div>
 <div class="mealPlanningPanel">
 <input type="text" id="mealPlanName" placeholder="New Plan Name">
 
@@ -273,7 +282,7 @@ $('#addItemBtn').css('display','none');
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
 				showLeftPush = document.getElementById( 'showLeftPush' ),
 				body = document.body;
-
+			var menuRight = document.getElementById( 'cbp-spmenu-s2' )
 
 		function pushMenu()
 		{
@@ -283,20 +292,42 @@ $('#addItemBtn').css('display','none');
 				classie.toggle( menuLeft, 'cbp-spmenu-open' );
 		}
 
+				function pushMenuRight()
+		{
+				console.log('close menu');
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toleft' );
+				classie.toggle( menuRight, 'cbp-spmenu-open' );
+		}
+
 
 		$('.listContainer').click(function(){
 			$('body').removeClass('cbp-spmenu-push-toright');
 			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
+			$('body').removeClass('cbp-spmenu-push-toleft');
+			$('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
 		})
 
 			$('#groupList').click(function(){
 			$('body').removeClass('cbp-spmenu-push-toright');
 			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
+			$('body').removeClass('cbp-spmenu-push-toleft');
+			$('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
 		})
+
+			$('.settingName').click(function(){
+			$('body').removeClass('cbp-spmenu-push-toright');
+			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
+			$('body').removeClass('cbp-spmenu-push-toleft');
+			$('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
+		})
+
 
 				$('#messageInput').click(function(){
 			$('body').removeClass('cbp-spmenu-push-toright');
 			$('#cbp-spmenu-s1').removeClass('cbp-spmenu-open');
+			$('body').removeClass('cbp-spmenu-push-toleft');
+			$('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
 		})
 
 		
@@ -314,6 +345,11 @@ var findStoreBtn = document.getElementById('showLeftPush');
 findStoreBtn.addEventListener('touchend', pushMenu, false);
 findStoreBtn.addEventListener('click', pushMenu, false);
 findStoreBtn.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
+
+var settingsBtn = document.getElementById('settingsIcon');
+settingsBtn.addEventListener('touchend', pushMenuRight, false);
+settingsBtn.addEventListener('click', pushMenuRight, false);
+settingsBtn.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
 
 var focusTextField = document.getElementById('messageInput');
 focusTextField.addEventListener('touchend', focusText, false);

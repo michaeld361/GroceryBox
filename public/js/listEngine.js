@@ -505,8 +505,11 @@ function leaveGroup()
 function createGroupDesktop()
 {
   randomKey = "";
+
+  var validationCount = 0;
   var myDetails = userID;
-  var newGroupName = document.getElementById('createGroupDesktop').value;
+  var newGroupNameRaw = document.getElementById('createGroupDesktop').value;
+  var newGroupName = newGroupNameRaw.replace(/[^a-zA-Z0-9 ]/g, "");
   if(newGroupName.length <= 16 && newGroupName.length >= 1 && newGroupName != '')
   {
   getRandomKey();
@@ -601,6 +604,21 @@ function showMealPlanTab()
       getDayofWeek();
 }
 
+//Meal Plan Tab
+var showaddUser = document.getElementById('addUserMobile');
+showaddUser.addEventListener('touchend', showAddUser, false);
+showaddUser.addEventListener('click', showAddUser, false);
+showaddUser.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
+
+function showAddUser()
+{
+      $('.wrap, #profileTab').removeClass('active2');
+      $('#addUserPanel').slideDown('fast');
+      //$('.profilePanel').slideUp('fast');
+      $('#lightsOut').fadeOut('fast');
+      $('#pageTitle').html('Add User');
+}
+
 
 $('.userIcon').click(function(){
         $('.wrap, #profileTab').toggleClass('active2');
@@ -645,6 +663,8 @@ function showRecipeTab()
 
 
 }
+
+
 
 
 
