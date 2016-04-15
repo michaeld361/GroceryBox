@@ -116,12 +116,12 @@ var userInitials = initials.join('');
       var userGroup = groupArray.toString();
       var notificationStatus = 'YES';
       var mealPlanGroupID = '';
-
+      var disabledNotifications = "";
       var myDataRef = new Firebase('https://todofyp.firebaseio.com/');
       var listRef = myDataRef.child("users");
       var groupRef = listRef.child(userID);
       $(document).ready(function(){
-        groupRef.set({groupID: userGroup, Name: userName, initials: userInitials, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
+        groupRef.set({groupID: userGroup, Name: userName, initials: userInitials, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, disabledNotifications : disabledNotifications, mealPlanGroupID: mealPlanGroupID});
          window.location.href = "https://todofyp.firebaseapp.com/";
       })
 }
@@ -140,12 +140,12 @@ var groupArray = [];
 var userGroup = groupArray.toString();
 var notificationStatus = 'YES';
 var mealPlanGroupID = '';
-
+var disabledNotifications = "";
 var myDataRef = new Firebase('https://todofyp.firebaseio.com/');
       var listRef = myDataRef.child("users");
       var groupRef = listRef.child(userID);
       $(document).ready(function(){
-        groupRef.set({groupID: userGroup, Name: userName, initials: userInitials, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, mealPlanGroupID: mealPlanGroupID});
+        groupRef.set({groupID: userGroup, Name: userName, initials: userInitials, Email: userEmail, deviceToken: deviceToken, notificationStatus: notificationStatus, disabledNotifications : disabledNotifications, mealPlanGroupID: mealPlanGroupID});
       })
 }
 

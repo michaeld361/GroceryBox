@@ -14,7 +14,7 @@ var recipeData = '';
 var recipeDataMobile = '';
 var groupString = '';
 var urlCount = 0;
-
+var notifyUserPanel = 0;
 //Login 
 function authDataCallback(authData) {
   if(authData) {
@@ -184,7 +184,9 @@ ref.on("value", function(snapshot) {
 
 function changeGroup(groupDiv)
 {
-      document.getElementById('usersInGroup').innerHTML = '';
+  notifyUserPanel = 0;
+  document.getElementById('notifierContainer').innerHTML = ""
+      document.getElementById('usersInGroup').innerHTML = "";
 recipeConstruct = [];
     nextRecipe = 0;
     recipeData = '';
@@ -370,9 +372,17 @@ function setTrigger()
   }
   else
   {
+
   itemTrigger = 1;
   $('.urgentBtn').css('border', '2px solid #d64841');
   }
+
+      if(notifyUserPanel != 1)
+    {
+      notifyUserPanel = 1;
+      lightbox3();
+    }
+  console.log(notifyUserPanel + " notifyer");
 
 }
 
@@ -568,6 +578,7 @@ function createGroupDesktop()
     var ref28 = new Firebase("https://todofyp.firebaseio.com/users/");
     ref28.once("value", function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
+      var userKey = childSnapshot.key();
     var usersInGroup = childSnapshot.val();
     var userGroupInGroup = usersInGroup.groupID;
     var userNameInGroup = usersInGroup.Name;
@@ -578,6 +589,7 @@ function createGroupDesktop()
     {
       if(usersInGroupArray[i] == userGroup)
       {
+        getNotificationSettings(usersInGroup, userKey);
         console.log(userNameInGroup + ' is in your group');
         document.getElementById('usersInGroup').innerHTML += '<div class="userInGroupIcon"><div class="userOffline"></div>' + userNameInGroup + '<div class="toggleNotificstions">' + userInitials + '</div>' + '</div>';
       }
@@ -591,6 +603,42 @@ function endGroupSnapshot(ref28)
 {
   ref28.off('value');
   console.log('Group is off!');
+}
+
+
+
+function getNotificationSettings(usersInGroup, userKey)
+{
+  var deviceTokenForUser = usersInGroup.deviceToken;
+  var username = usersInGroup.Name;
+  var disabledGroup = usersInGroup.disabledNotifications;
+
+  if(deviceTokenForUser == "")
+  {
+    document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">No Devices Registered</div></div>'
+  }
+  else if(disabledGroup == groupID )
+  {
+        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div><div id="' + userKey + '" class="userNotifierDisable">Enable</div></div>'
+  }
+  else
+  {
+        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div><div id="' + userKey + '" class="userNotifierDisable" onclick="changeNotiStatus(this.id);">X</div></div>'
+  }
+}
+
+function changeNotiStatus(id)
+{
+  
+//newGroupName = newGroupName + "----ID----" + randomKey;
+  var ref = new Firebase('https://todofyp.firebaseio.com/users/' + id);
+  ref.on("value", function(snapshot) {
+  var usersDetails = snapshot.val();
+  var userGroupString = usersDetails.disabledNotifications;
+  //var userGroupArray = userGroupString.split(",");
+    //var updatedGroup = userGroupArray.toString();
+    ref.update({ disabledNotifications: groupID});
+});
 }
 
 
@@ -1005,6 +1053,16 @@ document.body.scrollTop = document.documentElement.scrollTop = 0;
   })
 }
 
+function lightbox3()
+{
+document.body.scrollTop = document.documentElement.scrollTop = 0;
+  $(document).ready(function(){
+    $('html').css('overflow', 'hidden');
+    $('#lightsOut').fadeIn();
+    $('.lightbox3').fadeIn();
+  })
+}
+
 
 $('#lightsOut').click(function(){
   $('.wrap, #profileTab').removeClass('active2');
@@ -1043,6 +1101,7 @@ $('#lightsOut').click(function(){
   $('html').css('overflow', 'initial');
   $('#lightsOut').fadeOut('fast');
   $('.lightbox2').fadeOut('fast');
+  $('.lightbox3').fadeOut('fast');
 });
 
 
