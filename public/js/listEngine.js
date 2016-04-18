@@ -15,6 +15,7 @@ var recipeDataMobile = '';
 var groupString = '';
 var urlCount = 0;
 var notifyUserPanel = 0;
+var userInitials = '';
 //Login 
 function authDataCallback(authData) {
   if(authData) {
@@ -117,7 +118,7 @@ ref.on("value", function(snapshot) {
   myName = snapshot.val();
   userDisplayName = myName.Name;
   groupString = myName.groupID;
-  var userInitials = myName.initials;
+  userInitials = myName.initials;
   document.getElementById('avatar').innerHTML = userInitials;
   document.getElementById('userTitle').innerHTML = myName.Name;
   document.getElementById('profilePanelName').innerHTML = myName.Name;
@@ -224,7 +225,7 @@ function updateGroupSelected()
       console.log('Your Group2: ' + userGroup);
       var groupRef = new Firebase(myDataRef + '/' + userGroup);
       console.log('groupRef: ' + groupRef);
-          var name = userDisplayName;
+          var name = userInitials;
           var text = $('#messageInput').val();
           var defaultStatus = 'nrl';
           if(text != '')
@@ -256,13 +257,12 @@ function spyItem()
         document.getElementById('listItems').innerHTML = "";
         var myRef = new Firebase(myDataRef + '/' + userGroup);
         myRef.on('child_added', function(snapshot) {
-
             console.log('item added to ' + userGroup);
-
             var message = snapshot.val();
             var key = snapshot.key();
+            var userInitials = message.name;
             var priorityStatus = message.status;
-            displayChatMessage(message.name, message.text, message.status, key, priorityStatus);
+            displayChatMessage(message.name, userInitials, message.text, message.status, key, priorityStatus);
             ItemsAddedByOthers(message.time, message.text, key);
            // urgentIcon(message.name, message.text, message.status, key);
            recipeConstruct.push(message.text);
@@ -295,10 +295,9 @@ function endSnapshot(myRef)
 
 
 
-function displayChatMessage(name, text, status, key, priorityStatus) {
+function displayChatMessage(name, userInitials, text, status, key, priorityStatus) {
 
   var lineThrough = $('#' + key).css('text-decoration');
-
 
         if(priorityStatus == 'urg')
         {
@@ -318,6 +317,7 @@ function displayChatMessage(name, text, status, key, priorityStatus) {
           if(status == 'urg')
           {
              $('#' + key).append('<div class="urgentIcon"></div>');
+             $('#' + key).prepend('<div class="addedByUser">' + userInitials + '</div>');
           }
        // }
       //  else
@@ -615,15 +615,17 @@ function getNotificationSettings(usersInGroup, userKey)
 
   if(deviceTokenForUser == "")
   {
-    document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">No Devices Registered</div></div>'
+    document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon greyedOut"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">No Devices Registered</div></div>'
+    $('.greyedOut').css('background-image','url("../img/notifierIconDisabled.png")');
   }
   else if(disabledGroup == groupID )
   {
-        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div><div id="' + userKey + '" class="userNotifierDisable">Enable</div></div>'
+        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div><div id="' + userKey + '" class="userNotifierDisable">+</div></div>'
   }
   else
   {
-        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div><div id="' + userKey + '" class="userNotifierDisable" onclick="changeNotiStatus(this.id);">X</div></div>'
+        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div><div id="' + userKey + '" class="userNotifierDisable" onclick="changeNotiStatus(this.id);">X</div><div class="userNotifierEnable">+</div></div>'
+
   }
 }
 
@@ -638,8 +640,14 @@ function changeNotiStatus(id)
   //var userGroupArray = userGroupString.split(",");
     //var updatedGroup = userGroupArray.toString();
     ref.update({ disabledNotifications: groupID});
+  $('.userNotifierDisable').css('display','none');
+  $('.userNotifierEnable').fadeIn('fast');
+
 });
 }
+
+
+
 
 
 $('#mealPlanner').click(function() {
