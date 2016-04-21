@@ -231,7 +231,7 @@ function updateGroupSelected()
           if(text != '')
           {
           var currentTime = Firebase.ServerValue.TIMESTAMP;
-          groupRef.push({name: name, text: text, groupID: userGroup, status: defaultStatus, time: currentTime}, onComplete);
+          groupRef.push({name: name, text: text, groupID: userGroup, status: defaultStatus, time: currentTime}, onComplete(groupRef));
           console.log('Item Added: ' + text);
           text = '';
           $('#messageInput').val('');
@@ -241,9 +241,10 @@ spyItem();
 
 
 
-function onComplete()
+function onComplete(groupRef)
 {
   console.log('SAVED IN DB');
+  groupRef.off();
 }
 
 
