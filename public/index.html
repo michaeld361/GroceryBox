@@ -41,7 +41,7 @@ GroceryBox
 	<h3>Add a user to this list</h3>
 	<button id="closeLightbox">X</button>
 	<div class="addUserContainer">
-		<p class="textDesc">To add a user to this list, please enter their <b>email address</b> below. Easy Peasy!</p>
+		<p class="textDesc" id="addUserEmailDesc">To add a user to this list, please enter their <b>email address</b> below. Easy Peasy!</p>
 <input type="text" id="addUserTextBox" class="addUserTextBox" placeholder="User Email"><br>
 <button id="addUserBtn2" onclick="addUser();">Add User</button>
 </div>
@@ -147,8 +147,19 @@ GroceryBox
 	<button class="scheduleBtn">Schedule Shop</button>
 	<button onclick="setTrigger();" class="scheduleBtn urgentBtn">Urgent</button>
 </div>
+<div id="commitalItems">
+<div class="listSectionTitle">Items need your commitment</div>
+<div id="commitToItems">
+<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="sfwf7adw5">Eggs</div>
+<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="54545qwwe">Milk</div>
+</div>
+</div>
 
-<div id="listItems" class="listItems"></div>
+<div id="listItems" class="listItems">
+	<div class="breakerBar"></div>
+	<div id="remainingItems"></div>
+</div>
+
 <input type='text' onkeypress="addItem(event)" id='messageInput' autocorrect="off" autocapitalize="off" placeholder='+ Add Item'>
 <div id="userControls">
 <div id="leaveGroup" onclick="leaveGroup()"></div>

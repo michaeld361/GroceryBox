@@ -228,10 +228,11 @@ function updateGroupSelected()
           var name = userInitials;
           var text = $('#messageInput').val();
           var defaultStatus = 'nrl';
+          var commitalStatus = '';
           if(text != '')
           {
           var currentTime = Firebase.ServerValue.TIMESTAMP;
-          groupRef.push({name: name, text: text, groupID: userGroup, status: defaultStatus, time: currentTime}, onComplete(groupRef));
+          groupRef.push({name: name, text: text, groupID: userGroup, status: defaultStatus,commitalStatus: commitalStatus, time: currentTime}, onComplete(groupRef));
           console.log('Item Added: ' + text);
           text = '';
           $('#messageInput').val('');
@@ -254,8 +255,8 @@ function onComplete(groupRef)
 
 function spyItem()
 {
-
-        document.getElementById('listItems').innerHTML = "";
+        document.getElementById('commitToItems').innerHTML = "";
+        document.getElementById('remainingItems').innerHTML = "";
         var myRef = new Firebase(myDataRef + '/' + userGroup);
         myRef.on('child_added', function(snapshot) {
             console.log('item added to ' + userGroup);
@@ -263,8 +264,9 @@ function spyItem()
             var key = snapshot.key();
             var userInitials = message.name;
             var priorityStatus = message.status;
-            displayChatMessage(message.name, userInitials, message.text, message.status, key, priorityStatus);
-            ItemsAddedByOthers(message.time, message.text, key);
+            var committed = message.commitalStatus;
+            displayChatMessage(message.name, userInitials, message.text, message.status, key, priorityStatus, committed);
+            ItemsAddedByOthers(message.time, message.text, key, committed);
            // urgentIcon(message.name, message.text, message.status, key);
            recipeConstruct.push(message.text);
           },endSnapshot(myRef));
@@ -289,27 +291,45 @@ function endSnapshot(myRef)
 
   myRef.off('child_added');
   console.log('it is off!');
+  myDataRef.off('child_changed');
   changeGroup(groupDiv);
+
   //spyItem();
     });
 }
 
+function commitToItem(itemID)
+{
+   var r = confirm("Commit to buying this item");
+    if (r == true) 
+    { 
+      var setStatusRef = new Firebase("https://todofyp.firebaseio.com/listItems/" + userGroup + "/" + itemID);
+      setStatusRef.update({ commitalStatus: userInitials}, onFinish);
+    }
+  else {
+        console.log('you are still in the group');
+    }
+}
 
 
-function displayChatMessage(name, userInitials, text, status, key, priorityStatus) {
+
+function displayChatMessage(name, userInitials, text, status, key, priorityStatus, committed) {
 
   var lineThrough = $('#' + key).css('text-decoration');
 
-        if(priorityStatus == 'urg')
+        if(priorityStatus == 'urg' && committed == 'none')
         {
-            $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).prependTo($('.listItems'));
-            $('.listItems')[0].scrollTop = $('.listItems')[0].scrollHeight;
+
+              $('.breakerBar').css('display', 'block');
+              $('#commitalItems').css('display', 'block');
+            $('<div/>').prepend($('<div class="listItem" onMouseDown="commitToItem(this.id);" id="'+ key +'">').text(text)).prependTo($('#commitToItems'));
+            $('#commitToItems')[0].scrollTop = $('#commitToItems')[0].scrollHeight;
             $('</div>').text();
         }
         else
         {
-            $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('.listItems'));
-            $('.listItems')[0].scrollTop = $('.listItems')[0].scrollHeight;
+            $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('#remainingItems'));
+            $('#remainingItems')[0].scrollTop = $('#remainingItems')[0].scrollHeight;
             $('</div>').text();
         }
 
@@ -318,7 +338,12 @@ function displayChatMessage(name, userInitials, text, status, key, priorityStatu
           if(status == 'urg')
           {
              $('#' + key).append('<div class="urgentIcon"></div>');
-             $('#' + key).prepend('<div class="addedByUser">' + userInitials + '</div>');
+             //$('#' + key).prepend('<div class="addedByUser">' + userInitials + '</div>');
+          }
+
+          if(committed != "" && committed != "none")
+          {
+            $('#' + key).prepend('<div class="addedByUser">' + committed + '</div>');
           }
        // }
       //  else
@@ -391,7 +416,7 @@ function setItemUrgent(id)
 {
 
   var setStatusRef = new Firebase("https://todofyp.firebaseio.com/listItems/" + userGroup + "/" + id);
-  setStatusRef.update({ status: 'urg'}, onFinish);
+  setStatusRef.update({ status: 'urg', commitalStatus: 'none'}, onFinish);
 }
 
 
@@ -412,8 +437,8 @@ function onFinish()
   groupUrgentRef.once("child_changed", function(snapshot) {
    var itemStatus = snapshot.val();
    var key = snapshot.key();
-   var hitmebaby = itemStatus.status;
-   if(hitmebaby != 'nrl')
+   var mrkUrgent = itemStatus.status;
+   if(mrkUrgent != 'nrl')
    {
        $('#' + key).append('<div class="urgentIcon"></div>');
    }
@@ -422,7 +447,6 @@ function onFinish()
  }, function (errorObject) {
    console.log("The read failed: " + errorObject.code);
  });
-
 
 
 
@@ -439,7 +463,7 @@ amOnline.on('value', function(snapshot) {
   }
 });
 
-function ItemsAddedByOthers(timeAdded, text, key)
+function ItemsAddedByOthers(timeAdded, text, key, committed)
 {
   var timeOfAdd = timeAdded;
     var yourMessage = text;
@@ -449,8 +473,10 @@ var userRef = new Firebase('https://todofyp.firebaseio.com/presence/' + userID);
 userRef.on('value', function(snapshot) {
   if (snapshot.val() < timeOfAdd) {
     // User is online, update UI.
-
+    if(committed == "" || committed == "none")
+    {
     document.getElementById(key).innerHTML += '<div class="newIcon">Recently Added</div>';
+    }
 
 
 
@@ -993,7 +1019,7 @@ function getDayofWeek()
 
 function addUser()
 {
-
+var userAdded = 0;
 
 var checkEmail = document.getElementById('addUserTextBox').value;
 if(checkEmail == "")
@@ -1024,6 +1050,10 @@ if(checkEmail != '')
                   //newUserRef.child('groupID').update(newGroup);
                   newUserRef.update({ groupID: newGroup});
                   console.log('user is now in group');
+                  document.getElementById('addUserBtn2').onclick = function() { closeCurrentLightbox(); }
+                  document.getElementById('addUserBtn2').innerHTML = "Back to List";
+                  document.getElementById('addUserEmailDesc').innerHTML = "Member added to your list";
+                  $('#addUserTextBox').css('display', 'none');
           }
           else
           {
@@ -1038,7 +1068,11 @@ if(checkEmail != '')
 
 
 
-
+function closeCurrentLightbox()
+{
+    $('#lightsOut').fadeOut();
+    $('.lightbox').fadeOut();
+}
 
 
 function lightbox()
