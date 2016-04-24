@@ -16,6 +16,8 @@ var groupString = '';
 var urlCount = 0;
 var notifyUserPanel = 0;
 var userInitials = '';
+var isGuest = 0;
+var commitalCount = 0;
 //Login 
 function authDataCallback(authData) {
   if(authData) {
@@ -28,15 +30,26 @@ function authDataCallback(authData) {
     var groupLink = getURLGroupID()["groupID"];
     if(groupLink == '' || groupLink == undefined)
 {
-      console.log("User is logged out");
     window.location.href = "https://todofyp.firebaseapp.com/login.html";
 }
 else if(groupLink != '' || groupLink != undefined)
 {
   userID = 'Guest User';
   var cleansedGroupID = groupLink.replace("%20", " ");
+  isGuest = 1;
   groupID = cleansedGroupID;
   changeGroup(groupID);
+
+  if(isGuest == 1)
+{
+  $('.userIcon').css('opacity', '0.2');
+  $('#mealPlanner').css('opacity', '0.2'); 
+  $('#notificationDesktop').css('opacity', '0.2');    
+  $('#settingsIcon').css('opacity', '0.2');
+  $('.groupContainerTitle').css('opacity', '0.2');
+  $('.createGroupContainer').css('opacity', '0.2');
+  $('#userControls').css('display', 'none');
+}
 }
 
   }
@@ -185,6 +198,9 @@ ref.on("value", function(snapshot) {
 
 function changeGroup(groupDiv)
 {
+  commitalCount = 0;
+  itemTrigger = 0;
+  $('.urgentBtn').css('border', '1px solid #d64841');
   notifyUserPanel = 0;
   document.getElementById('notifierContainer').innerHTML = ""
       document.getElementById('usersInGroup').innerHTML = "";
@@ -214,7 +230,15 @@ recipeConstruct = [];
       {
         if (e.keyCode == 13) 
         {
+          var text = $('#messageInput').val();
+          if(text == " ")
+          {
+            //Do nothing
+          }
+          else
+          {
             updateGroupSelected();
+          }
         }
       }
 
@@ -255,6 +279,7 @@ function onComplete(groupRef)
 
 function spyItem()
 {
+
         document.getElementById('commitToItems').innerHTML = "";
         document.getElementById('remainingItems').innerHTML = "";
         var myRef = new Firebase(myDataRef + '/' + userGroup);
@@ -291,7 +316,6 @@ function endSnapshot(myRef)
 
   myRef.off('child_added');
   console.log('it is off!');
-  myDataRef.off('child_changed');
   changeGroup(groupDiv);
 
   //spyItem();
@@ -315,19 +339,19 @@ function commitToItem(itemID)
 
 function displayChatMessage(name, userInitials, text, status, key, priorityStatus, committed) {
 
+
   var lineThrough = $('#' + key).css('text-decoration');
 
         if(priorityStatus == 'urg' && committed == 'none')
         {
-
-              $('.breakerBar').css('display', 'block');
-              $('#commitalItems').css('display', 'block');
+              commitalCount += 1;
             $('<div/>').prepend($('<div class="listItem" onMouseDown="commitToItem(this.id);" id="'+ key +'">').text(text)).prependTo($('#commitToItems'));
             $('#commitToItems')[0].scrollTop = $('#commitToItems')[0].scrollHeight;
             $('</div>').text();
         }
         else
         {
+ 
             $('<div/>').prepend($('<div class="listItem" onMouseDown="removeListItemDB(this.id)" id="'+ key +'">').text(text)).appendTo($('#remainingItems'));
             $('#remainingItems')[0].scrollTop = $('#remainingItems')[0].scrollHeight;
             $('</div>').text();
@@ -350,10 +374,25 @@ function displayChatMessage(name, userInitials, text, status, key, priorityStatu
       //  {
       //    alert('item marked as Urgent already');
        // }
+       determineBreakerBar();
       }
 
 
 
+function determineBreakerBar()
+{
+        if(commitalCount == 0)
+        {
+              $('.breakerBar').css('display', 'none');
+              $('#commitalItems').css('display', 'none');
+        }
+        else
+        {
+              $('.breakerBar').css('display', 'block');
+              $('#commitalItems').css('display', 'block');
+        }
+
+}
 
 
 
@@ -647,11 +686,11 @@ function getNotificationSettings(usersInGroup, userKey)
   }
   else if(disabledGroup == groupID )
   {
-        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div><div id="' + userKey + '" class="userNotifierDisable">+</div></div>'
+        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="mobileNotiContainer"><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div></div><div id="' + userKey + '" onclick="enableNotiStatus(this.id);" class="userNotifierDisable green">+</div></div>'
   }
   else
   {
-        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="userNotifierIcon"></div><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div><div id="' + userKey + '" class="userNotifierDisable" onclick="changeNotiStatus(this.id);">X</div><div class="userNotifierEnable">+</div></div>'
+        document.getElementById('notifierContainer').innerHTML += '<div class="userSubjectContainer"><div class="mobileNotiContainer"><div class="userNotifierName">' + username + '</div><div class="userNotifierDevice">Push Notification</div></div><div id="' + userKey + '" class="userNotifierDisable" onclick="changeNotiStatus(this.id);">X</div><div id="' + userKey + '" onclick="enableNotiStatus(this.id);" class="userNotifierEnable">+</div></div>'
 
   }
 }
@@ -661,14 +700,32 @@ function changeNotiStatus(id)
   
 //newGroupName = newGroupName + "----ID----" + randomKey;
   var ref = new Firebase('https://todofyp.firebaseio.com/users/' + id);
-  ref.on("value", function(snapshot) {
+  ref.once("value", function(snapshot) {
   var usersDetails = snapshot.val();
   var userGroupString = usersDetails.disabledNotifications;
   //var userGroupArray = userGroupString.split(",");
     //var updatedGroup = userGroupArray.toString();
     ref.update({ disabledNotifications: groupID});
-  $('.userNotifierDisable').css('display','none');
+    $('.userNotifierDisable').css('display', 'none');
   $('.userNotifierEnable').fadeIn('fast');
+
+});
+}
+
+
+function enableNotiStatus(id)
+{
+  
+//newGroupName = newGroupName + "----ID----" + randomKey;
+  var ref = new Firebase('https://todofyp.firebaseio.com/users/' + id);
+  ref.once("value", function(snapshot) {
+  var usersDetails = snapshot.val();
+  var userGroupString = usersDetails.disabledNotifications;
+  //var userGroupArray = userGroupString.split(",");
+    //var updatedGroup = userGroupArray.toString();
+    ref.update({ disabledNotifications: " "});
+    $('.userNotifierEnable').css('display', 'none');
+  $('.userNotifierDisable').fadeIn('fast');
 
 });
 }
@@ -1371,4 +1428,10 @@ vars[key] = value;
 });
 return vars;
 }
+
+
+
+
+
+
 

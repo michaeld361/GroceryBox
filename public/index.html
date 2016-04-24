@@ -8,6 +8,7 @@ GroceryBox
 <link rel="stylesheet" type="text/css" href="css/component.css" />
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 	<script src='js/source.js'></script>
+	<script src='js/autherisation.js'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -75,16 +76,9 @@ GroceryBox
 <h3>Notify List Members</h3>
 <p class="notifyPanelDesc">By marking items as ‘urgent’, the following members will recieve notifications:</p>
 <div id="notifierContainer">
-<div class="userSubjectContainer">
-<div class="userNotifierIcon"></div>
-<div class="userNotifierName">Michael Down</div>
-<div class="userNotifierDevice">Push Notification</div>
-<div class="userNotifierDisable">X</div>
-<div class="userNotifierEnable">+</div>
-</div>
 
 </div>
-
+<div id="closeBtn1">Continue</div>
 </div>
 
 
@@ -98,6 +92,7 @@ GroceryBox
 	</div>
 </div>
 </div>
+<div id="leaveGroupMobile" onclick="leaveGroup()">Leave List</div>
 		</nav>
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<h3></h3>
@@ -138,6 +133,7 @@ GroceryBox
 		<div id="addGroupBtn">+</div>
 	</div>
 	<div id="usersInGroup" class="usersInGroup"></div>
+	<div id="leaveGroup" onclick="leaveGroup()"><img id="leaveListIcon" src="img/binIcon.png">Leave List</div>
 </div>
 </div>
 
@@ -162,7 +158,6 @@ GroceryBox
 
 <input type='text' onkeypress="addItem(event)" id='messageInput' autocorrect="off" autocapitalize="off" placeholder='+ Add Item'>
 <div id="userControls">
-<div id="leaveGroup" onclick="leaveGroup()"></div>
 <div id="addUser" onclick="lightbox()"></div>
 <div id="giveMeRecipe" onclick="lightbox2()"></div>
 </div>
@@ -252,7 +247,6 @@ GroceryBox
  </div>
  <div id="textContainerMobile">
 <h3 id="recipeTitleMobile">Recipe Inspiration</h3>
-<p class="recipeInfoMobile">Recipe Inspiration uses the items on your current shopping list to find a suitable recipe. Simply add items.<br> <br>Bon appetit!</p>
   <a id="linkMeMobile" target="_blank"><div class="recipeIcon2"><img src="img/recipeIcon.png"></div>View Recipe</a>
 <button id="getRecipeBtnMobile" onclick="getRecipeMobile();"><div class="recipeIcon2"><img id="mobileRecipeRefresh" src="img/refreshIcon.png"></div>Next Recipe</button>
  </div>
@@ -393,10 +387,14 @@ findStoreBtn.addEventListener('touchend', pushMenu, false);
 findStoreBtn.addEventListener('click', pushMenu, false);
 findStoreBtn.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
 
+if($(window).width() < 750)
+{
+
 var settingsBtn = document.getElementById('settingsIcon');
 settingsBtn.addEventListener('touchend', pushMenuRight, false);
 settingsBtn.addEventListener('click', pushMenuRight, false);
 settingsBtn.addEventListener('touchstart', function(e){ e.preventDefault(); }, false);
+}
 
 var focusTextField = document.getElementById('messageInput');
 focusTextField.addEventListener('touchend', focusText, false);
